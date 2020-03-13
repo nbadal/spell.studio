@@ -1,0 +1,25 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+header {
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.Controls {
+    width: 300px;
+    background-color: lightblue;
+}
+
+.Spellbook {
+    flex-grow: 1;
+    background-color: lightgrey;
+}
