@@ -9,19 +9,21 @@ header {
 }
 
 .content {
+    height: 100%;
     flex-grow: 1;
     display: flex;
     flex-direction: row;
 }
 
 .Controls {
-    width: 300px;
+    flex: 0 0 300px;
     background-color: lightblue;
 }
 
 .Spellbook {
     flex-grow: 1;
     background-color: lightgrey;
+    overflow: scroll;
 }
 
 @media print {

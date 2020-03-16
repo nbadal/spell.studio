@@ -1,5 +1,10 @@
 export type SpellDetail = string | any;
 
+export type SpellsState = {
+    filtered: Spell[];
+    filter: SpellFilter;
+}
+
 export type Spell = {
     name: string;
     classes: string[];
@@ -16,4 +21,10 @@ export type Spell = {
     }
     details: SpellDetail[];
     higherLevels?: string;
+}
+
+export type SpellFilter = {
+    classes: string[];
+    levelMin: number;
+    levelMax: number;
 }

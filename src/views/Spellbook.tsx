@@ -1,16 +1,27 @@
 import React, {Component} from 'react';
-import spells from "../data/srd/srd-spells.json";
+import {connect, ConnectedProps} from "react-redux";
+
 import SpellCard from "./SpellCard";
 import {Spell} from "../store/spells/types";
+import {RootState} from "../store/store";
 
-export default class Spellbook extends Component {
+const mapStateToProps = (state: RootState) => ({
+    spells: state.spells.filtered,
+});
+
+const reduxConnector = connect(mapStateToProps);
+type ReduxProps = ConnectedProps<typeof reduxConnector>;
+
+class Spellbook extends Component<ReduxProps> {
     public render() {
         return (
             <div className="Spellbook">
-                {spells.map((spell: Spell) => (
+                {this.props.spells.map((spell: Spell) => (
                     <SpellCard spell={spell} />
                 ))}
             </div>
         );
     }
 }
+
+export default reduxConnector(Spellbook);
