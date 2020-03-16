@@ -5,6 +5,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// import {processBTM} from "./scripts/btm-processing";
+// processBTM();
+
 ReactDOM.render(
     <App/>,
     document.getElementById('root')

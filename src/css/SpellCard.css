@@ -1,0 +1,114 @@
+.SpellCard {
+    width: 2.5in;
+    height: 3.5in;
+    background-color: green;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+
+    margin: 8px;
+    padding: 10px;
+
+
+    font-family: "modesto-text", serif;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.Name {
+    padding: 2px;
+    background-color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-size: 14px;
+    font-family: "modesto-expanded", serif;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.Type {
+    padding: 1px;
+    text-align: center;
+    color: white;
+    font-size: 9px;
+}
+
+.StatsTable {
+    width: 100%;
+    margin-bottom: 4px;
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+.StatsTable td {
+    width: 50%;
+    background-color: white;
+    border: 2px solid green;
+    padding: 2px;
+    vertical-align: top;
+}
+
+.StatsTitle {
+    text-align: center;
+    color: green;
+    font-size: 10px;
+    font-family: "modesto-expanded", serif;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.StatsValue {
+    text-align: center;
+    font-size: 10px;
+}
+
+.DetailsContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.DetailsContainer :first-child {
+    padding-top: 8px;
+}
+.DetailsContainer :last-child {
+    padding-bottom: 8px;
+}
+
+.DetailsBlock {
+    padding: 2px 8px;
+    background-color: white;
+    font-size: 9px;
+    text-align: justify;
+}
+
+.BoldDetail {
+    font-weight: bold;
+}
+
+.HigherLevels {
+    padding: 2px;
+    background-color: green;
+    text-align: center;
+    color: white;
+    font-size: 9px;
+}
+
+.HigherLevels ~ .DetailsBlock {
+    padding-top: 8px;
+}
+
+.CardFooter {
+    margin-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: small;
+    font-weight: bold;
+}
