@@ -20,7 +20,7 @@
     background-color: white;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-family: "modesto-expanded", serif;
     font-weight: 400;
     font-style: normal;
@@ -53,7 +53,7 @@
 .StatsTitle {
     text-align: center;
     color: green;
-    font-size: 10px;
+    font-size: 11px;
     font-family: "modesto-expanded", serif;
     font-weight: 400;
     font-style: normal;
@@ -62,7 +62,7 @@
 
 .StatsValue {
     text-align: center;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .DetailsContainer {
@@ -97,7 +97,7 @@
     background-color: green;
     text-align: center;
     color: white;
-    font-size: 9px;
+    font-size: 8px;
 }
 
 .HigherLevels ~ .DetailsBlock {
