@@ -54,8 +54,8 @@ export default class SpellCard extends Component<Props> {
                     )}
                 </div>
                 <div className="CardFooter">
-                    <div></div>
-                    <div>SpellStudio</div>
+                    <div/>
+                    <div>SpellStudio°</div>
                 </div>
             </div>
         );
