@@ -17,7 +17,7 @@ class Spellbook extends Component<ReduxProps> {
         return (
             <div className="Spellbook">
                 {this.props.spells.map((spell: Spell) => (
-                    <SpellCard spell={spell} />
+                    <SpellCard key={spell.name} spell={spell} />
                 ))}
             </div>
         );

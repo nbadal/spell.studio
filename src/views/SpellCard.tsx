@@ -13,6 +13,7 @@ export default class SpellCard extends Component<Props> {
                 <div className="Name">{this.props.spell.name}</div>
                 <div className="Type">{this.spellTypeString()}</div>
                 <table className="StatsTable">
+                    <tbody>
                     <tr>
                         <td>
                             <div className="StatsTitle">Casting Time</div>
@@ -33,6 +34,7 @@ export default class SpellCard extends Component<Props> {
                             <div className="StatsValue">{this.props.spell.duration}</div>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
                 <div className="DetailsContainer">
                     {this.props.spell.components.materialInfo !== undefined &&
@@ -41,13 +43,14 @@ export default class SpellCard extends Component<Props> {
                     {this.props.spell.details
                         .filter(detail => typeof detail === "string")
                         .map((detail, i, arr) => (
-                            <div className="DetailsBlock" style={{flexGrow: i === arr.length - 1 ? 1 : 0}}>{this.processText(detail)}</div>
+                            <div className="DetailsBlock" key={i}
+                                 style={{flexGrow: i === arr.length - 1 ? 1 : 0}}>{this.processText(detail)}</div>
                         ))}
                     {this.props.spell.higherLevels && (
-                            <div className="HigherLevels">At Higher Levels</div>
+                        <div className="HigherLevels">At Higher Levels</div>
                     )}
                     {this.props.spell.higherLevels && (
-                            <div className="DetailsBlock">{this.processText(this.props.spell.higherLevels)}</div>
+                        <div className="DetailsBlock">{this.processText(this.props.spell.higherLevels)}</div>
                     )}
                 </div>
                 <div className="CardFooter">
@@ -104,7 +107,7 @@ export default class SpellCard extends Component<Props> {
             .map((value, index) => {
                 if (index % 2) {
                     // Odd indexes are within **'s
-                    return (<span className="BoldDetail">{value}</span>);
+                    return (<span key={index} className="BoldDetail">{value}</span>);
                 } else {
                     return value;
                 }

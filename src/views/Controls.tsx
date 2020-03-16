@@ -32,7 +32,7 @@ class Controls extends Component<ReduxProps> {
                 }}>
                     {_.range(0, this.props.filter.levelMax + 1)
                         .map(n => (
-                            <option value={n}>{n || "Cantrip"}</option>
+                            <option key={n} value={n}>{n || "Cantrip"}</option>
                         ))
                     }
                 </select>
@@ -44,7 +44,7 @@ class Controls extends Component<ReduxProps> {
                 }}>
                     {_.range(this.props.filter.levelMin, 10)
                         .map(n => (
-                            <option value={n}>{n || "Cantrip"}</option>
+                            <option key={n} value={n}>{n || "Cantrip"}</option>
                         ))
                     }
                 </select>
