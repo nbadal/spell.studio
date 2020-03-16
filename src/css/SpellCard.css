@@ -3,7 +3,7 @@
     height: 3.5in;
     background-color: green;
     border-radius: 12px;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
 
     margin: 8px;
@@ -13,6 +13,13 @@
     font-family: "modesto-text", serif;
     font-style: normal;
     font-weight: 300;
+}
+
+@media print {
+    .SpellCard  {
+        -webkit-print-color-adjust: exact;
+        margin: 2px !important;
+    }
 }
 
 .Name {
