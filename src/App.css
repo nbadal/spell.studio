@@ -35,6 +35,10 @@ header {
         display: none;
     }
 
+    .content {
+        height: auto;
+    }
+
     .Controls {
         display: none
     }
