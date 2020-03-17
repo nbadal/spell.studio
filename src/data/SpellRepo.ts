@@ -1,7 +1,7 @@
-import rawSpells from "./srd/srd-spells.json";
 import {Spell, SpellFilter} from "../store/spells/types";
+import {processBTM} from "../scripts/btm-processing";
 
-const allSpells = rawSpells as Spell[];
+const allSpells = processBTM();
 
 export class SpellRepo {
     static filteredSpells(filter: SpellFilter): Spell[] {

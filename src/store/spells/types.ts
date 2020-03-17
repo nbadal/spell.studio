@@ -1,5 +1,25 @@
 export type SpellDetail = string | any;
 
+export type SpellSchool =
+    "conjuration"
+    | "abjuration"
+    | "divination"
+    | "enchantment"
+    | "evocation"
+    | "illusion"
+    | "necromancy"
+    | "transmutation";
+
+export type SpellClass =
+    "bard"
+    | "cleric"
+    | "druid"
+    | "fighter"
+    | "ranger"
+    | "sorcerer"
+    | "warlock"
+    | "wizard";
+
 export type SpellsState = {
     filtered: Spell[];
     filter: SpellFilter;
@@ -7,9 +27,10 @@ export type SpellsState = {
 
 export type Spell = {
     name: string;
-    classes: string[];
+    classes: SpellClass[];
     level: number;
-    school: string;
+    school: SpellSchool;
+    ritual: boolean;
     castingTime: string;
     range: string;
     duration: string;
@@ -24,7 +45,7 @@ export type Spell = {
 }
 
 export type SpellFilter = {
-    classes: string[];
+    classes: SpellClass[];
     levelMin: number;
     levelMax: number;
 }

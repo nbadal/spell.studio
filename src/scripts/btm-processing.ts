@@ -1,9 +1,10 @@
-import btm1 from "../data/srd/raw-BTMorton.json";
+import btm1 from "../data/raw/BTMorton/raw-BTMorton.json";
+import {Spell, SpellClass, SpellSchool} from "../store/spells/types";
 
 const rawSpells = btm1["Spellcasting"]["Spell Descriptions"];
 const rawLists = btm1["Spellcasting"]["Spell Lists"];
 
-export function processBTM() {
+export function processBTM(): Spell[] {
     const spellSets: { [klass: string]: string[] } = {
         "bard": flattenSpellList(rawLists["Bard Spells"]),
         "cleric": flattenSpellList(rawLists["Cleric Spells"]),
@@ -31,10 +32,10 @@ export function processBTM() {
             continue;
         }
 
-        let classes = [];
+        let classes: SpellClass[] = [];
         for (let klass in spellSets) {
             if (spellSets[klass].includes(name)) {
-                classes.push(klass);
+                classes.push(klass as SpellClass);
             }
         }
 
@@ -45,15 +46,15 @@ export function processBTM() {
 
         // console.log(spellContent);
 
-        const newSpell = {
+        const newSpell: Spell = {
             name: name,
             classes: classes,
             level: Number.parseInt(typeInfo[1] || "0"),
-            school: typeInfo[2].toLowerCase(),
+            school: typeInfo[2].toLowerCase() as SpellSchool,
             ritual: !!typeInfo[3],
-            castingTime: castingTime,
-            range: range,
-            duration: duration,
+            castingTime: castingTime!,
+            range: range!,
+            duration: duration!,
             components: {
                 verbal: !!componentInfo[1],
                 somatic: !!componentInfo[2],
@@ -65,7 +66,7 @@ export function processBTM() {
         };
         newSpells.push(newSpell);
     }
-    console.log(JSON.stringify(newSpells));
+    return newSpells;
 }
 
 /** Return a list of spells, originally split by level grouping */

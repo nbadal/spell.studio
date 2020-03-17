@@ -72,6 +72,10 @@
     font-size: 11px;
 }
 
+.StatsValue::first-letter {
+    text-transform: capitalize;
+}
+
 .DetailsContainer {
     flex-grow: 1;
     display: flex;
