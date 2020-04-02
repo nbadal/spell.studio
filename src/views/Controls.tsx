@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {Dispatch} from "redux";
 import {connect, ConnectedProps} from "react-redux";
+import _ from "lodash";
 
 import {RootState} from "../store/store";
-import _ from "lodash";
 import {filterSpells} from "../store/spells/actions";
 import {AllSpellClasses, SpellClass, SpellFilter} from "../store/spells/types";
 
+import "../css/Controls.css"
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
@@ -25,45 +26,53 @@ class Controls extends Component<ReduxProps> {
     public render() {
         return (
             <div className="Controls">
-                Class:
-                <select onChange={(event) => {
-                    let classes = Array.from(event.target.selectedOptions)
-                        .map(option => option.value as SpellClass);
-                    this.updateFilter({classes});
-                }} multiple>
-                    {AllSpellClasses
-                        .map(klass => (
+                <div className="filter">
+                    <label>Class:</label>
+                    <select multiple size={AllSpellClasses.length}
+                            onChange={(event) => {
+                                let classes = Array.from(event.target.selectedOptions)
+                                    .map(option => option.value as SpellClass);
+                                this.updateFilter({classes});
+                            }}>
+                        {AllSpellClasses.map(klass => (
                             <option key={klass} value={klass}
                                     selected={this.props.filter.classes.includes(klass)}>
                                 {klass}
                             </option>
-                        ))
-                    }
-                </select>
-
-                Min Level:
-                <select value={this.props.filter.levelMin} onChange={(event) => {
-                    let levelMin = Number.parseInt(event.target.value);
-                    this.updateFilter({levelMin})
-                }}>
-                    {_.range(0, this.props.filter.levelMax + 1)
-                        .map(n => (
-                            <option key={n} value={n}>{n || "Cantrip"}</option>
-                        ))
-                    }
-                </select>
-
-                Max Level:
-                <select value={this.props.filter.levelMax} onChange={(event) => {
-                    let levelMax = Number.parseInt(event.target.value);
-                    this.updateFilter({levelMax})
-                }}>
-                    {_.range(this.props.filter.levelMin, 10)
-                        .map(n => (
-                            <option key={n} value={n}>{n || "Cantrip"}</option>
-                        ))
-                    }
-                </select>
+                        ))}
+                    </select>
+                    <button onClick={() => {
+                        this.updateFilter({classes: []})
+                    }}>
+                        All
+                    </button>
+                </div>
+                <div className="filter">
+                    <label>Min Level:</label>
+                    <select value={this.props.filter.levelMin} onChange={(event) => {
+                        let levelMin = Number.parseInt(event.target.value);
+                        this.updateFilter({levelMin})
+                    }}>
+                        {_.range(0, this.props.filter.levelMax + 1)
+                            .map(n => (
+                                <option key={n} value={n}>{n || "Cantrip"}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+                <div className="filter">
+                    <label>Max Level:</label>
+                    <select value={this.props.filter.levelMax} onChange={(event) => {
+                        let levelMax = Number.parseInt(event.target.value);
+                        this.updateFilter({levelMax})
+                    }}>
+                        {_.range(this.props.filter.levelMin, 10)
+                            .map(n => (
+                                <option key={n} value={n}>{n || "Cantrip"}</option>
+                            ))
+                        }
+                    </select>
+                </div>
             </div>
         );
     }

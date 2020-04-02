@@ -1,0 +1,26 @@
+.filter {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: flex-start;
+}
+
+.filter label {
+    display: inline-block;
+    width: 100px;
+    margin-right: 8px;
+    text-align: end;
+    font-weight: bold;
+}
+
+.filter select {
+    width: 100px;
+    margin-right: 8px;
+}
+
+.filter select option {
+    text-transform: capitalize;
+}
+
+.filter button {
+    align-self: flex-end;
+}
