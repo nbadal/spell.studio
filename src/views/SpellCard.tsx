@@ -1,15 +1,17 @@
-import React, {Component, ReactNode} from 'react';
+import React, {Component, MouseEventHandler, ReactNode} from 'react';
 import {Spell} from "../store/spells/types";
 import "../css/SpellCard.css"
 
 interface Props {
     spell: Spell;
+    selected: boolean;
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export default class SpellCard extends Component<Props> {
     public render() {
         return (
-            <div className="SpellCard">
+            <div className={this.props.selected ? "SpellCard" : "DisabledSpellCard"} onClick={this.props.onClick}>
                 <div className="Name">{this.props.spell.name}</div>
                 <div className="Type">{this.spellTypeString()}</div>
                 <table className="StatsTable">
@@ -44,13 +46,13 @@ export default class SpellCard extends Component<Props> {
                         .filter(detail => typeof detail === "string")
                         .map((detail, i, arr) => (
                             <div className="DetailsBlock" key={i}
-                                 style={{flexGrow: i === arr.length - 1 ? 1 : 0}}>{this.processText(detail)}</div>
+                                 style={{flexGrow: i === arr.length - 1 ? 1 : 0}}>{processText(detail)}</div>
                         ))}
                     {this.props.spell.higherLevels && (
                         <div className="HigherLevels">At Higher Levels</div>
                     )}
                     {this.props.spell.higherLevels && (
-                        <div className="DetailsBlock">{this.processText(this.props.spell.higherLevels)}</div>
+                        <div className="DetailsBlock">{processText(this.props.spell.higherLevels)}</div>
                     )}
                 </div>
                 <div className="CardFooter">
@@ -101,18 +103,17 @@ export default class SpellCard extends Component<Props> {
         if (this.props.spell.components.material) components.push("M");
         return components.join(", ");
     }
-
-    private processText(text: string): ReactNode {
-        return text.split("***")
-            .map((value, index) => {
-                if (index % 2) {
-                    // Odd indexes are within **'s
-                    return (<span key={index} className="BoldDetail">{value}</span>);
-                } else {
-                    return value;
-                }
-            });
-    }
+}
 
 
+function processText(text: string): ReactNode {
+    return text.split("***")
+        .map((value, index) => {
+            if (index % 2) {
+                // Odd indexes are within **'s
+                return (<span key={index} className="BoldDetail">{value}</span>);
+            } else {
+                return value;
+            }
+        });
 }

@@ -1,4 +1,4 @@
-.SpellCard {
+.SpellCard, .DisabledSpellCard {
     width: 2.5in;
     height: 3.5in;
     background-color: green;
@@ -15,10 +15,18 @@
     font-weight: 300;
 }
 
+.DisabledSpellCard {
+    opacity: 0.5;
+}
+
 @media print {
-    .SpellCard  {
+    .SpellCard, .DisabledSpellCard  {
         -webkit-print-color-adjust: exact;
         margin: 2px !important;
+    }
+
+    .DisabledSpellCard {
+        display: none;
     }
 }
 
