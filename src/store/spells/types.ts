@@ -14,11 +14,12 @@ export type SpellClass =
     "bard"
     | "cleric"
     | "druid"
-    | "fighter"
     | "ranger"
     | "sorcerer"
     | "warlock"
     | "wizard";
+
+export const AllSpellClasses: SpellClass[] = ["bard", "cleric", "druid", "ranger", "sorcerer", "warlock", "wizard"];
 
 export type SpellsState = {
     filtered: Spell[];

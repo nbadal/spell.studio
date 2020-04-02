@@ -13,7 +13,7 @@ export class SpellRepo {
             let anyClassesMatch =
                 !filter.classes ||
                 filter.classes.length === 0 ||
-                filter.classes.some(s.classes.includes);
+                filter.classes.some(fClass => s.classes.includes(fClass));
 
             return levelInRange && anyClassesMatch;
         })

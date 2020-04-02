@@ -5,7 +5,7 @@ import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "../store/store";
 import _ from "lodash";
 import {filterSpells} from "../store/spells/actions";
-import {SpellFilter} from "../store/spells/types";
+import {AllSpellClasses, SpellClass, SpellFilter} from "../store/spells/types";
 
 
 const mapStateToProps = (state: RootState) => ({
@@ -25,6 +25,22 @@ class Controls extends Component<ReduxProps> {
     public render() {
         return (
             <div className="Controls">
+                Class:
+                <select onChange={(event) => {
+                    let classes = Array.from(event.target.selectedOptions)
+                        .map(option => option.value as SpellClass);
+                    this.updateFilter({classes});
+                }} multiple>
+                    {AllSpellClasses
+                        .map(klass => (
+                            <option key={klass} value={klass}
+                                    selected={this.props.filter.classes.includes(klass)}>
+                                {klass}
+                            </option>
+                        ))
+                    }
+                </select>
+
                 Min Level:
                 <select value={this.props.filter.levelMin} onChange={(event) => {
                     let levelMin = Number.parseInt(event.target.value);
