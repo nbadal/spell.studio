@@ -1,13 +1,20 @@
 h1 {
+    flex-grow: 1;
     font-family: "modesto-text", serif;
     font-style: normal;
     font-size: xx-large;
-    text-align: center;
+    text-align: left;
+    margin: 0;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .filter {
     display: flex;
-    margin-bottom: 8px;
+    margin-right: 8px;
     align-items: flex-start;
 }
 
@@ -26,8 +33,4 @@ h1 {
 
 .filter select option {
     text-transform: capitalize;
-}
-
-.filter button {
-    align-self: flex-end;
 }

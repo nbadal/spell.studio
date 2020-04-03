@@ -4,37 +4,36 @@ body {
 
 .App {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100vh;
     max-height: 100vh;
 }
 
 .content {
-    height: auto;
-    overflow: hidden;
+    height: 100%;
     flex-grow: 1;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .Controls {
-    flex: 0 0 250px;
-    background-color: lightblue;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #dfdfdf;
+    border-right: 1px solid #888888;
 }
 
 .Spellbook {
     flex-grow: 1;
-    background-color: lightgrey;
+    background-color: #f0f0f0;
     overflow: scroll;
 }
 
 @media print {
     @page {
         size: landscape;
-    }
-
-    header {
-        display: none;
     }
 
     .content {

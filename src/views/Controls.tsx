@@ -28,52 +28,52 @@ class Controls extends Component<ReduxProps> {
         return (
             <div className="Controls">
                 <h1>SpellStudio</h1>
-                <div className="filter">
-                    <label>Class:</label>
-                    <select multiple size={AllSpellClasses.length}
-                            value={this.props.filter.classes}
-                            onChange={(event) => {
-                                let classes = Array.from(event.target.selectedOptions)
-                                    .map(option => option.value as SpellClass);
-                                this.updateFilter({classes});
-                            }}>
-                        {AllSpellClasses.map(klass => (
-                            <option key={klass} value={klass}>{klass}</option>
-                        ))}
-                    </select>
-                    <button onClick={() => {
-                        this.updateFilter({classes: []})
-                    }}>
-                        All
-                    </button>
+                <div className="filters">
+                    <div className="filter">
+                        <label>Class:</label>
+                        <select value={this.props.filter.classes}
+                                onChange={(event) => {
+                                    let classes = Array.from(event.target.selectedOptions)
+                                        .map(option => option.value as SpellClass);
+                                    this.updateFilter({classes});
+                                }}>
+                            {AllSpellClasses.map(klass => (
+                                <option key={klass} value={klass}>{klass}</option>
+                            ))}
+                        </select>
+                        <button onClick={() => {
+                            this.updateFilter({classes: []})
+                        }}>
+                            All
+                        </button>
+                    </div>
+                    <div className="filter">
+                        <label>Min Level:</label>
+                        <select value={this.props.filter.levelMin} onChange={(event) => {
+                            let levelMin = Number.parseInt(event.target.value);
+                            this.updateFilter({levelMin})
+                        }}>
+                            {_.range(0, this.props.filter.levelMax + 1)
+                                .map(n => (
+                                    <option key={n} value={n}>{n || "Cantrip"}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    <div className="filter">
+                        <label>Max Level:</label>
+                        <select value={this.props.filter.levelMax} onChange={(event) => {
+                            let levelMax = Number.parseInt(event.target.value);
+                            this.updateFilter({levelMax})
+                        }}>
+                            {_.range(this.props.filter.levelMin, 10)
+                                .map(n => (
+                                    <option key={n} value={n}>{n || "Cantrip"}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
                 </div>
-                <div className="filter">
-                    <label>Min Level:</label>
-                    <select value={this.props.filter.levelMin} onChange={(event) => {
-                        let levelMin = Number.parseInt(event.target.value);
-                        this.updateFilter({levelMin})
-                    }}>
-                        {_.range(0, this.props.filter.levelMax + 1)
-                            .map(n => (
-                                <option key={n} value={n}>{n || "Cantrip"}</option>
-                            ))
-                        }
-                    </select>
-                </div>
-                <div className="filter">
-                    <label>Max Level:</label>
-                    <select value={this.props.filter.levelMax} onChange={(event) => {
-                        let levelMax = Number.parseInt(event.target.value);
-                        this.updateFilter({levelMax})
-                    }}>
-                        {_.range(this.props.filter.levelMin, 10)
-                            .map(n => (
-                                <option key={n} value={n}>{n || "Cantrip"}</option>
-                            ))
-                        }
-                    </select>
-                </div>
-                <div>Result: {this.props.spellCount}</div>
             </div>
         );
     }
