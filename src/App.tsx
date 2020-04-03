@@ -10,9 +10,8 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Helmet>
-                    <title>{process.env.NODE_ENV === "development" ? "[DEV] Spell Studio" : "Spell Studio"}</title>
+                    <title>{process.env.NODE_ENV === "development" ? "[DEV] SpellStudio" : "SpellStudio"}</title>
                 </Helmet>
-                <header><h1>Spell Studio</h1></header>
                 <div className="content">
                     <Controls/>
                     <Spellbook/>

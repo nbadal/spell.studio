@@ -9,9 +9,6 @@ body {
     max-height: 100vh;
 }
 
-header {
-}
-
 .content {
     height: auto;
     overflow: hidden;

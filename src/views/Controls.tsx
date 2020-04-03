@@ -27,6 +27,7 @@ class Controls extends Component<ReduxProps> {
     public render() {
         return (
             <div className="Controls">
+                <h1>SpellStudio</h1>
                 <div className="filter">
                     <label>Class:</label>
                     <select multiple size={AllSpellClasses.length}
