@@ -1,3 +1,7 @@
+body {
+    overscroll-behavior: none;
+}
+
 .App {
     display: flex;
     flex-direction: column;
