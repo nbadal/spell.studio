@@ -1,10 +1,11 @@
 import React, {Component, MouseEventHandler, ReactNode} from 'react';
 import {Spell} from "../store/spells/types";
 import "../css/SpellCard.css"
+import {Color} from "csstype";
 
 interface Props {
     spell: Spell;
-    cardColor: string;
+    cardColor: Color;
     selected: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
