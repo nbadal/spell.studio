@@ -32,6 +32,7 @@ class Spellbook extends Component<ReduxProps, State> {
                 {this.props.spells.map((spell: Spell) => (
                     <SpellCard key={spell.name} spell={spell}
                                selected={this.isSpellSelected(spell.name)}
+                               cardColor={this.cardColor(spell)}
                                onClick={() => this.spellClicked(spell.name)}/>
                 ))}
             </div>
@@ -52,6 +53,10 @@ class Spellbook extends Component<ReduxProps, State> {
 
     private isSpellSelected(spellName: string) {
         return this.state.selectedSpells.length === 0 || this.state.selectedSpells.includes(spellName);
+    }
+
+    private cardColor(spell: Spell) {
+        return "green";
     }
 }
 

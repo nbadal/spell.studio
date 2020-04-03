@@ -4,6 +4,7 @@ import "../css/SpellCard.css"
 
 interface Props {
     spell: Spell;
+    cardColor: string;
     selected: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
@@ -11,30 +12,20 @@ interface Props {
 export default class SpellCard extends Component<Props> {
     public render() {
         return (
-            <div className={this.props.selected ? "SpellCard" : "DisabledSpellCard"} onClick={this.props.onClick}>
+            <div className={this.props.selected ? "SpellCard" : "DisabledSpellCard"}
+                 style={{backgroundColor: this.props.cardColor}}
+                 onClick={this.props.onClick}>
                 <div className="Name">{this.props.spell.name}</div>
                 <div className="Type">{this.spellTypeString()}</div>
                 <table className="StatsTable">
                     <tbody>
                     <tr>
-                        <td>
-                            <div className="StatsTitle">Casting Time</div>
-                            <div className="StatsValue">{this.props.spell.castingTime}</div>
-                        </td>
-                        <td>
-                            <div className="StatsTitle">Range</div>
-                            <div className="StatsValue">{this.props.spell.range}</div>
-                        </td>
+                        {this.statCell("Casting Time", this.props.spell.castingTime)}
+                        {this.statCell("Range", this.props.spell.range)}
                     </tr>
                     <tr>
-                        <td>
-                            <div className="StatsTitle">Components</div>
-                            <div className="StatsValue">{this.spellComponentsString()}</div>
-                        </td>
-                        <td>
-                            <div className="StatsTitle">Duration</div>
-                            <div className="StatsValue">{this.props.spell.duration}</div>
-                        </td>
+                        {this.statCell("Components", this.spellComponentsString())}
+                        {this.statCell("Duration", this.props.spell.duration)}
                     </tr>
                     </tbody>
                 </table>
@@ -62,6 +53,13 @@ export default class SpellCard extends Component<Props> {
             </div>
         );
     }
+
+    private statCell = (title: string, value: string) => (
+        <td>
+            <div className="StatsTitle" style={{color: this.props.cardColor}}>{title}</div>
+            <div className="StatsValue">{value}</div>
+        </td>
+    );
 
     private spellTypeString(): string {
         let spellType: string = "";

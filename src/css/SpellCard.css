@@ -1,7 +1,6 @@
 .SpellCard, .DisabledSpellCard {
     width: 2.5in;
     height: 3.5in;
-    background-color: green;
     border-radius: 12px;
     display: inline-flex;
     flex-direction: column;
@@ -54,20 +53,27 @@
     width: 100%;
     margin-bottom: 4px;
     border-collapse: collapse;
-    border-style: hidden;
 }
 
-.StatsTable td {
+td {
     width: 50%;
     background-color: white;
-    border: 2px solid green;
+    border: 0 solid transparent;
+    background-clip: padding-box;
     padding: 2px;
     vertical-align: top;
 }
 
+tr > td + td {
+    border-left-width: 2px;
+}
+
+tr + tr > td {
+    border-top-width: 2px;
+}
+
 .StatsTitle {
     text-align: center;
-    color: green;
     font-size: 11px;
     font-family: "modesto-expanded", serif;
     font-weight: 400;
@@ -113,7 +119,6 @@
 
 .HigherLevels {
     padding: 2px;
-    background-color: green;
     text-align: center;
     color: white;
     font-size: 8px;
