@@ -34,7 +34,8 @@
     background-color: white;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 14px;
     font-family: "modesto-expanded", serif;
     font-weight: 400;
     font-style: normal;
@@ -43,10 +44,11 @@
 }
 
 .Type {
-    padding: 1px;
+    padding: 2px;
     text-align: center;
     color: white;
-    font-size: 9px;
+    font-size: 8px;
+    line-height: 8px;
 }
 
 .StatsTable {
@@ -74,7 +76,8 @@ tr + tr > td {
 
 .StatsTitle {
     text-align: center;
-    font-size: 11px;
+    font-size: 10px;
+    line-height: 10px;
     font-family: "modesto-expanded", serif;
     font-weight: 400;
     font-style: normal;
@@ -83,7 +86,8 @@ tr + tr > td {
 
 .StatsValue {
     text-align: center;
-    font-size: 11px;
+    font-size: 10px;
+    line-height: 10px;
 }
 
 .StatsValue::first-letter {
@@ -110,6 +114,7 @@ tr + tr > td {
     padding: 2px 8px;
     background-color: white;
     font-size: 9px;
+    line-height: 9px;
     text-align: justify;
 }
 
@@ -121,7 +126,8 @@ tr + tr > td {
     padding: 2px;
     text-align: center;
     color: white;
-    font-size: 8px;
+    font-size: 9px;
+    line-height: 9px;
 }
 
 .HigherLevels ~ .DetailsBlock {
@@ -133,6 +139,7 @@ tr + tr > td {
     display: flex;
     justify-content: space-between;
     color: white;
-    font-size: small;
+    font-size: 10px;
+    line-height: 10px;
     font-weight: bold;
 }
