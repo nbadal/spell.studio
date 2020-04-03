@@ -5,56 +5,49 @@ import SpellCard from "./SpellCard";
 import {Spell, SpellClass} from "../store/spells/types";
 import {RootState} from "../store/store";
 import {Color} from "csstype";
+import {Dispatch} from "redux";
+import {selectSpell, unselectSpell} from "../store/spells/actions";
 
 const mapStateToProps = (state: RootState) => ({
     spells: state.spells.filtered,
+    selected: state.spells.selected,
     filter: state.spells.filter,
 });
 
-interface State {
-    selectedSpells: string[];
-}
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        selectSpell: (spell: Spell) => dispatch(selectSpell(spell)),
+        unselectSpell: (spell: Spell) => dispatch(unselectSpell(spell)),
+    }
+};
 
-const reduxConnector = connect(mapStateToProps);
+const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
-class Spellbook extends Component<ReduxProps, State> {
-
-    constructor(props: Readonly<ReduxProps>) {
-        super(props);
-
-        this.state = {
-            selectedSpells: [],
-        }
-    }
-
+class Spellbook extends Component<ReduxProps> {
     public render() {
         return (
             <div className="Spellbook">
                 {this.props.spells.map((spell: Spell) => (
                     <SpellCard key={spell.name} spell={spell}
-                               selected={this.isSpellSelected(spell.name)}
+                               selected={this.isSpellSelected(spell)}
                                cardColor={this.cardColor(spell)}
-                               onClick={() => this.spellClicked(spell.name)}/>
+                               onClick={() => this.spellClicked(spell)}/>
                 ))}
             </div>
         );
     }
 
-    private spellClicked = (clickedSpell: string) => {
-        if (this.state.selectedSpells.includes(clickedSpell)) {
-            this.setState({
-                selectedSpells: this.state.selectedSpells
-                    .filter((spell) => spell !== clickedSpell)
-            });
+    private spellClicked = (spell: Spell) => {
+        if (this.props.selected.includes(spell)) {
+            this.props.unselectSpell(spell);
         } else {
-
-            this.setState({selectedSpells: [clickedSpell, ...this.state.selectedSpells]});
+            this.props.selectSpell(spell);
         }
     };
 
-    private isSpellSelected(spellName: string) {
-        return this.state.selectedSpells.length === 0 || this.state.selectedSpells.includes(spellName);
+    private isSpellSelected(spell: Spell) {
+        return this.props.selected.length === 0 || this.props.selected.includes(spell);
     }
 
     private cardColor(spell: Spell): Color {
