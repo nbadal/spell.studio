@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 
 import './index.css';
+import 'typeface-roboto';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {configureAppStore} from "./store/store";
+import {CssBaseline} from "@material-ui/core";
 
 // import {processBTM} from "./scripts/btm-processing";
 // processBTM();
@@ -14,7 +17,10 @@ const store = configureAppStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <React.Fragment>
+            <CssBaseline/>
+            <App/>
+        </React.Fragment>
     </Provider>,
     document.getElementById('root')
 );
