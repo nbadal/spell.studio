@@ -11,6 +11,7 @@ import "../css/Controls.css"
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
+    spellCount: state.spells.filtered.length
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -29,16 +30,14 @@ class Controls extends Component<ReduxProps> {
                 <div className="filter">
                     <label>Class:</label>
                     <select multiple size={AllSpellClasses.length}
+                            value={this.props.filter.classes}
                             onChange={(event) => {
                                 let classes = Array.from(event.target.selectedOptions)
                                     .map(option => option.value as SpellClass);
                                 this.updateFilter({classes});
                             }}>
                         {AllSpellClasses.map(klass => (
-                            <option key={klass} value={klass}
-                                    selected={this.props.filter.classes.includes(klass)}>
-                                {klass}
-                            </option>
+                            <option key={klass} value={klass}>{klass}</option>
                         ))}
                     </select>
                     <button onClick={() => {
@@ -73,6 +72,7 @@ class Controls extends Component<ReduxProps> {
                         }
                     </select>
                 </div>
+                <div>Result: {this.props.spellCount}</div>
             </div>
         );
     }
