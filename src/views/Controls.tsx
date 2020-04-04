@@ -34,7 +34,27 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
-class Controls extends Component<ReduxProps & WithStyles<typeof styles>> {
+const styles = (theme: Theme) => createStyles({
+    title: {
+        flexGrow: 1,
+        fontFamily: "modesto-text",
+        fontStyle: "normal",
+        fontSize: "xx-large",
+        textAlign: "left",
+        margin: 0,
+    },
+    filter: {
+        minWidth: "100px",
+        margin: theme.spacing(0, 1),
+    },
+    capitalized: {
+        textTransform: "capitalize",
+    }
+});
+type StyleProps = WithStyles<typeof styles>;
+let stylesConnector = withStyles(styles);
+
+class Controls extends Component<ReduxProps & StyleProps> {
     public render() {
         const {classes} = this.props;
 
@@ -113,22 +133,4 @@ class Controls extends Component<ReduxProps & WithStyles<typeof styles>> {
     }
 }
 
-const styles = (theme: Theme) => createStyles({
-    title: {
-        flexGrow: 1,
-        fontFamily: "modesto-text",
-        fontStyle: "normal",
-        fontSize: "xx-large",
-        textAlign: "left",
-        margin: 0,
-    },
-    filter: {
-        minWidth: "100px",
-        margin: theme.spacing(0, 1),
-    },
-    capitalized: {
-        textTransform: "capitalize",
-    }
-});
-
-export default withStyles(styles)(reduxConnector(Controls));
+export default stylesConnector(reduxConnector(Controls));
