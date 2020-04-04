@@ -35,7 +35,7 @@ body {
     @page {
         size: landscape;
     }
-    
+
     .App {
         height: auto;
         max-height: none;
