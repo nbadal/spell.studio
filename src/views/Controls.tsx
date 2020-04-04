@@ -2,12 +2,23 @@ import React, {Component} from 'react';
 import {Dispatch} from "redux";
 import {connect, ConnectedProps} from "react-redux";
 import _ from "lodash";
+import {
+    Checkbox,
+    createStyles,
+    FormControl,
+    Input,
+    InputLabel,
+    ListItemText,
+    MenuItem,
+    Select,
+    Theme,
+    WithStyles,
+    withStyles
+} from "@material-ui/core";
 
 import {RootState} from "../store/store";
 import {filterSpells} from "../store/spells/actions";
 import {AllSpellClasses, SpellClass, SpellFilter} from "../store/spells/types";
-
-import "../css/Controls.css"
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
@@ -23,56 +34,73 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
-class Controls extends Component<ReduxProps> {
+class Controls extends Component<ReduxProps & WithStyles<typeof styles>> {
     public render() {
+        const {classes} = this.props;
+
         return (
             <div className="Controls">
-                <h1>SpellStudio</h1>
+                <div className={classes.title}>SpellStudio</div>
                 <div className="filters">
-                    <div className="filter">
-                        <label>Class:</label>
-                        <select value={this.props.filter.classes}
+                    <FormControl className={classes.filter}>
+                        <InputLabel>Class</InputLabel>
+                        <Select multiple
+                                className="Select"
+                                value={this.props.filter.classes}
+                                input={<Input/>}
+                                renderValue={(selected) =>
+                                    <div className={classes.capitalized}>{(selected as string[]).join(', ')}</div>
+                                }
                                 onChange={(event) => {
-                                    let classes = Array.from(event.target.selectedOptions)
-                                        .map(option => option.value as SpellClass);
+                                    let classes = Array.from(event.target.value as SpellClass[])
                                     this.updateFilter({classes});
                                 }}>
                             {AllSpellClasses.map(klass => (
-                                <option key={klass} value={klass}>{klass}</option>
+                                <MenuItem className={classes.capitalized} key={klass} value={klass}>
+                                    <Checkbox checked={this.props.filter.classes.includes(klass)}/>
+                                    <ListItemText primary={klass}/>
+                                </MenuItem>
                             ))}
-                        </select>
-                        <button onClick={() => {
-                            this.updateFilter({classes: []})
-                        }}>
-                            All
-                        </button>
-                    </div>
-                    <div className="filter">
-                        <label>Min Level:</label>
-                        <select value={this.props.filter.levelMin} onChange={(event) => {
-                            let levelMin = Number.parseInt(event.target.value);
-                            this.updateFilter({levelMin})
-                        }}>
+                        </Select>
+                    </FormControl>
+                    <FormControl className={classes.filter}>
+                        <InputLabel>Min Level</InputLabel>
+                        <Select
+                            className="Select"
+                            value={this.props.filter.levelMin}
+                            onChange={(event) => {
+                                let value = event.target.value as string;
+                                let levelMin = Number.parseInt(value);
+                                this.updateFilter({levelMin})
+                            }}>
                             {_.range(0, this.props.filter.levelMax + 1)
                                 .map(n => (
-                                    <option key={n} value={n}>{n || "Cantrip"}</option>
+                                    <MenuItem className={classes.capitalized} key={n} value={n}>
+                                        {n || "Cantrip"}
+                                    </MenuItem>
                                 ))
                             }
-                        </select>
-                    </div>
-                    <div className="filter">
-                        <label>Max Level:</label>
-                        <select value={this.props.filter.levelMax} onChange={(event) => {
-                            let levelMax = Number.parseInt(event.target.value);
-                            this.updateFilter({levelMax})
-                        }}>
+                        </Select>
+                    </FormControl>
+                    <FormControl className={classes.filter}>
+                        <InputLabel>Max Level</InputLabel>
+                        <Select
+                            className="Select"
+                            value={this.props.filter.levelMax}
+                            onChange={(event) => {
+                                let value = event.target.value as string;
+                                let levelMax = Number.parseInt(value);
+                                this.updateFilter({levelMax})
+                            }}>
                             {_.range(this.props.filter.levelMin, 10)
                                 .map(n => (
-                                    <option key={n} value={n}>{n || "Cantrip"}</option>
+                                    <MenuItem className={classes.capitalized} key={n} value={n}>
+                                        {n || "Cantrip"}
+                                    </MenuItem>
                                 ))
                             }
-                        </select>
-                    </div>
+                        </Select>
+                    </FormControl>
                 </div>
             </div>
         );
@@ -85,4 +113,22 @@ class Controls extends Component<ReduxProps> {
     }
 }
 
-export default reduxConnector(Controls);
+const styles = (theme: Theme) => createStyles({
+    title: {
+        flexGrow: 1,
+        fontFamily: "modesto-text",
+        fontStyle: "normal",
+        fontSize: "xx-large",
+        textAlign: "left",
+        margin: 0,
+    },
+    filter: {
+        minWidth: "100px",
+        margin: theme.spacing(0, 1),
+    },
+    capitalized: {
+        textTransform: "capitalize",
+    }
+});
+
+export default withStyles(styles)(reduxConnector(Controls));
