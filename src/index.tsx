@@ -8,7 +8,7 @@ import 'typeface-roboto';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {configureAppStore} from "./store/store";
-import {CssBaseline} from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 // import {processBTM} from "./scripts/btm-processing";
 // processBTM();

@@ -2,23 +2,17 @@ import React, {Component} from 'react';
 import {Dispatch} from "redux";
 import {connect, ConnectedProps} from "react-redux";
 import _ from "lodash";
-import {
-    Checkbox,
-    createStyles,
-    FormControl,
-    Input,
-    InputLabel,
-    ListItemText,
-    MenuItem,
-    Select,
-    Theme,
-    WithStyles,
-    withStyles
-} from "@material-ui/core";
-
 import {RootState} from "../store/store";
 import {filterSpells} from "../store/spells/actions";
 import {AllSpellClasses, SpellClass, SpellFilter} from "../store/spells/types";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
+import MenuItem from "@material-ui/core/MenuItem";
+import Input from "@material-ui/core/Input";
+import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core/styles";
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,

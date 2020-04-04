@@ -6,8 +6,12 @@ import {RootState} from "../store/store";
 import {Color} from "csstype";
 import {Dispatch} from "redux";
 import {clearSelection, selectSpell, unselectSpell} from "../store/spells/actions";
-import {Box, Button, createStyles, Fab, Snackbar, Theme, withStyles, WithStyles} from "@material-ui/core";
 import PrintIcon from '@material-ui/icons/Print';
+import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Snackbar from "@material-ui/core/Snackbar";
+import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 
 const mapStateToProps = (state: RootState) => ({
     spells: state.spells.filtered,
@@ -57,7 +61,7 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
                         action={<Button color="secondary" size="small" onClick={this.clearSelection}>CLEAR</Button>}
                     />
                     <Fab className={classes.fab} onClick={this.handlePrint}>
-                        <PrintIcon color={"primary"} />
+                        <PrintIcon color={"primary"}/>
                     </Fab>
                 </Box>
             </Box>
