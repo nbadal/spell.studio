@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {connect, ConnectedProps} from "react-redux";
-
 import SpellCard from "./SpellCard";
 import {Spell, SpellClass} from "../store/spells/types";
 import {RootState} from "../store/store";
 import {Color} from "csstype";
 import {Dispatch} from "redux";
 import {clearSelection, selectSpell, unselectSpell} from "../store/spells/actions";
-import {Button, Snackbar} from "@material-ui/core";
+import {Box, Button, createStyles, Fab, Snackbar, Theme, withStyles, WithStyles} from "@material-ui/core";
+import PrintIcon from '@material-ui/icons/Print';
 
 const mapStateToProps = (state: RootState) => ({
     spells: state.spells.filtered,
@@ -26,25 +26,41 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
-class Spellbook extends Component<ReduxProps> {
+const styles = (theme: Theme) => createStyles({
+    fab: {
+        position: "absolute",
+        bottom: theme.spacing(2),
+        right: theme.spacing(3),
+    },
+});
+type StyleProps = WithStyles<typeof styles>;
+let stylesConnector = withStyles(styles);
+
+class Spellbook extends Component<ReduxProps & StyleProps> {
     public render() {
+        const {classes} = this.props;
         return (
-            <div className="Spellbook">
-                <div>
+            <Box className="Spellbook">
+                <Box>
                     {this.props.spells.map((spell: Spell) => (
                         <SpellCard key={spell.name} spell={spell}
                                    selected={this.isSpellSelected(spell)}
                                    cardColor={this.cardColor(spell)}
                                    onClick={() => this.spellClicked(spell)}/>
                     ))}
-                </div>
-                <Snackbar
-                    open={this.props.selected.length > 0}
-                    anchorOrigin={{horizontal: "center", vertical: "bottom"}}
-                    message={"Selected: " + this.props.selected.length + " / " + this.props.spells.length}
-                    action={<Button color="secondary" size="small" onClick={this.clearSelection}>CLEAR</Button>}
-                />
-            </div>
+                </Box>
+                <Box displayPrint="none">
+                    <Snackbar
+                        open={this.props.selected.length > 0}
+                        anchorOrigin={{horizontal: "center", vertical: "bottom"}}
+                        message={"Selected: " + this.props.selected.length + " / " + this.props.spells.length}
+                        action={<Button color="secondary" size="small" onClick={this.clearSelection}>CLEAR</Button>}
+                    />
+                    <Fab className={classes.fab} onClick={this.handlePrint}>
+                        <PrintIcon color={"primary"} />
+                    </Fab>
+                </Box>
+            </Box>
         );
     }
 
@@ -62,6 +78,10 @@ class Spellbook extends Component<ReduxProps> {
 
     private clearSelection = () => {
         this.props.clearSelection();
+    };
+
+    private handlePrint = () => {
+        window.print();
     };
 
     private cardColor(spell: Spell): Color {
@@ -106,4 +126,4 @@ class Spellbook extends Component<ReduxProps> {
     }
 }
 
-export default reduxConnector(Spellbook);
+export default stylesConnector(reduxConnector(Spellbook));
