@@ -1,6 +1,6 @@
 import {SpellFilter, SpellsState} from "./types";
 import {createReducer} from "@reduxjs/toolkit";
-import {filterSpells, selectSpell, spellsFiltered, unselectSpell} from "./actions";
+import {clearSelection, filterSpells, selectSpell, spellsFiltered, unselectSpell} from "./actions";
 import {SpellRepo} from "../../data/SpellRepo";
 
 let initialFilter: SpellFilter = {
@@ -30,5 +30,8 @@ export const spellsReducer = createReducer(initialState, (builder) => {
         .addCase(unselectSpell, (state, action) => {
             // We use `name` because the object will be proxied so === wont work.
             state.selected = state.selected.filter((spell) => spell.name !== action.payload.name);
+        })
+        .addCase(clearSelection, (state) => {
+            state.selected = [];
         });
 });

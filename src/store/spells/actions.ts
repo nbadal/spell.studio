@@ -10,3 +10,4 @@ export const spellsFiltered = createAction("SPELLS_FILTERED", withPayloadType<Sp
 
 export const selectSpell = createAction("SELECT_SPELL", withPayloadType<Spell>());
 export const unselectSpell = createAction("UNSELECT_SPELL", withPayloadType<Spell>());
+export const clearSelection = createAction("CLEAR_SELECTION");

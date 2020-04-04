@@ -6,7 +6,8 @@ import {Spell, SpellClass} from "../store/spells/types";
 import {RootState} from "../store/store";
 import {Color} from "csstype";
 import {Dispatch} from "redux";
-import {selectSpell, unselectSpell} from "../store/spells/actions";
+import {clearSelection, selectSpell, unselectSpell} from "../store/spells/actions";
+import {Button, Snackbar} from "@material-ui/core";
 
 const mapStateToProps = (state: RootState) => ({
     spells: state.spells.filtered,
@@ -18,6 +19,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         selectSpell: (spell: Spell) => dispatch(selectSpell(spell)),
         unselectSpell: (spell: Spell) => dispatch(unselectSpell(spell)),
+        clearSelection: () => dispatch(clearSelection()),
     }
 };
 
@@ -28,12 +30,20 @@ class Spellbook extends Component<ReduxProps> {
     public render() {
         return (
             <div className="Spellbook">
-                {this.props.spells.map((spell: Spell) => (
-                    <SpellCard key={spell.name} spell={spell}
-                               selected={this.isSpellSelected(spell)}
-                               cardColor={this.cardColor(spell)}
-                               onClick={() => this.spellClicked(spell)}/>
-                ))}
+                <div>
+                    {this.props.spells.map((spell: Spell) => (
+                        <SpellCard key={spell.name} spell={spell}
+                                   selected={this.isSpellSelected(spell)}
+                                   cardColor={this.cardColor(spell)}
+                                   onClick={() => this.spellClicked(spell)}/>
+                    ))}
+                </div>
+                <Snackbar
+                    open={this.props.selected.length > 0}
+                    anchorOrigin={{horizontal: "center", vertical: "bottom"}}
+                    message={"Selected: " + this.props.selected.length + " / " + this.props.spells.length}
+                    action={<Button color="secondary" size="small" onClick={this.clearSelection}>CLEAR</Button>}
+                />
             </div>
         );
     }
@@ -46,9 +56,13 @@ class Spellbook extends Component<ReduxProps> {
         }
     };
 
-    private isSpellSelected(spell: Spell) {
+    private isSpellSelected = (spell: Spell) => {
         return this.props.selected.length === 0 || this.props.selected.includes(spell);
-    }
+    };
+
+    private clearSelection = () => {
+        this.props.clearSelection();
+    };
 
     private cardColor(spell: Spell): Color {
         let spellClasses = this.spellClasses(spell);
