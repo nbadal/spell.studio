@@ -13,6 +13,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
@@ -53,9 +54,9 @@ class Controls extends Component<ReduxProps & StyleProps> {
         const {classes} = this.props;
 
         return (
-            <div className="Controls">
-                <div className={classes.title}>SpellStudio</div>
-                <div className="filters">
+            <Box className="Controls" displayPrint="none">
+                <Box className={classes.title}>SpellStudio</Box>
+                <Box className="filters">
                     <FormControl className={classes.filter}>
                         <InputLabel>Class</InputLabel>
                         <Select multiple
@@ -63,7 +64,7 @@ class Controls extends Component<ReduxProps & StyleProps> {
                                 value={this.props.filter.classes}
                                 input={<Input/>}
                                 renderValue={(selected) =>
-                                    <div className={classes.capitalized}>{(selected as string[]).join(', ')}</div>
+                                    <Box className={classes.capitalized}>{(selected as string[]).join(', ')}</Box>
                                 }
                                 onChange={(event) => {
                                     let classes = Array.from(event.target.value as SpellClass[])
@@ -115,8 +116,8 @@ class Controls extends Component<ReduxProps & StyleProps> {
                             }
                         </Select>
                     </FormControl>
-                </div>
-            </div>
+                </Box>
+            </Box>
         );
     }
 
