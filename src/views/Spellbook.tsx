@@ -12,11 +12,13 @@ import Box from "@material-ui/core/Box";
 import Snackbar from "@material-ui/core/Snackbar";
 import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
+import {ColorMode} from "../store/colors/types";
 
 const mapStateToProps = (state: RootState) => ({
     spells: state.spells.filtered,
     selected: state.spells.selected,
     filter: state.spells.filter,
+    colors: state.colors,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -88,38 +90,21 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
         window.print();
     };
 
-    private cardColor(spell: Spell): Color {
-        let spellClasses = this.spellClasses(spell);
-        if (spellClasses.length === 0) {
-            console.error("Couldn't figure out a color for " + spell.name);
-            return "gray";
+    private cardColor = (spell: Spell): Color => {
+        switch (this.props.colors.colorMode) {
+            case ColorMode.BY_SCHOOL:
+                return this.props.colors.bySchool[spell.school];
+            case ColorMode.BY_CLASS:
+                let spellClasses = this.spellClasses(spell);
+                if (spellClasses.length === 0) {
+                    console.error("Couldn't figure out a color for " + spell.name);
+                    return "gray";
+                }
+                // TODO: how should we handle multi-class spells?
+                // Right now, just select the first class listed.
+                return this.props.colors.byClass[spellClasses[0]];
         }
-        // TODO: how should we handle multi-class spells?
-        // Right now, just select the first class listed.
-        return this.classColor(spellClasses[0]);
-    }
-
-    private classColor(spellClass: SpellClass): Color {
-        // From D&D Beyond:
-        switch (spellClass) {
-            case "bard":
-                return "#AB6DAC";
-            case "cleric":
-                return "#91A1B2";
-            case "druid":
-                return "#7A853B";
-            case "paladin":
-                return "#B59E54";
-            case "ranger":
-                return "#507F62";
-            case "sorcerer":
-                return "#992E2E";
-            case "warlock":
-                return "#7B469B";
-            case "wizard":
-                return "#2A50A1";
-        }
-    }
+    };
 
     private spellClasses(spell: Spell): SpellClass[] {
         if (this.props.filter.classes.length > 0) {

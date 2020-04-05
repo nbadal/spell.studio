@@ -14,15 +14,20 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import {Typography} from "@material-ui/core";
+import {ColorMode} from "../store/colors/types";
+import {changeColorMode} from "../store/colors/actions";
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
-    spellCount: state.spells.filtered.length
+    spellCount: state.spells.filtered.length,
+    colors: state.colors,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         updateFilter: (filter: SpellFilter) => dispatch(filterSpells(filter)),
+        changeColorMode: (mode: ColorMode) => dispatch(changeColorMode(mode)),
     }
 };
 
@@ -30,21 +35,20 @@ const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
 const styles = (theme: Theme) => createStyles({
-    title: {
-        flexGrow: 1,
-        fontFamily: "modesto-text",
-        fontStyle: "normal",
-        fontSize: "xx-large",
-        textAlign: "left",
-        margin: 0,
+    controlGroup: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        marginBottom: "4em",
     },
-    filter: {
+    selectControl: {
         minWidth: "100px",
         margin: theme.spacing(0, 1),
     },
     capitalized: {
         textTransform: "capitalize",
-    }
+    },
 });
 type StyleProps = WithStyles<typeof styles>;
 let stylesConnector = withStyles(styles);
@@ -55,9 +59,9 @@ class Controls extends Component<ReduxProps & StyleProps> {
 
         return (
             <Box className="Controls" displayPrint="none">
-                <Box className={classes.title}>SpellStudio</Box>
-                <Box className="filters">
-                    <FormControl className={classes.filter}>
+                <Typography>Filter</Typography>
+                <Box className={classes.controlGroup}>
+                    <FormControl className={classes.selectControl}>
                         <InputLabel>Class</InputLabel>
                         <Select multiple
                                 className="Select"
@@ -78,7 +82,7 @@ class Controls extends Component<ReduxProps & StyleProps> {
                             ))}
                         </Select>
                     </FormControl>
-                    <FormControl className={classes.filter}>
+                    <FormControl className={classes.selectControl}>
                         <InputLabel>Min Level</InputLabel>
                         <Select
                             className="Select"
@@ -97,7 +101,7 @@ class Controls extends Component<ReduxProps & StyleProps> {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className={classes.filter}>
+                    <FormControl className={classes.selectControl}>
                         <InputLabel>Max Level</InputLabel>
                         <Select
                             className="Select"
@@ -114,6 +118,21 @@ class Controls extends Component<ReduxProps & StyleProps> {
                                     </MenuItem>
                                 ))
                             }
+                        </Select>
+                    </FormControl>
+                </Box>
+                <Typography>Colors</Typography>
+                <Box className={classes.controlGroup}>
+                    <FormControl className={classes.selectControl}>
+                        <InputLabel>Color By</InputLabel>
+                        <Select
+                            value={this.props.colors.colorMode}
+                            onChange={(event) => {
+                                let value = event.target.value as ColorMode;
+                                this.props.changeColorMode(value);
+                            }}>
+                            <MenuItem value={ColorMode.BY_CLASS}>Class</MenuItem>
+                            <MenuItem value={ColorMode.BY_SCHOOL}>School</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
