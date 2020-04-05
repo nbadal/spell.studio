@@ -41,7 +41,9 @@ export function processBTM(): Spell[] {
 
         const castingTime = popSection("**Casting Time:** ", spellContent);
         const range = popSection("**Range:** ", spellContent);
-        const duration = popSection("**Duration:** ", spellContent);
+        const durationRaw = popSection("**Duration:** ", spellContent);
+        const concentration = durationRaw?.startsWith("Concentration, ") || false;
+        const duration = durationRaw?.replace("Concentration, u", "U");
         let higherLevels = popSection("***At Higher Levels.*** ", spellContent);
 
         // console.log(spellContent);
@@ -55,6 +57,7 @@ export function processBTM(): Spell[] {
             castingTime: castingTime!,
             range: range!,
             duration: duration!,
+            concentration: concentration,
             components: {
                 verbal: !!componentInfo[1],
                 somatic: !!componentInfo[2],

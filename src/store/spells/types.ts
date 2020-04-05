@@ -37,6 +37,7 @@ export type Spell = {
     castingTime: string;
     range: string;
     duration: string;
+    concentration: boolean;
     components: {
         verbal: boolean;
         somatic: boolean;

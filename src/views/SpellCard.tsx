@@ -2,6 +2,7 @@ import React, {Component, MouseEventHandler, ReactNode} from 'react';
 import {Spell} from "../store/spells/types";
 import "../css/SpellCard.css"
 import {Color} from "csstype";
+import {ConcentrationIcon} from "./ConcentrationIcon";
 
 interface Props {
     spell: Spell;
@@ -26,7 +27,12 @@ export default class SpellCard extends Component<Props> {
                     </tr>
                     <tr>
                         {this.statCell("Components", this.spellComponentsString())}
-                        {this.statCell("Duration", this.props.spell.duration)}
+                        {this.statCell("Duration", this.props.spell.duration, !this.props.spell.concentration || (
+                            <ConcentrationIcon style={{
+                                fontSize: 16,
+                                color: this.props.cardColor,
+                            }} />
+                        ))}
                     </tr>
                     </tbody>
                 </table>
@@ -55,10 +61,13 @@ export default class SpellCard extends Component<Props> {
         );
     }
 
-    private statCell = (title: string, value: string) => (
+    private statCell = (title: string, value: string, badge?: ReactNode) => (
         <td>
-            <div className="StatsTitle" style={{color: this.props.cardColor}}>{title}</div>
-            <div className="StatsValue">{value}</div>
+            <div className="CellContent">
+                <div className="StatsTitle" style={{color: this.props.cardColor}}>{title}</div>
+                <div className="StatsValue">{value}</div>
+                {badge && <div className="StatsBadge">{badge}</div>}
+            </div>
         </td>
     );
 
