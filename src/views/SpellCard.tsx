@@ -29,7 +29,7 @@ export default class SpellCard extends Component<Props> {
                         {this.statCell("Components", this.spellComponentsString())}
                         {this.statCell("Duration", this.props.spell.duration, !this.props.spell.concentration || (
                             <ConcentrationIcon style={{
-                                fontSize: 16,
+                                fontSize: 18,
                                 color: this.props.cardColor,
                             }} />
                         ))}
