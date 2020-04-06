@@ -3,6 +3,8 @@ import {Spell} from "../store/spells/types";
 import "../css/SpellCard.css"
 import {Color} from "csstype";
 import {ConcentrationIcon} from "./ConcentrationIcon";
+import Textfit from "react-textfit";
+import Box from "@material-ui/core/Box";
 
 interface Props {
     spell: Spell;
@@ -17,7 +19,11 @@ export default class SpellCard extends Component<Props> {
             <div className={this.props.selected ? "SpellCard" : "DisabledSpellCard"}
                  style={{backgroundColor: this.props.cardColor}}
                  onClick={this.props.onClick}>
-                <div className="Name">{this.props.spell.name}</div>
+                <div className="Name">
+                    <Box><Textfit mode="single" max={14}>
+                        {this.props.spell.name}
+                    </Textfit></Box>
+                </div>
                 <div className="Type">{this.spellTypeString()}</div>
                 <table className="StatsTable">
                     <tbody>

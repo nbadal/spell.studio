@@ -19,6 +19,7 @@
     "react-helmet": "^5.2.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.0",
+    "react-textfit": "^1.1.0",
     "redux-observable": "^1.2.0"
   },
   "devDependencies": {
