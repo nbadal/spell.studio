@@ -31,7 +31,7 @@ export default class SpellCard extends Component<Props> {
                             <ConcentrationIcon style={{
                                 fontSize: 18,
                                 color: this.props.cardColor,
-                            }} />
+                            }}/>
                         ))}
                     </tr>
                     </tbody>
@@ -99,9 +99,14 @@ export default class SpellCard extends Component<Props> {
         if (this.props.spell.level === 0) {
             spellType += " cantrip"
         }
+        if (this.props.spell.ritual) {
+            spellType += " (ritual)"
+        }
 
         // Capitalize first letter.
-        return spellType.substring(0, 1).toUpperCase() + spellType.substring(1);
+        spellType = spellType.substring(0, 1).toUpperCase() + spellType.substring(1);
+
+        return spellType;
     }
 
     private spellComponentsString(): string {
