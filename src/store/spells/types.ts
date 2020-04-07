@@ -10,6 +10,8 @@ export type SpellSchool =
     | "necromancy"
     | "transmutation";
 
+export const AllSpellSchools: SpellSchool[] = ["conjuration", "abjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"];
+
 export type SpellClass =
     "bard"
     | "cleric"
