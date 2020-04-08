@@ -6,7 +6,6 @@ function withPayloadType<T>() {
 }
 
 export const filterSpells = createAction("FILTER_SPELLS", withPayloadType<SpellFilter>());
-export const spellsFiltered = createAction("SPELLS_FILTERED", withPayloadType<Spell[]>());
 
 export const selectSpell = createAction("SELECT_SPELL", withPayloadType<Spell>());
 export const unselectSpell = createAction("UNSELECT_SPELL", withPayloadType<Spell>());

@@ -1,8 +1,8 @@
 import {SpellClass, SpellSchool} from "../spells/types";
 
 export enum ColorMode {
-    BY_CLASS,
     BY_SCHOOL,
+    BY_CLASS,
 }
 
 export type CardColor = string

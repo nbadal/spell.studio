@@ -18,10 +18,10 @@ const initialState: ColorsState = {
     bySchool: {
         abjuration: "#888888",
         conjuration: "#2A50A1",
-        divination: "#7B469B",
+        divination: "#6a499b",
         enchantment: "#507F62",
         evocation: "#992E2E",
-        illusion: "#AB6DAC",
+        illusion: "#ac54a4",
         necromancy: "#222222",
         transmutation: "#B59E54",
     },

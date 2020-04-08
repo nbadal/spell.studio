@@ -1,28 +1,47 @@
-import React, {Component, MouseEventHandler, ReactNode} from 'react';
+import React, {Component, ReactNode} from 'react';
 import {Spell} from "../store/spells/types";
 import "../css/SpellCard.css"
-import {Color} from "csstype";
 import {ConcentrationIcon} from "./ConcentrationIcon";
 import Textfit from "react-textfit";
 import Box from "@material-ui/core/Box";
+import {RootState} from "../store/store";
+import {connect, ConnectedProps} from "react-redux";
+import {Dispatch} from "redux";
+import {selectSpell, unselectSpell} from "../store/spells/actions";
+import {selectSpellColor} from "../store/colors/selectors";
+
+const mapStateToProps = (state: RootState, props: Props) => ({
+    selectionActive: state.spells.selected.length > 0,
+    selected: state.spells.selected.includes(props.spell),
+    cardColor: selectSpellColor(state, props),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        selectSpell: (spell: Spell) => dispatch(selectSpell(spell)),
+        unselectSpell: (spell: Spell) => dispatch(unselectSpell(spell)),
+    }
+};
+
+const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
+type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
 interface Props {
     spell: Spell;
-    cardColor: Color;
-    selected: boolean;
-    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-export default class SpellCard extends Component<Props> {
+class SpellCard extends Component<Props & ReduxProps> {
     public render() {
         return (
-            <div className={this.props.selected ? "SpellCard" : "DisabledSpellCard"}
+            <div className={!this.props.selectionActive || this.props.selected ? "SpellCard" : "DisabledSpellCard"}
                  style={{backgroundColor: this.props.cardColor}}
-                 onClick={this.props.onClick}>
+                 onClick={this.onClick}>
                 <div className="Name">
-                    <Box><Textfit mode="single" max={14}>
-                        {this.props.spell.name}
-                    </Textfit></Box>
+                    <Box>
+                        {/*<Textfit mode="single" max={14}>*/}
+                            {this.props.spell.name}
+                        {/*</Textfit>*/}
+                    </Box>
                 </div>
                 <div className="Type">{this.spellTypeString()}</div>
                 <table className="StatsTable">
@@ -122,8 +141,17 @@ export default class SpellCard extends Component<Props> {
         if (this.props.spell.components.material) components.push("M");
         return components.join(", ");
     }
+
+    private onClick = () => {
+        if (this.props.selected) {
+            this.props.unselectSpell(this.props.spell);
+        } else {
+            this.props.selectSpell(this.props.spell);
+        }
+    }
 }
 
+export default reduxConnector(SpellCard);
 
 function processText(text: string): ReactNode {
     return text.split("***")

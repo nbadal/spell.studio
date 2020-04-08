@@ -25,7 +25,7 @@ export type SpellClass =
 export const AllSpellClasses: SpellClass[] = ["bard", "cleric", "druid", "paladin", "ranger", "sorcerer", "warlock", "wizard"];
 
 export type SpellsState = {
-    filtered: Spell[];
+    all: Spell[];
     selected: Spell[];
     filter: SpellFilter;
 }

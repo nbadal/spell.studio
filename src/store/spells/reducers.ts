@@ -1,7 +1,7 @@
 import {SpellFilter, SpellsState} from "./types";
 import {createReducer} from "@reduxjs/toolkit";
-import {clearSelection, filterSpells, selectSpell, spellsFiltered, unselectSpell} from "./actions";
-import {SpellRepo} from "../../data/SpellRepo";
+import {clearSelection, filterSpells, selectSpell, unselectSpell} from "./actions";
+import {allSpells} from "../../data/SpellRepo";
 
 let initialFilter: SpellFilter = {
     levelMin: 0,
@@ -10,7 +10,7 @@ let initialFilter: SpellFilter = {
 };
 
 const initialState: SpellsState = {
-    filtered: SpellRepo.filteredSpells(initialFilter),
+    all: allSpells,
     selected: [],
     filter: initialFilter
 };
@@ -19,9 +19,6 @@ export const spellsReducer = createReducer(initialState, (builder) => {
     builder
         .addCase(filterSpells, (state, action) => {
             state.filter = action.payload;
-        })
-        .addCase(spellsFiltered, (state, action) => {
-            state.filtered = action.payload;
             state.selected = [];
         })
         .addCase(selectSpell, (state, action) => {

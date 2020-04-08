@@ -19,10 +19,11 @@ import {ColorMode} from "../store/colors/types";
 import {changeClassColor, changeColorMode, changeSchoolColor} from "../store/colors/actions";
 import TextField from "@material-ui/core/TextField";
 import {SketchPicker} from "react-color";
+import {selectSpellCount} from "../store/spells/selectors";
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
-    spellCount: state.spells.filtered.length,
+    spellCount: selectSpellCount(state),
     colors: state.colors,
 });
 
@@ -201,7 +202,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                            clickHandler: () => void, colorHandler: (newColor: string) => void) => {
         const {classes} = this.props;
         return (
-            <>
+            <React.Fragment key={label}>
                 <Box className={classes.color} style={{backgroundColor: color}}/>
                 <Box onClick={clickHandler}>
                     <TextField label={label}
@@ -217,7 +218,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                     </Box>
                     }
                 </Box>
-            </>
+            </React.Fragment>
         );
     };
 
