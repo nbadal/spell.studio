@@ -38,9 +38,9 @@ class SpellCard extends Component<Props & ReduxProps> {
                  onClick={this.onClick}>
                 <div className="Name">
                     <Box>
-                        {/*<Textfit mode="single" max={14}>*/}
+                        <Textfit mode="single" max={14}>
                             {this.props.spell.name}
-                        {/*</Textfit>*/}
+                        </Textfit>
                     </Box>
                 </div>
                 <div className="Type">{this.spellTypeString()}</div>
