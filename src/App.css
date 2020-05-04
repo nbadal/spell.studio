@@ -30,7 +30,7 @@ body {
 .Spellbook {
     flex-grow: 1;
     background-color: #f0f0f0;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 @media print {
