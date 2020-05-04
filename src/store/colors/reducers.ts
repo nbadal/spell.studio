@@ -3,14 +3,14 @@ import {createReducer} from "@reduxjs/toolkit";
 import {changeClassColor, changeColorMode, changeSchoolColor} from "./actions";
 
 const initialState: ColorsState = {
-    colorMode: ColorMode.BY_SCHOOL,
+    colorMode: ColorMode.BY_CLASS,
     byClass: {
+        bard: "#802363",
+        cleric: "#CD9D15",
+        druid: "#639D48",
+        paladin: "#37A0C2",
+        ranger: "#665436",
         // From D&D Beyond themes:
-        bard: "#AB6DAC",
-        cleric: "#91A1B2",
-        druid: "#7A853B",
-        paladin: "#B59E54",
-        ranger: "#507F62",
         sorcerer: "#992E2E",
         warlock: "#7B469B",
         wizard: "#2A50A1",
