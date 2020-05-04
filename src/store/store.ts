@@ -1,7 +1,7 @@
 import {combineReducers, configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
 import {combineEpics, createEpicMiddleware} from "redux-observable";
-import {spellsReducer} from "./spells/reducers";
-import {colorsReducer} from "./colors/reducers";
+import spellsReducer from "./spells";
+import colorsReducer from "./colors";
 
 const rootReducer = combineReducers({
     spells: spellsReducer,

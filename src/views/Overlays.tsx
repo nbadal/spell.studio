@@ -8,8 +8,8 @@ import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core/sty
 import {RootState} from "../store/store";
 import {selectFilteredSpells} from "../store/spells/selectors";
 import {Dispatch} from "redux";
-import {clearSelection} from "../store/spells/actions";
 import {connect, ConnectedProps} from "react-redux";
+import {clearSelection} from "../store/spells";
 
 const mapStateToProps = (state: RootState) => ({
     spellCount: selectFilteredSpells(state).length,

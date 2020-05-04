@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 import {connect, ConnectedProps} from "react-redux";
 import _ from "lodash";
 import {RootState} from "../store/store";
-import {filterSpells} from "../store/spells/actions";
 import {AllSpellClasses, AllSpellSchools, SpellClass, SpellFilter, SpellSchool} from "../store/spells/types";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
@@ -15,11 +14,12 @@ import Input from "@material-ui/core/Input";
 import {createStyles, Theme, withStyles, WithStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import {Typography} from "@material-ui/core";
-import {ColorMode} from "../store/colors/types";
-import {changeClassColor, changeColorMode, changeSchoolColor} from "../store/colors/actions";
+import {CardColor, ColorMode} from "../store/colors/types";
 import TextField from "@material-ui/core/TextField";
 import {SketchPicker} from "react-color";
 import {selectSpellCount} from "../store/spells/selectors";
+import {changeClassColor, changeColorMode, changeSchoolColor} from '../store/colors';
+import {filterSpells} from '../store/spells';
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
@@ -31,8 +31,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         updateFilter: (filter: SpellFilter) => dispatch(filterSpells(filter)),
         changeColorMode: (mode: ColorMode) => dispatch(changeColorMode(mode)),
-        changeClassColor: (spellClass: SpellClass, color: string) => dispatch(changeClassColor(color, spellClass)),
-        changeSchoolColor: (spellSchool: SpellSchool, color: string) => dispatch(changeSchoolColor(color, spellSchool)),
+        changeClassColor: (spellClass: SpellClass, color: CardColor) => dispatch(changeClassColor({color, spellClass})),
+        changeSchoolColor: (spellSchool: SpellSchool, color: CardColor) => dispatch(changeSchoolColor({color, spellSchool})),
     }
 };
 

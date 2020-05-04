@@ -7,8 +7,8 @@ import Box from "@material-ui/core/Box";
 import {RootState} from "../store/store";
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
-import {selectSpell, unselectSpell} from "../store/spells/actions";
 import {selectSpellColor} from "../store/colors/selectors";
+import {selectSpell, unselectSpell} from '../store/spells';
 
 const mapStateToProps = (state: RootState, props: Props) => ({
     selectionActive: state.spells.selected.length > 0,
