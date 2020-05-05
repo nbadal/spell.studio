@@ -21,7 +21,8 @@
     "react-helmet": "^5.2.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.0",
-    "react-textfit": "^1.1.0"
+    "react-textfit": "^1.1.0",
+    "rpg-awesome": "^0.2.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.0",
