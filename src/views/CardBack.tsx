@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { Spell } from "../store/spells/types";
+import React, {Component} from "react";
+import {Spell} from "../store/spells/types";
 import "rpg-awesome/css/rpg-awesome.min.css";
+import "@rolodromo/gameicons-webfont/css/rpgen-gameicons.min.css";
 import "../css/CardBack.css";
-import { RootState } from "../store/store";
-import { connect, ConnectedProps } from "react-redux";
-import { Dispatch } from "redux";
-import { selectSpellColor, selectSpellClass } from "../store/colors/selectors";
-import { selectSpell, unselectSpell } from "../store/spells";
-import { Box } from "@material-ui/core";
-import { ClassIcon } from "./ClassIcon";
+import {RootState} from "../store/store";
+import {connect, ConnectedProps} from "react-redux";
+import {Dispatch} from "redux";
+import {selectSpellClass, selectSpellColor} from "../store/colors/selectors";
+import {selectSpell, unselectSpell} from "../store/spells";
+import {Box} from "@material-ui/core";
+import {ClassIcon} from "./ClassIcon";
 import _ from "lodash";
 
 const mapStateToProps = (state: RootState, props: Props) => ({
@@ -96,12 +97,11 @@ class CardBack extends Component<Props & ReduxProps> {
         let transform = `rotate(${angle} 50 50)`;
         // let transform = undefined;
 
-        // https://github.com/nagoshiashumari/Rpg-Awesome/blob/master/css/rpg-awesome.css
-        let smallText = _.times(64)
-            .map(() => "")
+        let smallText = _.times(32)
+            .map(() => this.getSmallChar())
             .join("");
-        let largeText = _.times(64)
-            .map(() => "")
+        let largeText = _.times(32)
+            .map(() => this.getLargeChar())
             .join("");
 
         return (
@@ -109,30 +109,77 @@ class CardBack extends Component<Props & ReduxProps> {
                 <g transform={transform}>
                     <line
                         className={"DiamondLine"}
-                        x1={-999}
+                        x1={-200}
                         y1={52}
-                        x2={999}
+                        x2={200}
                         y2={52}
                         stroke={this.props.cardColor}
                     />
-                    <text className={"ra DiamondTextSm"} x={50} y={50} fill={this.props.cardColor}>
+                    <text
+                        className={"gi DiamondTextSm"}
+                        x={50}
+                        y={49.5}
+                        fill={this.props.cardColor}
+                    >
                         {smallText}
                     </text>
 
                     <line
                         className={"DiamondLine"}
-                        x1={-999}
+                        x1={-200}
                         y1={42}
-                        x2={999}
+                        x2={200}
                         y2={42}
                         stroke={this.props.cardColor}
                     />
-                    <text className={"ra DiamondTextLg"} x={50} y={40} fill={this.props.cardColor}>
+                    <text className={"gi DiamondTextLg"} x={50} y={39} fill={this.props.cardColor}>
                         {largeText}
                     </text>
                 </g>
             </svg>
         );
+    }
+
+    private getSmallChar(): string {
+        switch (this.props.cardClass) {
+            case "bard":
+                return "\uefd8\uebe7"; // musical-notes double-quaver
+            case "cleric":
+                return "\uf3df\uedb1"; // trample hammer-drop
+            case "druid":
+                return "\uf001\ueb79"; // oak-leaf curled-leaf
+            case "paladin":
+                return "\uec2d\uecd6"; // edged-shield fist
+            case "ranger":
+                return "\uf064"; // pawprint
+            case "sorcerer":
+                return "\ueeff"; // lightning-slashes //kindle
+            case "warlock":
+                return "\uf123\uf1e5"; // raise-zombie sheikah-eye
+            case "wizard":
+                return "\uecbe"; // fire-ray
+        }
+    }
+
+    private getLargeChar(): string {
+        switch (this.props.cardClass) {
+            case "bard":
+                return "\uef32"; // lyre
+            case "cleric":
+                return "\uf1a6"; // scales
+            case "druid":
+                return "\uec29"; // eclipse-flare
+            case "paladin":
+                return "\uf42e"; // two-handed-sword
+            case "ranger":
+                return "\ueb80"; // curvy-knife
+            case "sorcerer":
+                return "\uee9e"; // kindle
+            case "warlock":
+                return "\ueb9d"; // death-juice
+            case "wizard":
+                return "\uec57"; // enlightenment
+        }
     }
 }
 
