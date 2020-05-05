@@ -1,12 +1,13 @@
 .SpellCard, .DisabledSpellCard {
     width: 2.5in;
     height: 3.5in;
-    border-radius: 12px;
+    vertical-align: top;
     display: inline-flex;
     flex-direction: column;
 
     margin: 8px;
     padding: 10px;
+    border-radius: 12px;
 
 
     font-family: "modesto-text", serif;

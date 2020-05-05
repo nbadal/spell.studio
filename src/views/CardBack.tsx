@@ -43,11 +43,19 @@ class CardBack extends Component<Props & ReduxProps> {
                 style={{ backgroundColor: cardColor }}
                 onClick={this.onClick}
             >
-                <Box className={"ArtBorder"} style={{ color: cardColor }}>
-                    <Box className={"Art"} style={{ borderColor: cardColor }}>
-                        <Box className={"TopCorner"}>{this.props.spell.level}</Box>
-                        <ClassIcon spellClass={this.props.cardClass} color={cardColor} />
-                        <Box className={"BotCorner"}>{this.props.spell.level}</Box>
+                <Box className={"ArtContainer"} style={{ color: cardColor }}>
+                    <Box className={"ArtInner"} style={{ borderColor: cardColor }}>
+                        <Box className={"ArtBackground"}>
+                            <svg viewBox={"0 0 196 292"}>
+                                {this.renderDiamond(196 * 0.98, 292 * 0.98)}
+                                {this.renderDiamond(196 * 1.15, 292 * 1.15)}
+                            </svg>
+                        </Box>
+                        <Box className={"Art"}>
+                            <Box className={"TopCorner"}>{this.props.spell.level}</Box>
+                            <ClassIcon spellClass={this.props.cardClass} color={cardColor} />
+                            <Box className={"BotCorner"}>{this.props.spell.level}</Box>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
@@ -61,6 +69,26 @@ class CardBack extends Component<Props & ReduxProps> {
             this.props.selectSpell(this.props.spell);
         }
     };
+
+    private renderDiamond(width: number, height: number) {
+        let stroke = this.props.cardColor;
+        return (
+            <g transform={"translate(" + 196 / 2 + " " + 292 / 2 + ")"}>
+                <path
+                    d={`
+                        M ${-width / 2} 0
+                        L 0 ${-height / 2}
+                        L ${width / 2} 0
+                        L 0 ${height / 2}
+                        Z
+                    `}
+                    stroke={stroke}
+                    fill={"none"}
+                    strokeWidth={3}
+                />
+            </g>
+        );
+    }
 }
 
 export default reduxConnector(CardBack);

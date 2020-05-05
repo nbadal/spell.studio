@@ -39,8 +39,6 @@ export class ClassIcon extends Component<Props> {
                 return <WarlockIcon {...props} />;
             case "wizard":
                 return <WizardIcon {...props} />;
-            default:
-                return <svg />;
         }
     }
 }
