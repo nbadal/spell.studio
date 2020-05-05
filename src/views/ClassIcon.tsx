@@ -9,29 +9,35 @@ import { ReactComponent as SorcererIcon } from "../svg/classes/sorcerer.svg";
 import { ReactComponent as WarlockIcon } from "../svg/classes/warlock.svg";
 import { ReactComponent as WizardIcon } from "../svg/classes/wizard.svg";
 
-interface Props extends React.SVGProps<SVGSVGElement> {
+interface Props {
     spellClass: SpellClass;
+    className: string;
+    height: string;
+    fill: string;
 }
 
 export class ClassIcon extends Component<Props> {
+
     public render() {
+        const {className, height, fill} = this.props;
+
         switch (this.props.spellClass) {
             case "bard":
-                return <BardIcon {...this.props} />;
+                return <BardIcon className={className} height={height} fill={fill} />;
             case "cleric":
-                return <ClericIcon {...this.props} />;
+                return <ClericIcon className={className} height={height} fill={fill} />;
             case "druid":
-                return <DruidIcon {...this.props} />;
+                return <DruidIcon className={className} height={height} fill={fill} />;
             case "paladin":
-                return <PaladinIcon {...this.props} />;
+                return <PaladinIcon className={className} height={height} fill={fill} />;
             case "ranger":
-                return <RangerIcon {...this.props} />;
+                return <RangerIcon className={className} height={height} fill={fill} />;
             case "sorcerer":
-                return <SorcererIcon {...this.props} />;
+                return <SorcererIcon className={className} height={height} fill={fill} />;
             case "warlock":
-                return <WarlockIcon {...this.props} />;
+                return <WarlockIcon className={className} height={height} fill={fill} />;
             case "wizard":
-                return <WizardIcon {...this.props} />;
+                return <WizardIcon className={className} height={height} fill={fill} />;
         }
     }
 }

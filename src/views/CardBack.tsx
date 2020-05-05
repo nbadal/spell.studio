@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Spell} from "../store/spells/types";
-import "rpg-awesome/css/rpg-awesome.min.css";
 import "@rolodromo/gameicons-webfont/css/rpgen-gameicons.min.css";
 import "../css/CardBack.css";
 import {RootState} from "../store/store";

@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-textfit/lib/Textfit.js b/node_modules/react-textfit/lib/Textfit.js
+index 4d44f41..48fd2ef 100644
+--- a/node_modules/react-textfit/lib/Textfit.js
++++ b/node_modules/react-textfit/lib/Textfit.js
+@@ -84,7 +84,7 @@ var TextFit = function (_React$Component) {
+     }
+ 
+     _createClass(TextFit, [{
+-        key: 'componentWillMount',
++        key: 'UNSAFE_componentWillMount',
+         value: function componentWillMount() {
+             this.handleWindowResize = (0, _throttle2.default)(this.handleWindowResize, this.props.throttle);
+         }
