@@ -8,37 +8,30 @@ import { ReactComponent as RangerIcon } from "../svg/classes/ranger.svg";
 import { ReactComponent as SorcererIcon } from "../svg/classes/sorcerer.svg";
 import { ReactComponent as WarlockIcon } from "../svg/classes/warlock.svg";
 import { ReactComponent as WizardIcon } from "../svg/classes/wizard.svg";
-import { CardColor } from "../store/colors/types";
 
-interface Props {
+interface Props extends React.SVGProps<SVGSVGElement> {
     spellClass: SpellClass;
-    color: CardColor;
 }
 
 export class ClassIcon extends Component<Props> {
     public render() {
-        let props: React.SVGProps<SVGSVGElement> = {
-            height: "1.5in",
-            fill: this.props.color,
-        };
-
         switch (this.props.spellClass) {
             case "bard":
-                return <BardIcon {...props} />;
+                return <BardIcon {...this.props} />;
             case "cleric":
-                return <ClericIcon {...props} />;
+                return <ClericIcon {...this.props} />;
             case "druid":
-                return <DruidIcon {...props} />;
+                return <DruidIcon {...this.props} />;
             case "paladin":
-                return <PaladinIcon {...props} />;
+                return <PaladinIcon {...this.props} />;
             case "ranger":
-                return <RangerIcon {...props} />;
+                return <RangerIcon {...this.props} />;
             case "sorcerer":
-                return <SorcererIcon {...props} />;
+                return <SorcererIcon {...this.props} />;
             case "warlock":
-                return <WarlockIcon {...props} />;
+                return <WarlockIcon {...this.props} />;
             case "wizard":
-                return <WizardIcon {...props} />;
+                return <WizardIcon {...this.props} />;
         }
     }
 }

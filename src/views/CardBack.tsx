@@ -45,17 +45,18 @@ class CardBack extends Component<Props & ReduxProps> {
             >
                 <Box className={"ArtContainer"} style={{ color: cardColor }}>
                     <Box className={"ArtInner"} style={{ borderColor: cardColor }}>
-                        <Box className={"ArtBackground"}>
-                            <svg viewBox={"0 0 196 292"}>
-                                {this.renderDiamond(196 * 0.98, 292 * 0.98)}
-                                {this.renderDiamond(196 * 1.15, 292 * 1.15)}
-                            </svg>
-                        </Box>
-                        <Box className={"Art"}>
-                            <Box className={"TopCorner"}>{this.props.spell.level}</Box>
-                            <ClassIcon spellClass={this.props.cardClass} color={cardColor} />
-                            <Box className={"BotCorner"}>{this.props.spell.level}</Box>
-                        </Box>
+                        <svg className={"Diamond"} viewBox={"0 0 196 292"}>
+                            {this.renderDiamond(196 * 0.98, 292 * 0.98)}
+                            {this.renderDiamond(196 * 1.15, 292 * 1.15)}
+                        </svg>
+                        <ClassIcon
+                            className={"Icon"}
+                            height={"1.5in"}
+                            spellClass={this.props.cardClass}
+                            fill={cardColor}
+                        />
+                        <Box className={"TRCorner"}>{this.props.spell.level}</Box>
+                        <Box className={"BLCorner"}>{this.props.spell.level}</Box>
                     </Box>
                 </Box>
             </Box>
