@@ -14,7 +14,7 @@
     opacity: 0.5;
 }
 
-.ArtContainer {
+.ArtBackground {
     position: relative;
     flex: 1;
     padding: 8px;
@@ -81,5 +81,8 @@
 
     .DisabledCardBack {
         display: none;
+    }
+    .ArtBackground {
+        background: white;
     }
 }

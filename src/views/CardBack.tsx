@@ -43,7 +43,7 @@ class CardBack extends Component<Props & ReduxProps> {
                 style={{ backgroundColor: cardColor }}
                 onClick={this.onClick}
             >
-                <Box className={"ArtContainer"} style={{ color: cardColor }}>
+                <Box className={"ArtBackground"} style={{ color: cardColor }}>
                     <Box className={"ArtInner"} style={{ borderColor: cardColor }}>
                         <svg className={"Diamond"} viewBox={"0 0 196 292"}>
                             {this.renderDiamond(196 * 0.98, 292 * 0.98)}
