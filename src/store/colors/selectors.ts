@@ -7,10 +7,17 @@ import {selectFilteredSpellClasses} from "../spells/selectors";
 const getColors = (state: RootState) => state.colors;
 const getSpellSchool = (state: RootState, props: { spell: Spell }) => props.spell.school;
 
+export const selectSpellClass = createSelector(
+    [selectFilteredSpellClasses],
+    (classes) => {
+        return classes[0];
+    }
+);
+
 export const selectSpellClassColor = createSelector(
-    [selectFilteredSpellClasses, getColors],
-    (classes, colors) => {
-        return colors.byClass[classes[0]];
+    [selectSpellClass, getColors],
+    (spellClass, colors) => {
+        return colors.byClass[spellClass];
     }
 );
 

@@ -1,0 +1,68 @@
+.CardBack,
+.DisabledCardBack {
+    width: 2.5in;
+    height: 3.5in;
+    border-radius: 12px;
+    display: inline-flex;
+
+    margin: 8px;
+    padding: 10px;
+}
+
+.DisabledCardBack {
+    opacity: 0.5;
+}
+
+.ArtBorder {
+    display: flex;
+    flex: 1;
+    padding: 8px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.Art {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 4px solid;
+
+    background-color: white;
+    border-radius: 8px;
+}
+svg {
+    flex: 1;
+}
+
+.TopCorner,
+.BotCorner {
+    margin: 0 4px;
+    font-family: "modesto-condensed", serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75in;
+    line-height: 0.65in;
+}
+
+.TopCorner {
+    align-self: flex-end;
+}
+
+.BotCorner {
+    align-self: flex-start;
+}
+
+@media print {
+    .CardBack,
+    .DisabledCardBack {
+        -webkit-print-color-adjust: exact;
+        margin: 2px !important;
+    }
+
+    .DisabledCardBack {
+        display: none;
+    }
+}
