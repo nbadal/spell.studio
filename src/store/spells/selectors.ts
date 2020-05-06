@@ -25,6 +25,13 @@ export const selectFilteredSpells = createSelector(
 
 export const selectSpellCount = createSelector([selectFilteredSpells], (spells) => spells.length);
 
+export const selectSpellAtIdx = (idx: number) => createSelector(
+    [selectFilteredSpells],
+    (spells) => {
+        return spells[idx];
+    },
+);
+
 export const selectFilteredSpellClasses = createSelector(
     [selectFilter, getSpellClasses],
     (filter, spellClasses) => {

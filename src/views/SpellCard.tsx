@@ -9,12 +9,17 @@ import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 import { selectSpellColor } from "../store/colors/selectors";
 import { selectSpell, unselectSpell } from "../store/spells";
+import {selectSpellAtIdx} from "../store/spells/selectors";
 
-const mapStateToProps = (state: RootState, props: Props) => ({
-    selectionActive: state.spells.selected.length > 0,
-    selected: state.spells.selected.includes(props.spell),
-    cardColor: selectSpellColor(state, props),
-});
+const mapStateToProps = (state: RootState, props: Props) => {
+    let spell = selectSpellAtIdx(props.spellIndex)(state)
+    return {
+        spell: spell,
+        selectionActive: state.spells.selected.length > 0,
+        selected: state.spells.selected.includes(spell),
+        cardColor: selectSpellColor(state, {spell}),
+    };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
@@ -27,7 +32,7 @@ const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
 interface Props {
-    spell: Spell;
+    spellIndex: number;
 }
 
 class SpellCard extends Component<Props & ReduxProps> {

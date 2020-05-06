@@ -182,7 +182,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                 <Typography>Layout</Typography>
                 <Box className={classes.controlGroup}>
                     <FormControl>
-                        <FormGroup>
+                        <FormGroup row={true}>
                             <FormControlLabel
                                 label={"Show Front"}
                                 control={<Switch checked={this.props.showFront} />}

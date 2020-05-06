@@ -10,13 +10,18 @@ import { selectSpell, unselectSpell } from "../store/spells";
 import { Box } from "@material-ui/core";
 import { ClassIcon } from "./ClassIcon";
 import _ from "lodash";
+import {selectSpellAtIdx} from "../store/spells/selectors";
 
-const mapStateToProps = (state: RootState, props: Props) => ({
-    selectionActive: state.spells.selected.length > 0,
-    selected: state.spells.selected.includes(props.spell),
-    cardColor: selectSpellColor(state, props),
-    cardClass: selectSpellClass(state, props),
-});
+const mapStateToProps = (state: RootState, props: Props) => {
+    let spell = selectSpellAtIdx(props.spellIndex)(state);
+    return {
+        spell: spell,
+        selectionActive: state.spells.selected.length > 0,
+        selected: state.spells.selected.includes(spell),
+        cardColor: selectSpellColor(state, {spell}),
+        cardClass: selectSpellClass(state, {spell}),
+    };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
@@ -29,7 +34,7 @@ const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
 interface Props {
-    spell: Spell;
+    spellIndex: number;
 }
 
 class CardBack extends Component<Props & ReduxProps> {
