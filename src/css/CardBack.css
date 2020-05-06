@@ -8,10 +8,17 @@
     border-radius: 12px;
     margin: 8px;
     padding: 10px;
+
+    cursor: pointer;
+    user-select: none;
 }
 
 .DisabledCardBack {
     opacity: 0.5;
+}
+
+.DisabledCardBack:hover {
+    opacity: 0.65;
 }
 
 .ArtBackground {

@@ -9,14 +9,24 @@
     padding: 10px;
     border-radius: 12px;
 
-
     font-family: "modesto-text", serif;
     font-style: normal;
     font-weight: 300;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.SpellCard:hover {
+    opacity: 0.9;
 }
 
 .DisabledSpellCard {
     opacity: 0.5;
+}
+
+.DisabledSpellCard:hover {
+    opacity: 0.65;
 }
 
 @media print {
@@ -103,6 +113,7 @@ tr + tr > td {
 
 .StatsValue::first-letter {
     text-transform: capitalize;
+    user-select: none;
 }
 
 .StatsBadge {
