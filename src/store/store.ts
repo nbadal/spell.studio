@@ -1,10 +1,12 @@
 import {combineReducers, configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
 import spellsReducer from "./spells";
 import colorsReducer from "./colors";
+import layoutReducer from "./layout";
 
 const rootReducer = combineReducers({
     spells: spellsReducer,
     colors: colorsReducer,
+    layout: layoutReducer,
 });
 
 export function configureAppStore() {

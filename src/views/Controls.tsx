@@ -20,16 +20,24 @@ import {SketchPicker} from "react-color";
 import {selectSpellCount} from "../store/spells/selectors";
 import {changeClassColor, changeColorMode, changeSchoolColor} from '../store/colors';
 import {filterSpells} from '../store/spells';
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import { setFrontShown, setBackShown } from '../store/layout';
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
     spellCount: selectSpellCount(state),
     colors: state.colors,
+    showFront: state.layout.showFront,
+    showBack: state.layout.showBack,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         updateFilter: (filter: SpellFilter) => dispatch(filterSpells(filter)),
+        setFrontShown: (show: boolean) => dispatch(setFrontShown(show)),
+        setBackShown: (show: boolean) => dispatch(setBackShown(show)),
         changeColorMode: (mode: ColorMode) => dispatch(changeColorMode(mode)),
         changeClassColor: (spellClass: SpellClass, color: CardColor) => dispatch(changeClassColor({color, spellClass})),
         changeSchoolColor: (spellSchool: SpellSchool, color: CardColor) => dispatch(changeSchoolColor({color, spellSchool})),
@@ -161,6 +169,23 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                         </Select>
                     </FormControl>
                 </Box>
+                <Typography>Layout</Typography>
+                <Box className={classes.controlGroup}>
+                    <FormControl>
+                        <FormGroup>
+                            <FormControlLabel label={"Show Front"} control={
+                                <Switch checked={this.props.showFront}/>
+                            } onChange={(event, checked) => {
+                                this.props.setFrontShown(checked);
+                            }}/>
+                            <FormControlLabel label={"Show Back"} control={
+                                <Switch checked={this.props.showBack}/>
+                            } onChange={(event, checked) => {
+                                this.props.setBackShown(checked);
+                            }}/>
+                        </FormGroup>
+                    </FormControl>
+                </Box>
                 <Typography>Colors</Typography>
                 <Box className={classes.controlGroup}>
                     <FormControl className={classes.selectControl}>
@@ -238,7 +263,6 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
 
     private schoolColorPicked = (spellSchool: SpellSchool, color: string) => {
         this.props.changeSchoolColor(spellSchool, color);
-
     };
 
     private updateFilter(newData: any) {

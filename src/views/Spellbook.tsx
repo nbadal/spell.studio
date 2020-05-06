@@ -9,6 +9,8 @@ import CardBack from "./CardBack";
 
 const mapStateToProps = (state: RootState) => ({
     spells: selectFilteredSpells(state),
+    showCard: state.layout.showFront,
+    showBack: state.layout.showBack,
 });
 
 const reduxConnector = connect(mapStateToProps);
@@ -20,8 +22,8 @@ class Spellbook extends Component<ReduxProps> {
             <Box className="Spellbook">
                 {this.props.spells.map((spell: Spell) => (
                     <React.Fragment key={spell.name}>
-                        <SpellCard spell={spell} />
-                        <CardBack spell={spell} />
+                        {this.props.showCard && <SpellCard spell={spell} />}
+                        {this.props.showBack && <CardBack spell={spell} />}
                     </React.Fragment>
                 ))}
             </Box>
