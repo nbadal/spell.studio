@@ -44,7 +44,10 @@
     border-radius: 8px;
 }
 
-.Diamond1, .Diamond2, .Diamond3, .Diamond4 {
+.Diamond1,
+.Diamond2,
+.Diamond3,
+.Diamond4 {
     justify-self: stretch;
     align-self: stretch;
 }

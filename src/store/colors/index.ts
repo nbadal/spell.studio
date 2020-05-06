@@ -1,6 +1,6 @@
-import {CardColor, ColorMode, ColorsState} from "./types";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {SpellClass, SpellSchool} from "../spells/types";
+import { CardColor, ColorMode, ColorsState } from "./types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { SpellClass, SpellSchool } from "../spells/types";
 
 const initialColorsState: ColorsState = {
     colorMode: ColorMode.BY_CLASS,
@@ -28,25 +28,27 @@ const initialColorsState: ColorsState = {
 };
 
 const colorsSlice = createSlice({
-    name: 'colors',
+    name: "colors",
     initialState: initialColorsState,
     reducers: {
         changeColorMode: (state, action: PayloadAction<ColorMode>) => {
             state.colorMode = action.payload;
         },
-        changeClassColor: (state, action: PayloadAction<{color: CardColor, spellClass: SpellClass}>) => {
+        changeClassColor: (
+            state,
+            action: PayloadAction<{ color: CardColor; spellClass: SpellClass }>,
+        ) => {
             state.byClass[action.payload.spellClass] = action.payload.color;
         },
-        changeSchoolColor: (state, action: PayloadAction<{color: CardColor, spellSchool: SpellSchool}>) => {
+        changeSchoolColor: (
+            state,
+            action: PayloadAction<{ color: CardColor; spellSchool: SpellSchool }>,
+        ) => {
             state.bySchool[action.payload.spellSchool] = action.payload.color;
         },
     },
 });
 
-export const {
-    changeColorMode,
-    changeClassColor,
-    changeSchoolColor,
-} = colorsSlice.actions;
+export const { changeColorMode, changeClassColor, changeSchoolColor } = colorsSlice.actions;
 
 export default colorsSlice.reducer;

@@ -1,7 +1,7 @@
 export type SpellDetail = string | any;
 
 export type SpellSchool =
-    "conjuration"
+    | "conjuration"
     | "abjuration"
     | "divination"
     | "enchantment"
@@ -10,10 +10,19 @@ export type SpellSchool =
     | "necromancy"
     | "transmutation";
 
-export const AllSpellSchools: SpellSchool[] = ["conjuration", "abjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"];
+export const AllSpellSchools: SpellSchool[] = [
+    "conjuration",
+    "abjuration",
+    "divination",
+    "enchantment",
+    "evocation",
+    "illusion",
+    "necromancy",
+    "transmutation",
+];
 
 export type SpellClass =
-    "bard"
+    | "bard"
     | "cleric"
     | "druid"
     | "paladin"
@@ -22,13 +31,22 @@ export type SpellClass =
     | "warlock"
     | "wizard";
 
-export const AllSpellClasses: SpellClass[] = ["bard", "cleric", "druid", "paladin", "ranger", "sorcerer", "warlock", "wizard"];
+export const AllSpellClasses: SpellClass[] = [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger",
+    "sorcerer",
+    "warlock",
+    "wizard",
+];
 
 export type SpellsState = {
     all: Spell[];
     selected: Spell[];
     filter: SpellFilter;
-}
+};
 
 export type Spell = {
     name: string;
@@ -45,13 +63,13 @@ export type Spell = {
         somatic: boolean;
         material: boolean;
         materialInfo?: string;
-    }
+    };
     details: SpellDetail[];
     higherLevels?: string;
-}
+};
 
 export type SpellFilter = {
     classes: SpellClass[];
     levelMin: number;
     levelMax: number;
-}
+};

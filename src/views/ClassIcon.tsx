@@ -17,9 +17,8 @@ interface Props {
 }
 
 export class ClassIcon extends Component<Props> {
-
     public render() {
-        const {className, height, fill} = this.props;
+        const { className, height, fill } = this.props;
 
         switch (this.props.spellClass) {
             case "bard":

@@ -1,4 +1,4 @@
-import {combineReducers, configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
+import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import spellsReducer from "./spells";
 import colorsReducer from "./colors";
 import layoutReducer from "./layout";
@@ -17,4 +17,3 @@ export function configureAppStore() {
 }
 
 export type RootState = ReturnType<typeof rootReducer>;
-

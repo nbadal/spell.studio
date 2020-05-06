@@ -1,6 +1,6 @@
-import {Spell, SpellFilter, SpellsState} from "./types";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {allSpells} from "../../data/SpellRepo";
+import { Spell, SpellFilter, SpellsState } from "./types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { allSpells } from "../../data/SpellRepo";
 
 let initialFilter: SpellFilter = {
     levelMin: 0,
@@ -11,11 +11,11 @@ let initialFilter: SpellFilter = {
 const initialSpellsState: SpellsState = {
     all: allSpells,
     selected: [],
-    filter: initialFilter
+    filter: initialFilter,
 };
 
 const spellsSlice = createSlice({
-    name: 'spells',
+    name: "spells",
     initialState: initialSpellsState,
     reducers: {
         filterSpells: (state, action) => {
@@ -35,11 +35,6 @@ const spellsSlice = createSlice({
     },
 });
 
-export const {
-    filterSpells,
-    selectSpell,
-    unselectSpell,
-    clearSelection,
-} = spellsSlice.actions;
+export const { filterSpells, selectSpell, unselectSpell, clearSelection } = spellsSlice.actions;
 
 export default spellsSlice.reducer;

@@ -1,14 +1,14 @@
-import React, {Component} from "react";
-import {Spell} from "../store/spells/types";
+import React, { Component } from "react";
+import { Spell } from "../store/spells/types";
 import "@rolodromo/gameicons-webfont/css/rpgen-gameicons.min.css";
 import "../css/CardBack.css";
-import {RootState} from "../store/store";
-import {connect, ConnectedProps} from "react-redux";
-import {Dispatch} from "redux";
-import {selectSpellClass, selectSpellColor} from "../store/colors/selectors";
-import {selectSpell, unselectSpell} from "../store/spells";
-import {Box} from "@material-ui/core";
-import {ClassIcon} from "./ClassIcon";
+import { RootState } from "../store/store";
+import { connect, ConnectedProps } from "react-redux";
+import { Dispatch } from "redux";
+import { selectSpellClass, selectSpellColor } from "../store/colors/selectors";
+import { selectSpell, unselectSpell } from "../store/spells";
+import { Box } from "@material-ui/core";
+import { ClassIcon } from "./ClassIcon";
 import _ from "lodash";
 
 const mapStateToProps = (state: RootState, props: Props) => ({
