@@ -258,7 +258,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                 <Box onClick={clickHandler}>
                     <TextField
                         label={label}
-                        value={color}
+                        value={color.toUpperCase()}
                         size={"small"}
                         variant={"outlined"}
                         disabled
