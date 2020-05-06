@@ -31,12 +31,12 @@ class Spellbook extends Component<ReduxProps> {
     private renderGrid = (gridSize: Size) => {
         let cellWidth = 0;
         if (this.props.showCard) {
-            cellWidth += 260;
+            cellWidth += 256;
         }
         if (this.props.showBack) {
-            cellWidth += 260;
+            cellWidth += 256;
         }
-        let cellHeight = 350;
+        let cellHeight = 352;
         let columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
         let rowCount = Math.max(1, this.props.spellCount / columnCount);
         return (
@@ -44,7 +44,7 @@ class Spellbook extends Component<ReduxProps> {
                 width={gridSize.width}
                 height={gridSize.height}
                 columnCount={columnCount}
-                columnWidth={gridSize.width / columnCount}
+                columnWidth={cellWidth}
                 rowHeight={cellHeight}
                 rowCount={rowCount}
             >

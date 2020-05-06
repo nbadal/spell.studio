@@ -70,7 +70,7 @@ const styles = (theme: Theme) =>
         },
         colorGrid: {
             display: "grid",
-            gridTemplateColumns: "24px 1fr 24px 1fr",
+            gridTemplateColumns: "24px 1fr",
             gridRowGap: theme.spacing(1),
             margin: theme.spacing(1),
             justifyItems: "center",
