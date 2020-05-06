@@ -24,6 +24,7 @@ body {
     padding: 8px 16px;
     background-color: #dfdfdf;
     border-right: 1px solid #888888;
+    overflow-y: scroll;
 }
 
 .Spellbook {
