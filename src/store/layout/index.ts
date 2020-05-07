@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialLayoutState: LayoutState = {
     showFront: true,
-    showBack: false,
+    showBack: true,
 };
 
 const layoutSlice = createSlice({
