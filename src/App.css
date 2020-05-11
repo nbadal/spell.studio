@@ -3,22 +3,18 @@ body {
 }
 
 .App {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 250px 1fr;
     height: 100vh;
     max-height: 100vh;
 }
 
-.content {
-    height: 0;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
+.TopBar {
+    grid-column: 1/3;
 }
 
 .Controls {
     display: flex;
-    width: 250px;
     flex-direction: column;
     align-items: center;
     padding: 8px 16px;
