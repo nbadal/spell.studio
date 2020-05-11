@@ -40,7 +40,7 @@ class Overlays extends Component<ReduxProps & StyleProps> {
     render() {
         const { classes } = this.props;
         return (
-            <Box displayPrint="none">
+            <Box className={"Overlays"} displayPrint="none">
                 <Snackbar
                     open={this.props.selectedCount > 0}
                     anchorOrigin={{ horizontal: "center", vertical: "bottom" }}

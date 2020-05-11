@@ -5,6 +5,7 @@
     vertical-align: top;
     display: inline-flex;
     flex-direction: column;
+    break-inside: avoid-page;
 
     margin: 8px;
     padding: 10px;

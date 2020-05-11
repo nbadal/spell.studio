@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../store/store";
 import Box from "@material-ui/core/Box";
-import { selectSpellCount } from "../store/spells/selectors";
+import { selectFilteredSpells, selectSpellCount } from "../store/spells/selectors";
 import AutoSizer, { Size } from "react-virtualized-auto-sizer";
 import { FixedSizeGrid, GridChildComponentProps } from "react-window";
 import SpellCard from "./SpellCard";
 import CardBack from "./CardBack";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 const mapStateToProps = (state: RootState) => ({
+    spells: selectFilteredSpells(state),
     spellCount: selectSpellCount(state),
     showCard: state.layout.showFront,
     showBack: state.layout.showBack,
@@ -17,13 +19,45 @@ const mapStateToProps = (state: RootState) => ({
 const reduxConnector = connect(mapStateToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
-class Spellbook extends Component<ReduxProps> {
+const styles = () =>
+    createStyles({
+        screenSpellbook: {
+            display: "flex",
+            flex: 1,
+            "@media print": {
+                display: "none",
+            },
+        },
+        printSpellbook: {
+            display: "none",
+            flexWrap: "wrap",
+            flex: 1,
+            "@media print": {
+                display: "flex",
+            },
+        },
+    });
+type StyleProps = WithStyles<typeof styles>;
+let stylesConnector = withStyles(styles);
+
+class Spellbook extends Component<ReduxProps & StyleProps> {
     componentDidMount() {}
 
     public render() {
+        const { classes } = this.props;
         return (
             <Box className="Spellbook">
-                <AutoSizer>{(size) => this.renderGrid(size)}</AutoSizer>
+                <Box className={classes.screenSpellbook}>
+                    <AutoSizer>{(size) => this.renderGrid(size)}</AutoSizer>
+                </Box>
+                <Box className={classes.printSpellbook}>
+                    {this.props.spells.map((spell, index) => (
+                        <React.Fragment key={spell.name}>
+                            {this.props.showCard && <SpellCard spellIndex={index} />}
+                            {this.props.showBack && <CardBack spellIndex={index} />}
+                        </React.Fragment>
+                    ))}
+                </Box>
             </Box>
         );
     }
@@ -68,4 +102,4 @@ class Spellbook extends Component<ReduxProps> {
     };
 }
 
-export default reduxConnector(Spellbook);
+export default stylesConnector(reduxConnector(Spellbook));

@@ -5,28 +5,40 @@ body {
 .App {
     display: grid;
     grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr;
     height: 100vh;
     max-height: 100vh;
 }
 
 .TopBar {
     grid-column: 1/3;
+    grid-row: 1;
 }
 
 .Controls {
+    grid-column: 1;
+    grid-row: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 8px 16px;
     background-color: #dfdfdf;
     border-right: 1px solid #888888;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .Spellbook {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
     flex-grow: 1;
     background-color: #f0f0f0;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.Overlays {
+    grid-column: 2;
+    grid-row: 2;
 }
 
 @media print {
@@ -34,12 +46,18 @@ body {
         size: landscape;
     }
 
+    .Controls {
+        display: none;
+    }
+
     .App {
         height: auto;
         max-height: none;
     }
 
-    .content {
-        height: auto;
+    .Spellbook {
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+        overflow-y: auto;
     }
 }

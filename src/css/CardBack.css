@@ -4,6 +4,7 @@
     height: 3.5in;
     vertical-align: top;
     display: inline-flex;
+    break-inside: avoid-page;
 
     border-radius: 12px;
     margin: 8px;
