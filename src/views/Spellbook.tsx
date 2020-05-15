@@ -22,18 +22,17 @@ type ReduxProps = ConnectedProps<typeof reduxConnector>;
 const styles = () =>
     createStyles({
         screenSpellbook: {
-            display: "flex",
-            flex: 1,
+            display: "block",
+            height: "100%",
             "@media print": {
                 display: "none",
             },
         },
         printSpellbook: {
             display: "none",
-            flexWrap: "wrap",
-            flex: 1,
+            height: "100%",
             "@media print": {
-                display: "flex",
+                display: "block",
             },
         },
     });

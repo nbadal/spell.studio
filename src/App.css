@@ -30,8 +30,6 @@ body {
 .Spellbook {
     grid-column: 2;
     grid-row: 2;
-    display: flex;
-    flex-grow: 1;
     background-color: #f0f0f0;
     overflow-y: auto;
 }
@@ -42,10 +40,6 @@ body {
 }
 
 @media print {
-    @page {
-        size: landscape;
-    }
-
     .Controls {
         display: none;
     }
