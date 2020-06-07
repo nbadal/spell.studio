@@ -1,30 +1,27 @@
 import React, { Component, ReactNode } from "react";
-import { Spell } from "../store/cards/types";
+import { Card, CardStat } from "../store/cards/types";
 import "../css/CardFront.css";
 import { ConcentrationIcon } from "./ConcentrationIcon";
 import Textfit from "react-textfit";
-import Box from "@material-ui/core/Box";
 import { RootState } from "../store/store";
 import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
-import { selectSpellColor } from "../store/colors/selectors";
 import { selectCard, unselectCard } from "../store/cards";
-import {selectCardAtIdx} from "../store/cards/selectors";
+import { selectCardAtIdx } from "../store/cards/selectors";
 
 const mapStateToProps = (state: RootState, props: Props) => {
-    let card = selectCardAtIdx(props.spellIndex)(state)
+    let card: Card = selectCardAtIdx(props.cardIndex)(state);
     return {
         card: card,
-        selectionActive: state.cards.selected.length > 0,
-        selected: state.cards.selected.includes(card),
-        cardColor: selectSpellColor(state, {spell: card}),
+        selectionActive: state.cards.selectedTitles.length > 0,
+        selected: state.cards.selectedTitles.includes(card.title),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        selectCard: (spell: Spell) => dispatch(selectCard(spell)),
-        unselectCard: (spell: Spell) => dispatch(unselectCard(spell)),
+        selectCard: (card: Card) => dispatch(selectCard(card)),
+        unselectCard: (card: Card) => dispatch(unselectCard(card)),
     };
 };
 
@@ -32,7 +29,7 @@ const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
 interface Props {
-    spellIndex: number;
+    cardIndex: number;
 }
 
 class CardFront extends Component<Props & ReduxProps> {
@@ -44,65 +41,30 @@ class CardFront extends Component<Props & ReduxProps> {
                         ? "CardFront"
                         : "DisabledCardFront"
                 }
-                style={{ backgroundColor: this.props.cardColor }}
+                style={{ backgroundColor: this.props.card.color }}
                 onClick={this.onClick}
             >
-                <div className="Name">
-                    <Box>
-                        <Textfit mode="single" max={14}>
-                            {this.props.card.name}
-                        </Textfit>
-                    </Box>
+                <div className="Title">
+                    <Textfit mode="single" max={14}>
+                        {this.props.card.title}
+                    </Textfit>
                 </div>
-                <div className="Type">{this.spellTypeString()}</div>
-                <table className="StatsTable">
-                    <tbody>
-                        <tr>
-                            {this.statCell("Casting Time", this.props.card.castingTime)}
-                            {this.statCell("Range", this.props.card.range)}
-                        </tr>
-                        <tr>
-                            {this.statCell("Components", this.spellComponentsString())}
-                            {this.statCell(
-                                "Duration",
-                                this.props.card.duration,
-                                !this.props.card.concentration || (
-                                    <ConcentrationIcon
-                                        style={{
-                                            fontSize: 18,
-                                            color: this.props.cardColor,
-                                        }}
-                                    />
-                                ),
-                            )}
-                        </tr>
-                    </tbody>
-                </table>
+                <div className="Subtitle">{this.props.card.subtitle}</div>
+                <div className="StatsTable">
+                    {this.props.card.stats.map((prop) => this.statCell(prop))}
+                </div>
                 <div className="DetailsContainer">
-                    {this.props.card.components.materialInfo !== undefined && (
-                        <div className="DetailsBlock">
-                            Material: {this.props.card.components.materialInfo}
-                        </div>
-                    )}
-                    {this.props.card.details
-                        .filter((detail) => typeof detail === "string")
-                        .map((detail, i, arr) => (
+                    {this.props.card.details.map((detail) => (
+                        <>
+                            {detail.header && <div className="HigherLevels">{detail.header}</div>}
                             <div
                                 className="DetailsBlock"
-                                key={i}
-                                style={{ flexGrow: i === arr.length - 1 ? 1 : 0 }}
+                                style={{ flexGrow: detail.expand ? 1 : 0 }}
                             >
-                                {processText(detail)}
+                                {processText(detail.text)}
                             </div>
-                        ))}
-                    {this.props.card.higherLevels && (
-                        <div className="HigherLevels">At Higher Levels</div>
-                    )}
-                    {this.props.card.higherLevels && (
-                        <div className="DetailsBlock">
-                            {processText(this.props.card.higherLevels)}
-                        </div>
-                    )}
+                        </>
+                    ))}
                 </div>
                 <div className="CardFooter">
                     <div />
@@ -112,63 +74,26 @@ class CardFront extends Component<Props & ReduxProps> {
         );
     }
 
-    private statCell = (title: string, value: string, badge?: ReactNode) => (
-        <td>
+    private statCell = (prop: CardStat) => (
+        <div className="StatCell">
             <div className="CellContent">
-                <div className="StatsTitle" style={{ color: this.props.cardColor }}>
-                    {title}
+                <div className="StatsTitle" style={{ color: this.props.card.color }}>
+                    {prop.name}
                 </div>
-                <div className="StatsValue">{value}</div>
-                {badge && <div className="StatsBadge">{badge}</div>}
+                <div className="StatsValue">{prop.value}</div>
+                {prop.icon && (
+                    <div className="StatsBadge">
+                        <ConcentrationIcon
+                            style={{
+                                fontSize: 18,
+                                color: this.props.card.color,
+                            }}
+                        />
+                    </div>
+                )}
             </div>
-        </td>
+        </div>
     );
-
-    private spellTypeString(): string {
-        let spellType: string = "";
-
-        switch (this.props.card.level) {
-            case 1:
-                spellType += "1st-level ";
-                break;
-            case 2:
-                spellType += "2nd-level ";
-                break;
-            case 3:
-                spellType += "3rd-level ";
-                break;
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-                spellType += this.props.card.level + "th-level ";
-                break;
-        }
-
-        spellType += this.props.card.school;
-
-        if (this.props.card.level === 0) {
-            spellType += " cantrip";
-        }
-        if (this.props.card.ritual) {
-            spellType += " (ritual)";
-        }
-
-        // Capitalize first letter.
-        spellType = spellType.substring(0, 1).toUpperCase() + spellType.substring(1);
-
-        return spellType;
-    }
-
-    private spellComponentsString(): string {
-        let components: string[] = [];
-        if (this.props.card.components.verbal) components.push("V");
-        if (this.props.card.components.somatic) components.push("S");
-        if (this.props.card.components.material) components.push("M");
-        return components.join(", ");
-    }
 
     private onClick = () => {
         if (this.props.selected) {

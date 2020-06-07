@@ -14,6 +14,10 @@
     user-select: none;
 }
 
+.CardBack:hover {
+    opacity: 0.9;
+}
+
 .DisabledCardBack {
     opacity: 0.5;
 }
@@ -126,6 +130,7 @@
     .DisabledCardBack {
         display: none;
     }
+
     .ArtBackground {
         background: white;
     }

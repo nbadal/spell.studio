@@ -4,29 +4,26 @@ import "../css/CardBack.css";
 import { RootState } from "../store/store";
 import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
-import { selectSpellClass, selectSpellColor } from "../store/colors/selectors";
 import { selectCard, unselectCard } from "../store/cards";
 import { Box } from "@material-ui/core";
-import { ClassIcon } from "./ClassIcon";
+import { CardIconView } from "./CardIconView";
 import _ from "lodash";
-import {selectCardAtIdx} from "../store/cards/selectors";
-import {Spell} from "../store/cards/types";
+import { selectCardAtIdx } from "../store/cards/selectors";
+import { Card } from "../store/cards/types";
 
 const mapStateToProps = (state: RootState, props: Props) => {
     let card = selectCardAtIdx(props.spellIndex)(state);
     return {
-        spell: card,
-        selectionActive: state.cards.selected.length > 0,
-        selected: state.cards.selected.includes(card),
-        cardColor: selectSpellColor(state, {spell: card}),
-        cardClass: selectSpellClass(state, {spell: card}),
+        card: card,
+        selectionActive: state.cards.selectedTitles.length > 0,
+        selected: state.cards.selectedTitles.includes(card.title),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        selectCard: (card: Spell) => dispatch(selectCard(card)),
-        unselectCard: (card: Spell) => dispatch(unselectCard(card)),
+        selectCard: (card: Card) => dispatch(selectCard(card)),
+        unselectCard: (card: Card) => dispatch(unselectCard(card)),
     };
 };
 
@@ -39,7 +36,7 @@ interface Props {
 
 class CardBack extends Component<Props & ReduxProps> {
     public render() {
-        let { cardColor } = this.props;
+        let cardColor = this.props.card.color;
         return (
             <Box
                 className={
@@ -56,14 +53,14 @@ class CardBack extends Component<Props & ReduxProps> {
                         {this.renderDiamond(2)}
                         {this.renderDiamond(3)}
                         {this.renderDiamond(4)}
-                        <ClassIcon
+                        <CardIconView
                             className={"Icon"}
                             height={"1.5in"}
-                            spellClass={this.props.cardClass}
+                            icon={this.props.card.icon}
                             fill={cardColor}
                         />
-                        <Box className={"TRCorner"}>{this.props.spell.level}</Box>
-                        <Box className={"BLCorner"}>{this.props.spell.level}</Box>
+                        <Box className={"TRCorner"}>{this.props.card.backCharacter}</Box>
+                        <Box className={"BLCorner"}>{this.props.card.backCharacter}</Box>
                     </Box>
                 </Box>
             </Box>
@@ -72,9 +69,9 @@ class CardBack extends Component<Props & ReduxProps> {
 
     private onClick = () => {
         if (this.props.selected) {
-            this.props.unselectCard(this.props.spell);
+            this.props.unselectCard(this.props.card);
         } else {
-            this.props.selectCard(this.props.spell);
+            this.props.selectCard(this.props.card);
         }
     };
 
@@ -102,12 +99,13 @@ class CardBack extends Component<Props & ReduxProps> {
         // let transform = undefined;
 
         let smallText = _.times(32)
-            .map(() => this.getSmallChar())
+            .map(() => this.props.card.backIconsSmall)
             .join("");
         let largeText = _.times(32)
-            .map(() => this.getLargeChar())
+            .map(() => this.props.card.backIconsLarge)
             .join("");
 
+        let cardColor = this.props.card.color;
         return (
             <svg className={"Diamond" + quadrant} viewBox={"0 0 100 100"}>
                 <g transform={transform}>
@@ -117,14 +115,9 @@ class CardBack extends Component<Props & ReduxProps> {
                         y1={52}
                         x2={200}
                         y2={52}
-                        stroke={this.props.cardColor}
+                        stroke={cardColor}
                     />
-                    <text
-                        className={"gi DiamondTextSm"}
-                        x={50}
-                        y={49.5}
-                        fill={this.props.cardColor}
-                    >
+                    <text className={"gi DiamondTextSm"} x={50} y={49.5} fill={cardColor}>
                         {smallText}
                     </text>
 
@@ -134,56 +127,14 @@ class CardBack extends Component<Props & ReduxProps> {
                         y1={42}
                         x2={200}
                         y2={42}
-                        stroke={this.props.cardColor}
+                        stroke={cardColor}
                     />
-                    <text className={"gi DiamondTextLg"} x={50} y={39} fill={this.props.cardColor}>
+                    <text className={"gi DiamondTextLg"} x={50} y={39} fill={cardColor}>
                         {largeText}
                     </text>
                 </g>
             </svg>
         );
-    }
-
-    private getSmallChar(): string {
-        switch (this.props.cardClass) {
-            case "bard":
-                return "\uefd8\uebe7"; // musical-notes double-quaver
-            case "cleric":
-                return "\uf3df\uedb1"; // trample hammer-drop
-            case "druid":
-                return "\uf001\ueb79"; // oak-leaf curled-leaf
-            case "paladin":
-                return "\uec2d\uecd6"; // edged-shield fist
-            case "ranger":
-                return "\uf064"; // pawprint
-            case "sorcerer":
-                return "\ueeff"; // lightning-slashes //kindle
-            case "warlock":
-                return "\uf123\uf1e5"; // raise-zombie sheikah-eye
-            case "wizard":
-                return "\uecbe"; // fire-ray
-        }
-    }
-
-    private getLargeChar(): string {
-        switch (this.props.cardClass) {
-            case "bard":
-                return "\uef32"; // lyre
-            case "cleric":
-                return "\uf1a6"; // scales
-            case "druid":
-                return "\uec29"; // eclipse-flare
-            case "paladin":
-                return "\uf42e"; // two-handed-sword
-            case "ranger":
-                return "\ueb80"; // curvy-knife
-            case "sorcerer":
-                return "\uee9e"; // kindle
-            case "warlock":
-                return "\ueb9d"; // death-juice
-            case "wizard":
-                return "\uec57"; // enlightenment
-        }
     }
 }
 

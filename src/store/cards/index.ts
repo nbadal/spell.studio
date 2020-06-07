@@ -1,40 +1,29 @@
-import { Spell, SpellFilter, SpellsState } from "./types";
+import { Card, CardsState } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { allSpells } from "../../data/SpellRepo";
 
-let initialFilter: SpellFilter = {
-    levelMin: 0,
-    levelMax: 9,
-    classes: [],
-};
-
-const initialSpellsState: SpellsState = {
-    all: allSpells,
-    selected: [],
-    filter: initialFilter,
+const initialCardsState: CardsState = {
+    selectedTitles: [],
 };
 
 const cardsSlice = createSlice({
     name: "cards",
-    initialState: initialSpellsState,
+    initialState: initialCardsState,
     reducers: {
-        filterCards: (state, action) => {
-            state.filter = action.payload;
-            state.selected = [];
+        selectCard: (state, action: PayloadAction<Card>) => {
+            state.selectedTitles = [action.payload.title, ...state.selectedTitles];
         },
-        selectCard: (state, action: PayloadAction<Spell>) => {
-            state.selected = [action.payload, ...state.selected];
-        },
-        unselectCard: (state, action: PayloadAction<Spell>) => {
-            // We use `name` because the object will be proxied so === wont work.
-            state.selected = state.selected.filter((spell) => spell.name !== action.payload.name);
+        unselectCard: (state, action: PayloadAction<Card>) => {
+            // We use `title` because the object will be proxied so === wont work.
+            state.selectedTitles = state.selectedTitles.filter(
+                (title) => title !== action.payload.title,
+            );
         },
         clearSelection: (state) => {
-            state.selected = [];
+            state.selectedTitles = [];
         },
     },
 });
 
-export const { filterCards, selectCard, unselectCard, clearSelection } = cardsSlice.actions;
+export const { selectCard, unselectCard, clearSelection } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

@@ -43,7 +43,7 @@
     }
 }
 
-.Name {
+.Title {
     padding: 2px 8px;
     background-color: white;
     border-top-left-radius: 8px;
@@ -57,7 +57,7 @@
     text-align: center;
 }
 
-.Type {
+.Subtitle {
     padding: 2px;
     text-align: center;
     color: white;
@@ -66,25 +66,19 @@
 }
 
 .StatsTable {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2px;
     width: 100%;
     margin-bottom: 4px;
     border-collapse: collapse;
 }
 
-td {
-    width: 50%;
+.StatCell {
     background-color: white;
     border: 0 solid transparent;
     background-clip: padding-box;
     padding: 2px;
-}
-
-tr > td + td {
-    border-left-width: 2px;
-}
-
-tr + tr > td {
-    border-top-width: 2px;
 }
 
 .CellContent {
@@ -137,6 +131,7 @@ tr + tr > td {
 .DetailsContainer :first-child {
     padding-top: 8px;
 }
+
 .DetailsContainer :last-child {
     padding-bottom: 8px;
 }

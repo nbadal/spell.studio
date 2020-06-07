@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SpellClass } from "../store/cards/types";
+import { CardIcon } from "../store/cards/types";
 import { ReactComponent as BardIcon } from "../svg/classes/bard.svg";
 import { ReactComponent as ClericIcon } from "../svg/classes/cleric.svg";
 import { ReactComponent as DruidIcon } from "../svg/classes/druid.svg";
@@ -10,17 +10,17 @@ import { ReactComponent as WarlockIcon } from "../svg/classes/warlock.svg";
 import { ReactComponent as WizardIcon } from "../svg/classes/wizard.svg";
 
 interface Props {
-    spellClass: SpellClass;
+    icon: CardIcon;
     className: string;
     height: string;
     fill: string;
 }
 
-export class ClassIcon extends Component<Props> {
+export class CardIconView extends Component<Props> {
     public render() {
         const { className, height, fill } = this.props;
 
-        switch (this.props.spellClass) {
+        switch (this.props.icon) {
             case "bard":
                 return <BardIcon className={className} height={height} fill={fill} />;
             case "cleric":

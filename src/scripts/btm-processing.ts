@@ -1,5 +1,5 @@
 import btm1 from "../data/raw/BTMorton/raw-BTMorton.json";
-import { Spell, SpellClass, SpellSchool } from "../store/cards/types";
+import { Spell, SpellClass, SpellSchool } from "../store/spells/types";
 
 const rawSpells = btm1["Spellcasting"]["Spell Descriptions"];
 const rawLists = btm1["Spellcasting"]["Spell Lists"];

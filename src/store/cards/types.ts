@@ -1,75 +1,32 @@
-export type SpellDetail = string | any;
+import { CardColor } from "../colors/types";
+import { SpellClass } from "../spells/types";
 
-export type SpellSchool =
-    | "conjuration"
-    | "abjuration"
-    | "divination"
-    | "enchantment"
-    | "evocation"
-    | "illusion"
-    | "necromancy"
-    | "transmutation";
-
-export const AllSpellSchools: SpellSchool[] = [
-    "conjuration",
-    "abjuration",
-    "divination",
-    "enchantment",
-    "evocation",
-    "illusion",
-    "necromancy",
-    "transmutation",
-];
-
-export type SpellClass =
-    | "bard"
-    | "cleric"
-    | "druid"
-    | "paladin"
-    | "ranger"
-    | "sorcerer"
-    | "warlock"
-    | "wizard";
-
-export const AllSpellClasses: SpellClass[] = [
-    "bard",
-    "cleric",
-    "druid",
-    "paladin",
-    "ranger",
-    "sorcerer",
-    "warlock",
-    "wizard",
-];
-
-export type SpellsState = {
-    all: Spell[];
-    selected: Spell[];
-    filter: SpellFilter;
+export type CardsState = {
+    selectedTitles: string[];
 };
 
-export type Spell = {
+export type Card = {
+    title: string;
+    subtitle: string;
+    stats: CardStat[];
+    details: CardDetail[];
+    color: CardColor;
+    icon: CardIcon;
+    backCharacter: string | number;
+    backIconsSmall: string;
+    backIconsLarge: string;
+};
+
+export type CardIcon = SpellClass;
+
+export type CardDetail = {
+    header?: string;
+    text: string;
+    expand?: boolean;
+};
+
+export type CardStat = {
     name: string;
-    classes: SpellClass[];
-    level: number;
-    school: SpellSchool;
-    ritual: boolean;
-    castingTime: string;
-    range: string;
-    duration: string;
-    concentration: boolean;
-    components: {
-        verbal: boolean;
-        somatic: boolean;
-        material: boolean;
-        materialInfo?: string;
-    };
-    details: SpellDetail[];
-    higherLevels?: string;
-};
-
-export type SpellFilter = {
-    classes: SpellClass[];
-    levelMin: number;
-    levelMax: number;
+    value: string;
+    icon?: boolean;
 };

@@ -13,7 +13,7 @@ import { clearSelection } from "../store/cards";
 
 const mapStateToProps = (state: RootState) => ({
     spellCount: selectFilteredCards(state).length,
-    selectedCount: state.cards.selected.length,
+    selectedCount: state.cards.selectedTitles.length,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../store/store";
 import Box from "@material-ui/core/Box";
-import { selectFilteredCards, selectCardCount } from "../store/cards/selectors";
+import { selectCardCount, selectFilteredCards } from "../store/cards/selectors";
 import AutoSizer, { Size } from "react-virtualized-auto-sizer";
 import { FixedSizeGrid, GridChildComponentProps } from "react-window";
 import CardFront from "./CardFront";
@@ -10,8 +10,8 @@ import CardBack from "./CardBack";
 import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 const mapStateToProps = (state: RootState) => ({
-    spells: selectFilteredCards(state),
-    spellCount: selectCardCount(state),
+    cards: selectFilteredCards(state),
+    cardCount: selectCardCount(state),
     showCard: state.layout.showFront,
     showBack: state.layout.showBack,
 });
@@ -50,9 +50,9 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
                     <AutoSizer>{(size) => this.renderGrid(size)}</AutoSizer>
                 </Box>
                 <Box className={classes.printSpellbook}>
-                    {this.props.spells.map((spell, index) => (
-                        <React.Fragment key={spell.name}>
-                            {this.props.showCard && <CardFront spellIndex={index} />}
+                    {this.props.cards.map((card, index) => (
+                        <React.Fragment key={card.title}>
+                            {this.props.showCard && <CardFront cardIndex={index} />}
                             {this.props.showBack && <CardBack spellIndex={index} />}
                         </React.Fragment>
                     ))}
@@ -71,7 +71,7 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
         }
         let cellHeight = 352;
         let columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
-        let rowCount = Math.max(1, this.props.spellCount / columnCount);
+        let rowCount = Math.max(1, this.props.cardCount / columnCount);
         return (
             <FixedSizeGrid
                 width={gridSize.width}
@@ -90,11 +90,11 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
     };
 
     private renderCardCell = (props: GridChildComponentProps, spellIdx: number) => {
-        if (spellIdx >= this.props.spellCount) return <Box style={props.style} />;
+        if (spellIdx >= this.props.cardCount) return <Box style={props.style} />;
 
         return (
             <Box style={props.style}>
-                {this.props.showCard && <CardFront spellIndex={spellIdx} />}
+                {this.props.showCard && <CardFront cardIndex={spellIdx} />}
                 {this.props.showBack && <CardBack spellIndex={spellIdx} />}
             </Box>
         );

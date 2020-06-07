@@ -1,4 +1,4 @@
-import {SpellClass, SpellSchool} from "../cards/types";
+import { SpellClass, SpellSchool } from "../spells/types";
 
 export enum ColorMode {
     BY_SCHOOL,
