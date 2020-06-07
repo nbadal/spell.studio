@@ -1,32 +1,32 @@
 import React, { Component } from "react";
-import { Spell } from "../store/spells/types";
 import "@rolodromo/gameicons-webfont/css/rpgen-gameicons.min.css";
 import "../css/CardBack.css";
 import { RootState } from "../store/store";
 import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 import { selectSpellClass, selectSpellColor } from "../store/colors/selectors";
-import { selectSpell, unselectSpell } from "../store/spells";
+import { selectCard, unselectCard } from "../store/cards";
 import { Box } from "@material-ui/core";
 import { ClassIcon } from "./ClassIcon";
 import _ from "lodash";
-import {selectSpellAtIdx} from "../store/spells/selectors";
+import {selectCardAtIdx} from "../store/cards/selectors";
+import {Spell} from "../store/cards/types";
 
 const mapStateToProps = (state: RootState, props: Props) => {
-    let spell = selectSpellAtIdx(props.spellIndex)(state);
+    let card = selectCardAtIdx(props.spellIndex)(state);
     return {
-        spell: spell,
-        selectionActive: state.spells.selected.length > 0,
-        selected: state.spells.selected.includes(spell),
-        cardColor: selectSpellColor(state, {spell}),
-        cardClass: selectSpellClass(state, {spell}),
+        spell: card,
+        selectionActive: state.cards.selected.length > 0,
+        selected: state.cards.selected.includes(card),
+        cardColor: selectSpellColor(state, {spell: card}),
+        cardClass: selectSpellClass(state, {spell: card}),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        selectSpell: (spell: Spell) => dispatch(selectSpell(spell)),
-        unselectSpell: (spell: Spell) => dispatch(unselectSpell(spell)),
+        selectCard: (card: Spell) => dispatch(selectCard(card)),
+        unselectCard: (card: Spell) => dispatch(unselectCard(card)),
     };
 };
 
@@ -72,9 +72,9 @@ class CardBack extends Component<Props & ReduxProps> {
 
     private onClick = () => {
         if (this.props.selected) {
-            this.props.unselectSpell(this.props.spell);
+            this.props.unselectCard(this.props.spell);
         } else {
-            this.props.selectSpell(this.props.spell);
+            this.props.selectCard(this.props.spell);
         }
     };
 

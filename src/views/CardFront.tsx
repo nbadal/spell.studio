@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from "react";
-import { Spell } from "../store/spells/types";
+import { Spell } from "../store/cards/types";
 import "../css/CardFront.css";
 import { ConcentrationIcon } from "./ConcentrationIcon";
 import Textfit from "react-textfit";
@@ -8,23 +8,23 @@ import { RootState } from "../store/store";
 import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 import { selectSpellColor } from "../store/colors/selectors";
-import { selectSpell, unselectSpell } from "../store/spells";
-import {selectSpellAtIdx} from "../store/spells/selectors";
+import { selectCard, unselectCard } from "../store/cards";
+import {selectCardAtIdx} from "../store/cards/selectors";
 
 const mapStateToProps = (state: RootState, props: Props) => {
-    let spell = selectSpellAtIdx(props.spellIndex)(state)
+    let card = selectCardAtIdx(props.spellIndex)(state)
     return {
-        spell: spell,
-        selectionActive: state.spells.selected.length > 0,
-        selected: state.spells.selected.includes(spell),
-        cardColor: selectSpellColor(state, {spell}),
+        card: card,
+        selectionActive: state.cards.selected.length > 0,
+        selected: state.cards.selected.includes(card),
+        cardColor: selectSpellColor(state, {spell: card}),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        selectSpell: (spell: Spell) => dispatch(selectSpell(spell)),
-        unselectSpell: (spell: Spell) => dispatch(unselectSpell(spell)),
+        selectCard: (spell: Spell) => dispatch(selectCard(spell)),
+        unselectCard: (spell: Spell) => dispatch(unselectCard(spell)),
     };
 };
 
@@ -50,7 +50,7 @@ class CardFront extends Component<Props & ReduxProps> {
                 <div className="Name">
                     <Box>
                         <Textfit mode="single" max={14}>
-                            {this.props.spell.name}
+                            {this.props.card.name}
                         </Textfit>
                     </Box>
                 </div>
@@ -58,15 +58,15 @@ class CardFront extends Component<Props & ReduxProps> {
                 <table className="StatsTable">
                     <tbody>
                         <tr>
-                            {this.statCell("Casting Time", this.props.spell.castingTime)}
-                            {this.statCell("Range", this.props.spell.range)}
+                            {this.statCell("Casting Time", this.props.card.castingTime)}
+                            {this.statCell("Range", this.props.card.range)}
                         </tr>
                         <tr>
                             {this.statCell("Components", this.spellComponentsString())}
                             {this.statCell(
                                 "Duration",
-                                this.props.spell.duration,
-                                !this.props.spell.concentration || (
+                                this.props.card.duration,
+                                !this.props.card.concentration || (
                                     <ConcentrationIcon
                                         style={{
                                             fontSize: 18,
@@ -79,12 +79,12 @@ class CardFront extends Component<Props & ReduxProps> {
                     </tbody>
                 </table>
                 <div className="DetailsContainer">
-                    {this.props.spell.components.materialInfo !== undefined && (
+                    {this.props.card.components.materialInfo !== undefined && (
                         <div className="DetailsBlock">
-                            Material: {this.props.spell.components.materialInfo}
+                            Material: {this.props.card.components.materialInfo}
                         </div>
                     )}
-                    {this.props.spell.details
+                    {this.props.card.details
                         .filter((detail) => typeof detail === "string")
                         .map((detail, i, arr) => (
                             <div
@@ -95,12 +95,12 @@ class CardFront extends Component<Props & ReduxProps> {
                                 {processText(detail)}
                             </div>
                         ))}
-                    {this.props.spell.higherLevels && (
+                    {this.props.card.higherLevels && (
                         <div className="HigherLevels">At Higher Levels</div>
                     )}
-                    {this.props.spell.higherLevels && (
+                    {this.props.card.higherLevels && (
                         <div className="DetailsBlock">
-                            {processText(this.props.spell.higherLevels)}
+                            {processText(this.props.card.higherLevels)}
                         </div>
                     )}
                 </div>
@@ -127,7 +127,7 @@ class CardFront extends Component<Props & ReduxProps> {
     private spellTypeString(): string {
         let spellType: string = "";
 
-        switch (this.props.spell.level) {
+        switch (this.props.card.level) {
             case 1:
                 spellType += "1st-level ";
                 break;
@@ -143,16 +143,16 @@ class CardFront extends Component<Props & ReduxProps> {
             case 7:
             case 8:
             case 9:
-                spellType += this.props.spell.level + "th-level ";
+                spellType += this.props.card.level + "th-level ";
                 break;
         }
 
-        spellType += this.props.spell.school;
+        spellType += this.props.card.school;
 
-        if (this.props.spell.level === 0) {
+        if (this.props.card.level === 0) {
             spellType += " cantrip";
         }
-        if (this.props.spell.ritual) {
+        if (this.props.card.ritual) {
             spellType += " (ritual)";
         }
 
@@ -164,17 +164,17 @@ class CardFront extends Component<Props & ReduxProps> {
 
     private spellComponentsString(): string {
         let components: string[] = [];
-        if (this.props.spell.components.verbal) components.push("V");
-        if (this.props.spell.components.somatic) components.push("S");
-        if (this.props.spell.components.material) components.push("M");
+        if (this.props.card.components.verbal) components.push("V");
+        if (this.props.card.components.somatic) components.push("S");
+        if (this.props.card.components.material) components.push("M");
         return components.join(", ");
     }
 
     private onClick = () => {
         if (this.props.selected) {
-            this.props.unselectSpell(this.props.spell);
+            this.props.unselectCard(this.props.card);
         } else {
-            this.props.selectSpell(this.props.spell);
+            this.props.selectCard(this.props.card);
         }
     };
 }

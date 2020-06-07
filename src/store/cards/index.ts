@@ -14,18 +14,18 @@ const initialSpellsState: SpellsState = {
     filter: initialFilter,
 };
 
-const spellsSlice = createSlice({
-    name: "spells",
+const cardsSlice = createSlice({
+    name: "cards",
     initialState: initialSpellsState,
     reducers: {
-        filterSpells: (state, action) => {
+        filterCards: (state, action) => {
             state.filter = action.payload;
             state.selected = [];
         },
-        selectSpell: (state, action: PayloadAction<Spell>) => {
+        selectCard: (state, action: PayloadAction<Spell>) => {
             state.selected = [action.payload, ...state.selected];
         },
-        unselectSpell: (state, action: PayloadAction<Spell>) => {
+        unselectCard: (state, action: PayloadAction<Spell>) => {
             // We use `name` because the object will be proxied so === wont work.
             state.selected = state.selected.filter((spell) => spell.name !== action.payload.name);
         },
@@ -35,6 +35,6 @@ const spellsSlice = createSlice({
     },
 });
 
-export const { filterSpells, selectSpell, unselectSpell, clearSelection } = spellsSlice.actions;
+export const { filterCards, selectCard, unselectCard, clearSelection } = cardsSlice.actions;
 
-export default spellsSlice.reducer;
+export default cardsSlice.reducer;

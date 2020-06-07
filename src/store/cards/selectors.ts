@@ -2,13 +2,13 @@ import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { Spell } from "./types";
 
-const selectAllSpells = (state: RootState) => state.spells.all;
-const selectFilter = (state: RootState) => state.spells.filter;
+const selectAllCards = (state: RootState) => state.cards.all;
+const selectFilter = (state: RootState) => state.cards.filter;
 
 const getSpellClasses = (state: RootState, props: { spell: Spell }) => props.spell.classes;
 
-export const selectFilteredSpells = createSelector(
-    [selectAllSpells, selectFilter],
+export const selectFilteredCards = createSelector(
+    [selectAllCards, selectFilter],
     (spells, filter) => {
         return spells.filter((s) => {
             let levelInRange = s.level >= filter.levelMin && s.level <= filter.levelMax;
@@ -23,10 +23,10 @@ export const selectFilteredSpells = createSelector(
     },
 );
 
-export const selectSpellCount = createSelector([selectFilteredSpells], (spells) => spells.length);
+export const selectCardCount = createSelector([selectFilteredCards], (spells) => spells.length);
 
-export const selectSpellAtIdx = (idx: number) => createSelector(
-    [selectFilteredSpells],
+export const selectCardAtIdx = (idx: number) => createSelector(
+    [selectFilteredCards],
     (spells) => {
         return spells[idx];
     },

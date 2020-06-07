@@ -9,7 +9,7 @@ import {
     SpellClass,
     SpellFilter,
     SpellSchool,
-} from "../store/spells/types";
+} from "../store/cards/types";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
@@ -23,17 +23,17 @@ import { Typography } from "@material-ui/core";
 import { CardColor, ColorMode } from "../store/colors/types";
 import TextField from "@material-ui/core/TextField";
 import { SketchPicker } from "react-color";
-import { selectSpellCount } from "../store/spells/selectors";
+import { selectCardCount } from "../store/cards/selectors";
 import { changeClassColor, changeColorMode, changeSchoolColor } from "../store/colors";
-import { filterSpells } from "../store/spells";
+import { filterCards } from "../store/cards";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { setFrontShown, setBackShown } from "../store/layout";
 
 const mapStateToProps = (state: RootState) => ({
-    filter: state.spells.filter,
-    spellCount: selectSpellCount(state),
+    filter: state.cards.filter,
+    spellCount: selectCardCount(state),
     colors: state.colors,
     showFront: state.layout.showFront,
     showBack: state.layout.showBack,
@@ -41,7 +41,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        updateFilter: (filter: SpellFilter) => dispatch(filterSpells(filter)),
+        updateFilter: (filter: SpellFilter) => dispatch(filterCards(filter)),
         setFrontShown: (show: boolean) => dispatch(setFrontShown(show)),
         setBackShown: (show: boolean) => dispatch(setBackShown(show)),
         changeColorMode: (mode: ColorMode) => dispatch(changeColorMode(mode)),

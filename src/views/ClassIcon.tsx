@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SpellClass } from "../store/spells/types";
+import { SpellClass } from "../store/cards/types";
 import { ReactComponent as BardIcon } from "../svg/classes/bard.svg";
 import { ReactComponent as ClericIcon } from "../svg/classes/cleric.svg";
 import { ReactComponent as DruidIcon } from "../svg/classes/druid.svg";

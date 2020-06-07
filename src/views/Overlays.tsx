@@ -6,14 +6,14 @@ import PrintIcon from "@material-ui/icons/Print";
 import React, { Component } from "react";
 import { createStyles, Theme, withStyles, WithStyles } from "@material-ui/core/styles";
 import { RootState } from "../store/store";
-import { selectFilteredSpells } from "../store/spells/selectors";
+import { selectFilteredCards } from "../store/cards/selectors";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
-import { clearSelection } from "../store/spells";
+import { clearSelection } from "../store/cards";
 
 const mapStateToProps = (state: RootState) => ({
-    spellCount: selectFilteredSpells(state).length,
-    selectedCount: state.spells.selected.length,
+    spellCount: selectFilteredCards(state).length,
+    selectedCount: state.cards.selected.length,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

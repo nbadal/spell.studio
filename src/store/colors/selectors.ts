@@ -1,8 +1,8 @@
 import { RootState } from "../store";
-import { Spell, SpellSchool } from "../spells/types";
+import { Spell, SpellSchool } from "../cards/types";
 import { createSelector } from "@reduxjs/toolkit";
 import { ColorMode, ColorsState } from "./types";
-import { selectFilteredSpellClasses } from "../spells/selectors";
+import { selectFilteredSpellClasses } from "../cards/selectors";
 
 const getColors = (state: RootState) => state.colors;
 const getSpellSchool = (state: RootState, props: { spell: Spell }) => props.spell.school;

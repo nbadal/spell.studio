@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../store/store";
 import Box from "@material-ui/core/Box";
-import { selectFilteredSpells, selectSpellCount } from "../store/spells/selectors";
+import { selectFilteredCards, selectCardCount } from "../store/cards/selectors";
 import AutoSizer, { Size } from "react-virtualized-auto-sizer";
 import { FixedSizeGrid, GridChildComponentProps } from "react-window";
 import CardFront from "./CardFront";
@@ -10,8 +10,8 @@ import CardBack from "./CardBack";
 import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 const mapStateToProps = (state: RootState) => ({
-    spells: selectFilteredSpells(state),
-    spellCount: selectSpellCount(state),
+    spells: selectFilteredCards(state),
+    spellCount: selectCardCount(state),
     showCard: state.layout.showFront,
     showBack: state.layout.showBack,
 });
