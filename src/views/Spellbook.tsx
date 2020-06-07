@@ -5,7 +5,7 @@ import Box from "@material-ui/core/Box";
 import { selectFilteredSpells, selectSpellCount } from "../store/spells/selectors";
 import AutoSizer, { Size } from "react-virtualized-auto-sizer";
 import { FixedSizeGrid, GridChildComponentProps } from "react-window";
-import SpellCard from "./SpellCard";
+import CardFront from "./CardFront";
 import CardBack from "./CardBack";
 import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
@@ -52,7 +52,7 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
                 <Box className={classes.printSpellbook}>
                     {this.props.spells.map((spell, index) => (
                         <React.Fragment key={spell.name}>
-                            {this.props.showCard && <SpellCard spellIndex={index} />}
+                            {this.props.showCard && <CardFront spellIndex={index} />}
                             {this.props.showBack && <CardBack spellIndex={index} />}
                         </React.Fragment>
                     ))}
@@ -94,7 +94,7 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
 
         return (
             <Box style={props.style}>
-                {this.props.showCard && <SpellCard spellIndex={spellIdx} />}
+                {this.props.showCard && <CardFront spellIndex={spellIdx} />}
                 {this.props.showBack && <CardBack spellIndex={spellIdx} />}
             </Box>
         );

@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from "react";
 import { Spell } from "../store/spells/types";
-import "../css/SpellCard.css";
+import "../css/CardFront.css";
 import { ConcentrationIcon } from "./ConcentrationIcon";
 import Textfit from "react-textfit";
 import Box from "@material-ui/core/Box";
@@ -35,14 +35,14 @@ interface Props {
     spellIndex: number;
 }
 
-class SpellCard extends Component<Props & ReduxProps> {
+class CardFront extends Component<Props & ReduxProps> {
     public render() {
         return (
             <div
                 className={
                     !this.props.selectionActive || this.props.selected
-                        ? "SpellCard"
-                        : "DisabledSpellCard"
+                        ? "CardFront"
+                        : "DisabledCardFront"
                 }
                 style={{ backgroundColor: this.props.cardColor }}
                 onClick={this.onClick}
@@ -179,7 +179,7 @@ class SpellCard extends Component<Props & ReduxProps> {
     };
 }
 
-export default reduxConnector(SpellCard);
+export default reduxConnector(CardFront);
 
 function processText(text: string): ReactNode {
     return text.split("***").map((value, index) => {

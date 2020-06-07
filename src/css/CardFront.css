@@ -1,5 +1,5 @@
-.SpellCard,
-.DisabledSpellCard {
+.CardFront,
+.DisabledCardFront {
     width: 2.5in;
     height: 3.5in;
     vertical-align: top;
@@ -19,26 +19,26 @@
     user-select: none;
 }
 
-.SpellCard:hover {
+.CardFront:hover {
     opacity: 0.9;
 }
 
-.DisabledSpellCard {
+.DisabledCardFront {
     opacity: 0.5;
 }
 
-.DisabledSpellCard:hover {
+.DisabledCardFront:hover {
     opacity: 0.65;
 }
 
 @media print {
-    .SpellCard,
-    .DisabledSpellCard {
+    .CardFront,
+    .DisabledCardFront {
         -webkit-print-color-adjust: exact;
         margin: 2px !important;
     }
 
-    .DisabledSpellCard {
+    .DisabledCardFront {
         display: none;
     }
 }
