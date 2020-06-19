@@ -37,11 +37,9 @@ const styles = () =>
         },
     });
 type StyleProps = WithStyles<typeof styles>;
-let stylesConnector = withStyles(styles);
+const stylesConnector = withStyles(styles);
 
 class Spellbook extends Component<ReduxProps & StyleProps> {
-    componentDidMount() {}
-
     public render() {
         const { classes } = this.props;
         return (
@@ -69,9 +67,9 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
         if (this.props.showBack) {
             cellWidth += 256;
         }
-        let cellHeight = 352;
-        let columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
-        let rowCount = Math.max(1, this.props.cardCount / columnCount);
+        const cellHeight = 352;
+        const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
+        const rowCount = Math.max(1, this.props.cardCount / columnCount);
         return (
             <FixedSizeGrid
                 width={gridSize.width}
@@ -82,7 +80,7 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
                 rowCount={rowCount}
             >
                 {(props: GridChildComponentProps) => {
-                    let idx = props.rowIndex * columnCount + props.columnIndex;
+                    const idx = props.rowIndex * columnCount + props.columnIndex;
                     return this.renderCardCell(props, idx);
                 }}
             </FixedSizeGrid>

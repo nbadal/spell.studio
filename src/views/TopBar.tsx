@@ -26,7 +26,7 @@ const styles = () =>
         },
     });
 type StyleProps = WithStyles<typeof styles>;
-let stylesConnector = withStyles(styles);
+const stylesConnector = withStyles(styles);
 
 class TopBar extends Component<StyleProps> {
     public render() {

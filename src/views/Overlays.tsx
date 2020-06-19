@@ -34,7 +34,7 @@ const styles = (theme: Theme) =>
         },
     });
 type StyleProps = WithStyles<typeof styles>;
-let stylesConnector = withStyles(styles);
+const stylesConnector = withStyles(styles);
 
 class Overlays extends Component<ReduxProps & StyleProps> {
     render() {

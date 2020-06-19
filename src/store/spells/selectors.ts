@@ -14,9 +14,9 @@ export const selectFilteredSpells = createSelector(
     [selectAllSpells, selectFilter],
     (spells, filter) => {
         return spells.filter((s) => {
-            let levelInRange = s.level >= filter.levelMin && s.level <= filter.levelMax;
+            const levelInRange = s.level >= filter.levelMin && s.level <= filter.levelMax;
 
-            let anyClassesMatch =
+            const anyClassesMatch =
                 !filter.classes ||
                 filter.classes.length === 0 ||
                 filter.classes.some((fClass) => s.classes.includes(fClass));
@@ -44,7 +44,7 @@ export const selectFilteredSpellCards = createSelector(
     [selectFilteredSpells, selectFilter, getColors],
     (spells, filter, colors) => {
         return spells.map((spell) => {
-            let spellClass = filterSpellClasses(filter, spell.classes)[0];
+            const spellClass = filterSpellClasses(filter, spell.classes)[0];
             switch (colors.colorMode) {
                 case ColorMode.BY_SCHOOL:
                     return getSpellCard(spell, spellClass, colors.bySchool[spell.school]);
@@ -89,7 +89,7 @@ function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: CardColo
 }
 
 function spellSubtitle(spell: Spell): string {
-    let spellType: string = "";
+    let spellType = "";
 
     switch (spell.level) {
         case 1:
@@ -127,7 +127,7 @@ function spellSubtitle(spell: Spell): string {
 }
 
 function spellComponentsString(spell: Spell): string {
-    let components: string[] = [];
+    const components: string[] = [];
     if (spell.components.verbal) components.push("V");
     if (spell.components.somatic) components.push("S");
     if (spell.components.material) components.push("M");
@@ -135,13 +135,13 @@ function spellComponentsString(spell: Spell): string {
 }
 
 function* spellDetails(spell: Spell): Generator<CardDetail> {
-    if (!!spell.components.materialInfo) {
+    if (spell.components.materialInfo) {
         yield { text: `Material: ${spell.components.materialInfo}` };
     }
 
-    let spellDetails: CardDetail[] = [];
+    const spellDetails: CardDetail[] = [];
     // Parse spell detail entries
-    for (let spellDetail of spell.details) {
+    for (const spellDetail of spell.details) {
         if (typeof spellDetail === "string") {
             spellDetails.push({
                 text: spellDetail,
@@ -150,7 +150,7 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
         // TODO: parse more detail types.
     }
     spellDetails[spellDetails.length - 1].expand = true; // Expand last detail entry.
-    for (let detail of spellDetails) {
+    for (const detail of spellDetails) {
         yield detail;
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/no-non-null-assertion */
 import btm1 from "../data/raw/BTMorton/raw-BTMorton.json";
 import { Spell, SpellClass, SpellSchool } from "../store/spells/types";
 
@@ -18,7 +19,7 @@ export function processBTM(): Spell[] {
 
     const newSpells = [];
 
-    for (let name in rawSpells) {
+    for (const name in rawSpells) {
         const spellContent = (rawSpells as any)[name].content as any[];
 
         const typeStr: string = spellContent[0] || "";
@@ -36,8 +37,8 @@ export function processBTM(): Spell[] {
             continue;
         }
 
-        let classes: SpellClass[] = [];
-        for (let klass in spellSets) {
+        const classes: SpellClass[] = [];
+        for (const klass in spellSets) {
             if (spellSets[klass].includes(name)) {
                 classes.push(klass as SpellClass);
             }
@@ -48,7 +49,7 @@ export function processBTM(): Spell[] {
         const durationRaw = popSection("**Duration:** ", spellContent);
         const concentration = durationRaw?.startsWith("Concentration, ") || false;
         const duration = durationRaw?.replace("Concentration, u", "U");
-        let higherLevels = popSection("***At Higher Levels.*** ", spellContent);
+        const higherLevels = popSection("***At Higher Levels.*** ", spellContent);
 
         // console.log(spellContent);
 
@@ -78,8 +79,8 @@ export function processBTM(): Spell[] {
 
 /** Return a list of spells, originally split by level grouping */
 function flattenSpellList(spellsByLevel: { [level: string]: string[] }) {
-    let spells = [];
-    for (let level in spellsByLevel) {
+    const spells = [];
+    for (const level in spellsByLevel) {
         spells.push(...spellsByLevel[level]);
     }
     return spells;

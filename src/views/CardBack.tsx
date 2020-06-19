@@ -12,7 +12,7 @@ import { selectCardAtIdx } from "../store/cards/selectors";
 import { Card } from "../store/cards/types";
 
 const mapStateToProps = (state: RootState, props: Props) => {
-    let card = selectCardAtIdx(props.spellIndex)(state);
+    const card = selectCardAtIdx(props.spellIndex)(state);
     return {
         card: card,
         selectionActive: state.cards.selectedTitles.length > 0,
@@ -36,7 +36,7 @@ interface Props {
 
 class CardBack extends Component<Props & ReduxProps> {
     public render() {
-        let cardColor = this.props.card.color;
+        const cardColor = this.props.card.color;
         return (
             <Box
                 className={
@@ -77,7 +77,7 @@ class CardBack extends Component<Props & ReduxProps> {
 
     private renderDiamond(quadrant: 1 | 2 | 3 | 4) {
         // TODO: Use actual aspect ratio here:
-        let baseAngle = (Math.atan2(146, 98) * 180) / Math.PI;
+        const baseAngle = (Math.atan2(146, 98) * 180) / Math.PI;
 
         let angle: number;
         switch (quadrant) {
@@ -95,17 +95,17 @@ class CardBack extends Component<Props & ReduxProps> {
                 break;
         }
 
-        let transform = `rotate(${angle} 50 50)`;
+        const transform = `rotate(${angle} 50 50)`;
         // let transform = undefined;
 
-        let smallText = _.times(32)
+        const smallText = _.times(32)
             .map(() => this.props.card.backIconsSmall)
             .join("");
-        let largeText = _.times(32)
+        const largeText = _.times(32)
             .map(() => this.props.card.backIconsLarge)
             .join("");
 
-        let cardColor = this.props.card.color;
+        const cardColor = this.props.card.color;
         return (
             <svg className={"Diamond" + quadrant} viewBox={"0 0 100 100"}>
                 <g transform={transform}>
