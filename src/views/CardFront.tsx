@@ -10,7 +10,7 @@ import { selectCard, unselectCard } from "../store/cards";
 import { selectCardAtIdx } from "../store/cards/selectors";
 
 const mapStateToProps = (state: RootState, props: Props) => {
-    let card: Card = selectCardAtIdx(props.cardIndex)(state);
+    const card: Card = selectCardAtIdx(props.cardIndex)(state);
     return {
         card: card,
         selectionActive: state.cards.selectedTitles.length > 0,

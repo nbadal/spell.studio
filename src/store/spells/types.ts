@@ -1,4 +1,4 @@
-export type SpellDetail = string | any;
+export type SpellDetail = string | unknown;
 
 export type SpellSchool =
     | "conjuration"

@@ -2,7 +2,7 @@ import { SpellFilter, SpellsState } from "./types";
 import { createSlice } from "@reduxjs/toolkit";
 import { allSpells } from "../../data/SpellRepo";
 
-let initialFilter: SpellFilter = {
+const initialFilter: SpellFilter = {
     levelMin: 0,
     levelMax: 9,
     classes: [],

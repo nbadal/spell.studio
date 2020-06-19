@@ -44,10 +44,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "react-scripts build && firebase deploy --only hosting",
-    "postinstall": "patch-package"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "postinstall": "patch-package",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "browserslist": {
     "production": [

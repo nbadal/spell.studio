@@ -1,7 +1,7 @@
 import React from "react";
-import SvgIcon from "@material-ui/core/SvgIcon";
+import SvgIcon, {SvgIconProps} from "@material-ui/core/SvgIcon";
 
-export function ConcentrationIcon(props?: any) {
+export function ConcentrationIcon(props?: SvgIconProps) {
     return (
         <SvgIcon {...props}>
             <path

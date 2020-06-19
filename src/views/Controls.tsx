@@ -96,7 +96,7 @@ const styles = (theme: Theme) =>
         },
     });
 type StyleProps = WithStyles<typeof styles>;
-let stylesConnector = withStyles(styles);
+const stylesConnector = withStyles(styles);
 
 interface State {
     showClassColorPicker?: SpellClass;
@@ -130,7 +130,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                                 </Box>
                             )}
                             onChange={(event) => {
-                                let classes = Array.from(event.target.value as SpellClass[]);
+                                const classes = Array.from(event.target.value as SpellClass[]);
                                 this.updateFilter({ classes });
                             }}
                         >
@@ -148,8 +148,8 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                             className="Select"
                             value={this.props.filter.levelMin}
                             onChange={(event) => {
-                                let value = event.target.value as string;
-                                let levelMin = Number.parseInt(value);
+                                const value = event.target.value as string;
+                                const levelMin = Number.parseInt(value);
                                 this.updateFilter({ levelMin });
                             }}
                         >
@@ -166,8 +166,8 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                             className="Select"
                             value={this.props.filter.levelMax}
                             onChange={(event) => {
-                                let value = event.target.value as string;
-                                let levelMax = Number.parseInt(value);
+                                const value = event.target.value as string;
+                                const levelMax = Number.parseInt(value);
                                 this.updateFilter({ levelMax });
                             }}
                         >
@@ -207,7 +207,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                         <Select
                             value={this.props.colors.colorMode}
                             onChange={(event) => {
-                                let value = event.target.value as ColorMode;
+                                const value = event.target.value as ColorMode;
                                 this.props.changeColorMode(value);
                             }}
                         >
@@ -279,12 +279,12 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
     };
 
     private classColorClicked = (spellClass: SpellClass) => {
-        let picker = spellClass === this.state.showClassColorPicker ? undefined : spellClass;
+        const picker = spellClass === this.state.showClassColorPicker ? undefined : spellClass;
         this.setState({ showSchoolColorPicker: undefined, showClassColorPicker: picker });
     };
 
     private schoolColorClicked = (spellSchool: SpellSchool) => {
-        let picker = spellSchool === this.state.showSchoolColorPicker ? undefined : spellSchool;
+        const picker = spellSchool === this.state.showSchoolColorPicker ? undefined : spellSchool;
         this.setState({ showSchoolColorPicker: picker, showClassColorPicker: undefined });
     };
 
@@ -296,8 +296,8 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
         this.props.changeSchoolColor(spellSchool, color);
     };
 
-    private updateFilter(newData: any) {
-        let newFilter = Object.assign({}, this.props.filter);
+    private updateFilter(newData: Partial<SpellFilter>) {
+        const newFilter = Object.assign({}, this.props.filter);
         Object.assign(newFilter, newData);
         this.props.updateFilter(newFilter);
     }
