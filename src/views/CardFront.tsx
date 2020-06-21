@@ -1,14 +1,14 @@
-import React, { Component, ReactNode } from "react";
-import Textfit from "react-textfit";
-import { connect, ConnectedProps } from "react-redux";
-import { Dispatch } from "redux";
-import { Box } from "@material-ui/core";
-import { Card, CardStat } from "../store/cards/types";
-import "../css/CardFront.css";
-import { ConcentrationIcon } from "./ConcentrationIcon";
-import { RootState } from "../store/store";
-import { selectCard, unselectCard } from "../store/cards";
-import { selectCardAtIdx } from "../store/cards/selectors";
+import React, { Component, ReactNode } from 'react';
+import Textfit from 'react-textfit';
+import { connect, ConnectedProps } from 'react-redux';
+import { Dispatch } from 'redux';
+import { Box } from '@material-ui/core';
+import { Card, CardStat } from '../store/cards/types';
+import '../css/CardFront.css';
+import { ConcentrationIcon } from './ConcentrationIcon';
+import { RootState } from '../store/store';
+import { selectCard, unselectCard } from '../store/cards';
+import { selectCardAtIdx } from '../store/cards/selectors';
 
 const mapStateToProps = (state: RootState, props: Props) => {
     const card: Card = selectCardAtIdx(props.cardIndex)(state);
@@ -66,8 +66,8 @@ class CardFront extends Component<Props & ReduxProps> {
             <Box
                 className={
                     !this.props.selectionActive || this.props.selected
-                        ? "CardFront"
-                        : "DisabledCardFront"
+                        ? 'CardFront'
+                        : 'DisabledCardFront'
                 }
                 style={{ backgroundColor: this.props.card.color }}
                 onClick={this.onClick}
@@ -106,7 +106,7 @@ class CardFront extends Component<Props & ReduxProps> {
 export default reduxConnector(CardFront);
 
 function processText(text: string): ReactNode {
-    return text.split("***").map((value, index) => {
+    return text.split('***').map((value, index) => {
         if (index % 2) {
             // Odd indexes are within **'s
             return (

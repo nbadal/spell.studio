@@ -1,8 +1,8 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { ColorMode, ColorsState } from "./types";
-import { selectSpellClass } from "../spells/selectors";
-import { Spell, SpellSchool } from "../spells/types";
+import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { ColorMode, ColorsState } from './types';
+import { selectSpellClass } from '../spells/selectors';
+import { Spell, SpellSchool } from '../spells/types';
 
 const getColors = (state: RootState) => state.colors;
 
@@ -27,7 +27,7 @@ export const selectSpellColor = createSelector(
             case ColorMode.BY_CLASS:
                 return classColor;
             default:
-                throw Error("Missing color mode case");
+                throw Error('Missing color mode case');
         }
     },
 );

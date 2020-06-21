@@ -1,8 +1,8 @@
-declare module "react-textfit" {
-    import React, { Component } from "react";
+declare module 'react-textfit' {
+    import React, { Component } from 'react';
 
     export interface TextfitProps {
-        mode?: "single" | "multi";
+        mode?: 'single' | 'multi';
         forceSingleModeWidth?: boolean;
         min?: number;
         max?: number;

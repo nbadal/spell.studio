@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { connect, ConnectedProps } from "react-redux";
-import Box from "@material-ui/core/Box";
-import AutoSizer, { Size } from "react-virtualized-auto-sizer";
-import { FixedSizeGrid, GridChildComponentProps } from "react-window";
-import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
-import { RootState } from "../store/store";
-import { selectCardCount, selectFilteredCards } from "../store/cards/selectors";
-import CardFront from "./CardFront";
-import CardBack from "./CardBack";
+import React, { Component } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import Box from '@material-ui/core/Box';
+import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
+import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
+import { RootState } from '../store/store';
+import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
+import CardFront from './CardFront';
+import CardBack from './CardBack';
 
 const mapStateToProps = (state: RootState) => ({
     cards: selectFilteredCards(state),
@@ -22,17 +22,17 @@ type ReduxProps = ConnectedProps<typeof reduxConnector>;
 const styles = () =>
     createStyles({
         screenSpellbook: {
-            display: "block",
-            height: "100%",
-            "@media print": {
-                display: "none",
+            display: 'block',
+            height: '100%',
+            '@media print': {
+                display: 'none',
             },
         },
         printSpellbook: {
-            display: "none",
-            height: "100%",
-            "@media print": {
-                display: "block",
+            display: 'none',
+            height: '100%',
+            '@media print': {
+                display: 'block',
             },
         },
     });

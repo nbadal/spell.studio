@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/no-non-null-assertion */
-import btm1 from "../data/raw/BTMorton/raw-BTMorton.json";
-import { Spell, SpellClass, SpellSchool } from "../store/spells/types";
+import btm1 from '../data/raw/BTMorton/raw-BTMorton.json';
+import { Spell, SpellClass, SpellSchool } from '../store/spells/types';
 
-const rawSpells = btm1.Spellcasting["Spell Descriptions"];
-const rawLists = btm1.Spellcasting["Spell Lists"];
+const rawSpells = btm1.Spellcasting['Spell Descriptions'];
+const rawLists = btm1.Spellcasting['Spell Lists'];
 
 export function processBTM(): Spell[] {
     const spellSets: { [klass: string]: string[] } = {
-        bard: flattenSpellList(rawLists["Bard Spells"]),
-        cleric: flattenSpellList(rawLists["Cleric Spells"]),
-        druid: flattenSpellList(rawLists["Druid Spells"]),
-        paladin: flattenSpellList(rawLists["Paladin Spells"]),
-        ranger: flattenSpellList(rawLists["Ranger Spells"]),
-        sorcerer: flattenSpellList(rawLists["Sorcerer Spells"]),
-        warlock: flattenSpellList(rawLists["Warlock Spells"]),
-        wizard: flattenSpellList(rawLists["Wizard Spells"]),
+        bard: flattenSpellList(rawLists['Bard Spells']),
+        cleric: flattenSpellList(rawLists['Cleric Spells']),
+        druid: flattenSpellList(rawLists['Druid Spells']),
+        paladin: flattenSpellList(rawLists['Paladin Spells']),
+        ranger: flattenSpellList(rawLists['Ranger Spells']),
+        sorcerer: flattenSpellList(rawLists['Sorcerer Spells']),
+        warlock: flattenSpellList(rawLists['Warlock Spells']),
+        wizard: flattenSpellList(rawLists['Wizard Spells']),
     };
 
     const newSpells: Spell[] = [];
@@ -22,13 +22,13 @@ export function processBTM(): Spell[] {
     Object.keys(rawSpells).forEach((name) => {
         const spellContent = (rawSpells as any)[name].content as any[];
 
-        const typeStr: string = spellContent[0] || "";
+        const typeStr: string = spellContent[0] || '';
         const typeInfo = typeStr.match(
             /\*(?:(.)..-level )?\s*(conjuration|enchantment|illusion|evocation|abjuration|transmutation|divination|necromancy)\s*(?:cantrip)?\s*(\(ritual\))?\*/i,
         );
         spellContent.splice(0, 1); // Remove type item.
 
-        const componentsStr = popSection("**Components:** ", spellContent) || "";
+        const componentsStr = popSection('**Components:** ', spellContent) || '';
         const componentInfo = componentsStr.match(
             /(V)?(?:, )?(S)?(?:, )?(M)?(?: )?(?:\(([^)]+)\))?/,
         );
@@ -41,19 +41,19 @@ export function processBTM(): Spell[] {
             .filter((klass) => spellSets[klass].includes(name))
             .map((klass) => klass as SpellClass);
 
-        const castingTime = popSection("**Casting Time:** ", spellContent);
-        const range = popSection("**Range:** ", spellContent);
-        const durationRaw = popSection("**Duration:** ", spellContent);
-        const concentration = durationRaw?.startsWith("Concentration, ") || false;
-        const duration = durationRaw?.replace("Concentration, u", "U");
-        const higherLevels = popSection("***At Higher Levels.*** ", spellContent);
+        const castingTime = popSection('**Casting Time:** ', spellContent);
+        const range = popSection('**Range:** ', spellContent);
+        const durationRaw = popSection('**Duration:** ', spellContent);
+        const concentration = durationRaw?.startsWith('Concentration, ') || false;
+        const duration = durationRaw?.replace('Concentration, u', 'U');
+        const higherLevels = popSection('***At Higher Levels.*** ', spellContent);
 
         // console.log(spellContent);
 
         const newSpell: Spell = {
             name,
             classes,
-            level: Number.parseInt(typeInfo[1] || "0", 10),
+            level: Number.parseInt(typeInfo[1] || '0', 10),
             school: typeInfo[2].toLowerCase() as SpellSchool,
             ritual: !!typeInfo[3],
             castingTime: castingTime!,
@@ -84,7 +84,7 @@ function flattenSpellList(spellsByLevel: { [level: string]: string[] }): string[
 function popSection(prefix: string, content: any[]): string | undefined {
     for (let i = 0; i < content.length; i += 1) {
         const item = content[i];
-        if (typeof item === "string" && item.startsWith(prefix)) {
+        if (typeof item === 'string' && item.startsWith(prefix)) {
             content = content.splice(i, 1);
             return item.substring(prefix.length);
         }

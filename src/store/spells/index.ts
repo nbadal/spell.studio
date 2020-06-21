@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { SpellFilter, SpellsState } from "./types";
-import { allSpells } from "../../data/SpellRepo";
+import { createSlice } from '@reduxjs/toolkit';
+import { SpellFilter, SpellsState } from './types';
+import { allSpells } from '../../data/SpellRepo';
 
 const initialFilter: SpellFilter = {
     levelMin: 0,
@@ -14,7 +14,7 @@ const initialSpellsState: SpellsState = {
 };
 
 const cardsSlice = createSlice({
-    name: "spells",
+    name: 'spells',
     initialState: initialSpellsState,
     reducers: {
         filterSpells: (state, action) => {

@@ -35,7 +35,6 @@ module.exports = {
     "implicit-arrow-linebreak": "off",
 
     // Consider changing:
-    quotes: "off",
     "no-use-before-define": "off",
     "no-param-reassign": "off",
     "no-console": "off",

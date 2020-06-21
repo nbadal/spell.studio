@@ -1,17 +1,17 @@
-import Box from "@material-ui/core/Box";
-import Snackbar from "@material-ui/core/Snackbar";
-import Button from "@material-ui/core/Button";
-import Fab from "@material-ui/core/Fab";
-import PrintIcon from "@material-ui/icons/Print";
-import React, { Component } from "react";
+import Box from '@material-ui/core/Box';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import PrintIcon from '@material-ui/icons/Print';
+import React, { Component } from 'react';
 import {
     createStyles, Theme, withStyles, WithStyles,
-} from "@material-ui/core/styles";
-import { Dispatch } from "redux";
-import { connect, ConnectedProps } from "react-redux";
-import { RootState } from "../store/store";
-import { selectFilteredCards } from "../store/cards/selectors";
-import { clearSelection } from "../store/cards";
+} from '@material-ui/core/styles';
+import { Dispatch } from 'redux';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '../store/store';
+import { selectFilteredCards } from '../store/cards/selectors';
+import { clearSelection } from '../store/cards';
 
 const mapStateToProps = (state: RootState) => ({
     spellCount: selectFilteredCards(state).length,
@@ -28,7 +28,7 @@ type ReduxProps = ConnectedProps<typeof reduxConnector>;
 const styles = (theme: Theme) =>
     createStyles({
         fab: {
-            position: "absolute",
+            position: 'absolute',
             bottom: theme.spacing(2),
             right: theme.spacing(3),
         },
@@ -51,7 +51,7 @@ class Overlays extends Component<ReduxProps & StyleProps> {
             <Box className="Overlays" displayPrint="none">
                 <Snackbar
                     open={this.props.selectedCount > 0}
-                    anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+                    anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
                     message={
                         `Selected: ${this.props.selectedCount} / ${this.props.spellCount}`
                     }

@@ -1,8 +1,8 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { Spell, SpellClass, SpellFilter } from "./types";
-import { Card, CardDetail } from "../cards/types";
-import { CardColor, ColorMode } from "../colors/types";
+import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { Spell, SpellClass, SpellFilter } from './types';
+import { Card, CardDetail } from '../cards/types';
+import { CardColor, ColorMode } from '../colors/types';
 
 const selectAllSpells = (state: RootState) => state.spells.all;
 const selectFilter = (state: RootState) => state.spells.filter;
@@ -56,19 +56,19 @@ function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: CardColo
         subtitle: spellSubtitle(spell),
         stats: [
             {
-                name: "Casting Time",
+                name: 'Casting Time',
                 value: spell.castingTime,
             },
             {
-                name: "Range",
+                name: 'Range',
                 value: spell.range,
             },
             {
-                name: "Components",
+                name: 'Components',
                 value: spellComponentsString(spell),
             },
             {
-                name: "Duration",
+                name: 'Duration',
                 value: spell.duration,
                 icon: spell.concentration,
             },
@@ -83,17 +83,17 @@ function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: CardColo
 }
 
 function spellSubtitle(spell: Spell): string {
-    let spellType = "";
+    let spellType = '';
 
     switch (spell.level) {
         case 1:
-            spellType += "1st-level ";
+            spellType += '1st-level ';
             break;
         case 2:
-            spellType += "2nd-level ";
+            spellType += '2nd-level ';
             break;
         case 3:
-            spellType += "3rd-level ";
+            spellType += '3rd-level ';
             break;
         case 4:
         case 5:
@@ -109,10 +109,10 @@ function spellSubtitle(spell: Spell): string {
     spellType += spell.school;
 
     if (spell.level === 0) {
-        spellType += " cantrip";
+        spellType += ' cantrip';
     }
     if (spell.ritual) {
-        spellType += " (ritual)";
+        spellType += ' (ritual)';
     }
 
     // Capitalize first letter.
@@ -123,10 +123,10 @@ function spellSubtitle(spell: Spell): string {
 
 function spellComponentsString(spell: Spell): string {
     const components: string[] = [];
-    if (spell.components.verbal) components.push("V");
-    if (spell.components.somatic) components.push("S");
-    if (spell.components.material) components.push("M");
-    return components.join(", ");
+    if (spell.components.verbal) components.push('V');
+    if (spell.components.somatic) components.push('S');
+    if (spell.components.material) components.push('M');
+    return components.join(', ');
 }
 
 function* spellDetails(spell: Spell): Generator<CardDetail> {
@@ -137,7 +137,7 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
     const details: CardDetail[] = [];
     // Parse spell detail entries
     spell.details.forEach((spellDetail) => {
-        if (typeof spellDetail === "string") {
+        if (typeof spellDetail === 'string') {
             details.push({
                 text: spellDetail,
             });
@@ -151,7 +151,7 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
 
     if (spell.higherLevels) {
         yield {
-            header: "At Higher Levels",
+            header: 'At Higher Levels',
             text: spell.higherLevels,
         };
     }
@@ -159,46 +159,46 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
 
 function getSmallChar(spellClass: SpellClass): string {
     switch (spellClass) {
-        case "bard":
-            return "\uefd8\uebe7"; // musical-notes double-quaver
-        case "cleric":
-            return "\uf3df\uedb1"; // trample hammer-drop
-        case "druid":
-            return "\uf001\ueb79"; // oak-leaf curled-leaf
-        case "paladin":
-            return "\uec2d\uecd6"; // edged-shield fist
-        case "ranger":
-            return "\uf064"; // pawprint
-        case "sorcerer":
-            return "\ueeff"; // lightning-slashes //kindle
-        case "warlock":
-            return "\uf123\uf1e5"; // raise-zombie sheikah-eye
-        case "wizard":
-            return "\uecbe"; // fire-ray
+        case 'bard':
+            return '\uefd8\uebe7'; // musical-notes double-quaver
+        case 'cleric':
+            return '\uf3df\uedb1'; // trample hammer-drop
+        case 'druid':
+            return '\uf001\ueb79'; // oak-leaf curled-leaf
+        case 'paladin':
+            return '\uec2d\uecd6'; // edged-shield fist
+        case 'ranger':
+            return '\uf064'; // pawprint
+        case 'sorcerer':
+            return '\ueeff'; // lightning-slashes //kindle
+        case 'warlock':
+            return '\uf123\uf1e5'; // raise-zombie sheikah-eye
+        case 'wizard':
+            return '\uecbe'; // fire-ray
         default:
-            throw Error("Missing spell class small char");
+            throw Error('Missing spell class small char');
     }
 }
 
 function getLargeChar(spellClass: SpellClass): string {
     switch (spellClass) {
-        case "bard":
-            return "\uef32"; // lyre
-        case "cleric":
-            return "\uf1a6"; // scales
-        case "druid":
-            return "\uec29"; // eclipse-flare
-        case "paladin":
-            return "\uf42e"; // two-handed-sword
-        case "ranger":
-            return "\ueb80"; // curvy-knife
-        case "sorcerer":
-            return "\uee9e"; // kindle
-        case "warlock":
-            return "\ueb9d"; // death-juice
-        case "wizard":
-            return "\uec57"; // enlightenment
+        case 'bard':
+            return '\uef32'; // lyre
+        case 'cleric':
+            return '\uf1a6'; // scales
+        case 'druid':
+            return '\uec29'; // eclipse-flare
+        case 'paladin':
+            return '\uf42e'; // two-handed-sword
+        case 'ranger':
+            return '\ueb80'; // curvy-knife
+        case 'sorcerer':
+            return '\uee9e'; // kindle
+        case 'warlock':
+            return '\ueb9d'; // death-juice
+        case 'wizard':
+            return '\uec57'; // enlightenment
         default:
-            throw Error("Missing spell class large char");
+            throw Error('Missing spell class large char');
     }
 }

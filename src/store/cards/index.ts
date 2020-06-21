@@ -1,12 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Card, CardsState } from "./types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Card, CardsState } from './types';
 
 const initialCardsState: CardsState = {
     selectedTitles: [],
 };
 
 const cardsSlice = createSlice({
-    name: "cards",
+    name: 'cards',
     initialState: initialCardsState,
     reducers: {
         selectCard: (state, action: PayloadAction<Card>) => {

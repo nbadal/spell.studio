@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LayoutState } from "./types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LayoutState } from './types';
 
 const initialLayoutState: LayoutState = {
     showFront: true,
@@ -7,7 +7,7 @@ const initialLayoutState: LayoutState = {
 };
 
 const layoutSlice = createSlice({
-    name: "layout",
+    name: 'layout',
     initialState: initialLayoutState,
     reducers: {
         setFrontShown: (state, action: PayloadAction<boolean>) => {

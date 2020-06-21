@@ -1,25 +1,25 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import IconButton from "@material-ui/core/IconButton";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles({
     titleContainer: {
-        display: "flex",
+        display: 'flex',
         flexGrow: 1,
-        alignItems: "center",
+        alignItems: 'center',
     },
     title: {
-        fontFamily: "modesto-expanded",
-        fontSize: "xx-large",
+        fontFamily: 'modesto-expanded',
+        fontSize: 'xx-large',
     },
     version: {
-        fontFamily: "modesto-text",
-        fontSize: "small",
+        fontFamily: 'modesto-text',
+        fontSize: 'small',
         marginLeft: 6,
         paddingTop: 30,
     },

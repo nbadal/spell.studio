@@ -1,5 +1,5 @@
-import { CardColor } from "../colors/types";
-import { SpellClass } from "../spells/types";
+import { CardColor } from '../colors/types';
+import { SpellClass } from '../spells/types';
 
 export type CardsState = {
     selectedTitles: string[];

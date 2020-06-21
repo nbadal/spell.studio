@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import { Dispatch } from "redux";
-import { connect, ConnectedProps } from "react-redux";
-import _ from "lodash";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-import MenuItem from "@material-ui/core/MenuItem";
-import Input from "@material-ui/core/Input";
+import React, { Component } from 'react';
+import { Dispatch } from 'redux';
+import { connect, ConnectedProps } from 'react-redux';
+import _ from 'lodash';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import MenuItem from '@material-ui/core/MenuItem';
+import Input from '@material-ui/core/Input';
 import {
     createStyles, Theme, withStyles, WithStyles,
-} from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import { Typography } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
-import { SketchPicker } from "react-color";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import { changeClassColor, changeColorMode, changeSchoolColor } from "../store/colors";
-import { selectCardCount } from "../store/cards/selectors";
-import { CardColor, ColorMode } from "../store/colors/types";
+} from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import { Typography } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import { SketchPicker } from 'react-color';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import { changeClassColor, changeColorMode, changeSchoolColor } from '../store/colors';
+import { selectCardCount } from '../store/cards/selectors';
+import { CardColor, ColorMode } from '../store/colors/types';
 import {
     AllSpellClasses,
     AllSpellSchools,
     SpellClass,
     SpellFilter,
     SpellSchool,
-} from "../store/spells/types";
-import { RootState } from "../store/store";
-import { setFrontShown, setBackShown } from "../store/layout";
-import { filterSpells } from "../store/spells";
+} from '../store/spells/types';
+import { RootState } from '../store/store';
+import { setFrontShown, setBackShown } from '../store/layout';
+import { filterSpells } from '../store/spells';
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
@@ -58,41 +58,41 @@ type ReduxProps = ConnectedProps<typeof reduxConnector>;
 const styles = (theme: Theme) =>
     createStyles({
         controlGroup: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "stretch",
-            marginBottom: "4em",
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'stretch',
+            marginBottom: '4em',
         },
         selectControl: {
-            minWidth: "100px",
+            minWidth: '100px',
             margin: theme.spacing(1),
         },
         colorGrid: {
-            display: "grid",
-            gridTemplateColumns: "24px 1fr",
+            display: 'grid',
+            gridTemplateColumns: '24px 1fr',
             gridRowGap: theme.spacing(1),
             margin: theme.spacing(1),
-            justifyItems: "center",
-            alignItems: "center",
+            justifyItems: 'center',
+            alignItems: 'center',
         },
         color: {
             width: 12,
-            height: "100%",
+            height: '100%',
         },
         picker: {
-            position: "absolute",
+            position: 'absolute',
             zIndex: 2,
         },
         overlayClose: {
-            position: "fixed",
+            position: 'fixed',
             top: 0,
             left: 0,
             bottom: 0,
             right: 0,
         },
         capitalized: {
-            textTransform: "capitalize",
+            textTransform: 'capitalize',
         },
     });
 type StyleProps = WithStyles<typeof styles>;
@@ -190,7 +190,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                             input={<Input />}
                             renderValue={(selected) => (
                                 <Box className={classes.capitalized}>
-                                    {(selected as string[]).join(", ")}
+                                    {(selected as string[]).join(', ')}
                                 </Box>
                             )}
                             onChange={(event) => {
@@ -219,7 +219,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                         >
                             {_.range(0, this.props.filter.levelMax + 1).map((n) => (
                                 <MenuItem className={classes.capitalized} key={n} value={n}>
-                                    {n || "Cantrip"}
+                                    {n || 'Cantrip'}
                                 </MenuItem>
                             ))}
                         </Select>
@@ -237,7 +237,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                         >
                             {_.range(this.props.filter.levelMin, 10).map((n) => (
                                 <MenuItem className={classes.capitalized} key={n} value={n}>
-                                    {n || "Cantrip"}
+                                    {n || 'Cantrip'}
                                 </MenuItem>
                             ))}
                         </Select>

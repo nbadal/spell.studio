@@ -1,13 +1,13 @@
-import React from "react";
-import { CardIcon } from "../store/cards/types";
-import { ReactComponent as BardIcon } from "../svg/classes/bard.svg";
-import { ReactComponent as ClericIcon } from "../svg/classes/cleric.svg";
-import { ReactComponent as DruidIcon } from "../svg/classes/druid.svg";
-import { ReactComponent as PaladinIcon } from "../svg/classes/paladin.svg";
-import { ReactComponent as RangerIcon } from "../svg/classes/ranger.svg";
-import { ReactComponent as SorcererIcon } from "../svg/classes/sorcerer.svg";
-import { ReactComponent as WarlockIcon } from "../svg/classes/warlock.svg";
-import { ReactComponent as WizardIcon } from "../svg/classes/wizard.svg";
+import React from 'react';
+import { CardIcon } from '../store/cards/types';
+import { ReactComponent as BardIcon } from '../svg/classes/bard.svg';
+import { ReactComponent as ClericIcon } from '../svg/classes/cleric.svg';
+import { ReactComponent as DruidIcon } from '../svg/classes/druid.svg';
+import { ReactComponent as PaladinIcon } from '../svg/classes/paladin.svg';
+import { ReactComponent as RangerIcon } from '../svg/classes/ranger.svg';
+import { ReactComponent as SorcererIcon } from '../svg/classes/sorcerer.svg';
+import { ReactComponent as WarlockIcon } from '../svg/classes/warlock.svg';
+import { ReactComponent as WizardIcon } from '../svg/classes/wizard.svg';
 
 interface Props {
     icon: CardIcon;
@@ -22,23 +22,23 @@ export function CardIconView(props: Props) {
     } = props;
 
     switch (icon) {
-        case "bard":
+        case 'bard':
             return <BardIcon className={className} height={height} fill={fill} />;
-        case "cleric":
+        case 'cleric':
             return <ClericIcon className={className} height={height} fill={fill} />;
-        case "druid":
+        case 'druid':
             return <DruidIcon className={className} height={height} fill={fill} />;
-        case "paladin":
+        case 'paladin':
             return <PaladinIcon className={className} height={height} fill={fill} />;
-        case "ranger":
+        case 'ranger':
             return <RangerIcon className={className} height={height} fill={fill} />;
-        case "sorcerer":
+        case 'sorcerer':
             return <SorcererIcon className={className} height={height} fill={fill} />;
-        case "warlock":
+        case 'warlock':
             return <WarlockIcon className={className} height={height} fill={fill} />;
-        case "wizard":
+        case 'wizard':
             return <WizardIcon className={className} height={height} fill={fill} />;
         default:
-            throw Error("Missing icon for card");
+            throw Error('Missing icon for card');
     }
 }

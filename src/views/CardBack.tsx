@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import "@rolodromo/gameicons-webfont/css/rpgen-gameicons.min.css";
-import "../css/CardBack.css";
-import { connect, ConnectedProps } from "react-redux";
-import { Dispatch } from "redux";
-import { Box } from "@material-ui/core";
-import _ from "lodash";
-import { selectCard, unselectCard } from "../store/cards";
-import { CardIconView } from "./CardIconView";
-import { RootState } from "../store/store";
-import { selectCardAtIdx } from "../store/cards/selectors";
-import { Card } from "../store/cards/types";
+import React, { Component } from 'react';
+import '@rolodromo/gameicons-webfont/css/rpgen-gameicons.min.css';
+import '../css/CardBack.css';
+import { connect, ConnectedProps } from 'react-redux';
+import { Dispatch } from 'redux';
+import { Box } from '@material-ui/core';
+import _ from 'lodash';
+import { selectCard, unselectCard } from '../store/cards';
+import { CardIconView } from './CardIconView';
+import { RootState } from '../store/store';
+import { selectCardAtIdx } from '../store/cards/selectors';
+import { Card } from '../store/cards/types';
 
 const mapStateToProps = (state: RootState, props: Props) => {
     const card = selectCardAtIdx(props.spellIndex)(state);
@@ -67,10 +67,10 @@ class CardBack extends Component<Props & ReduxProps> {
 
         const smallText = _.times(32)
             .map(() => this.props.card.backIconsSmall)
-            .join("");
+            .join('');
         const largeText = _.times(32)
             .map(() => this.props.card.backIconsLarge)
-            .join("");
+            .join('');
 
         const cardColor = this.props.card.color;
         return (
@@ -110,8 +110,8 @@ class CardBack extends Component<Props & ReduxProps> {
             <Box
                 className={
                     !this.props.selectionActive || this.props.selected
-                        ? "CardBack"
-                        : "DisabledCardBack"
+                        ? 'CardBack'
+                        : 'DisabledCardBack'
                 }
                 style={{ backgroundColor: cardColor }}
                 onClick={this.onClick}

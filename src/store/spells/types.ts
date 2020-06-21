@@ -1,45 +1,45 @@
 export type SpellDetail = string | unknown;
 
 export type SpellSchool =
-    | "conjuration"
-    | "abjuration"
-    | "divination"
-    | "enchantment"
-    | "evocation"
-    | "illusion"
-    | "necromancy"
-    | "transmutation";
+    | 'conjuration'
+    | 'abjuration'
+    | 'divination'
+    | 'enchantment'
+    | 'evocation'
+    | 'illusion'
+    | 'necromancy'
+    | 'transmutation';
 
 export const AllSpellSchools: SpellSchool[] = [
-    "conjuration",
-    "abjuration",
-    "divination",
-    "enchantment",
-    "evocation",
-    "illusion",
-    "necromancy",
-    "transmutation",
+    'conjuration',
+    'abjuration',
+    'divination',
+    'enchantment',
+    'evocation',
+    'illusion',
+    'necromancy',
+    'transmutation',
 ];
 
 export type SpellClass =
-    | "bard"
-    | "cleric"
-    | "druid"
-    | "paladin"
-    | "ranger"
-    | "sorcerer"
-    | "warlock"
-    | "wizard";
+    | 'bard'
+    | 'cleric'
+    | 'druid'
+    | 'paladin'
+    | 'ranger'
+    | 'sorcerer'
+    | 'warlock'
+    | 'wizard';
 
 export const AllSpellClasses: SpellClass[] = [
-    "bard",
-    "cleric",
-    "druid",
-    "paladin",
-    "ranger",
-    "sorcerer",
-    "warlock",
-    "wizard",
+    'bard',
+    'cleric',
+    'druid',
+    'paladin',
+    'ranger',
+    'sorcerer',
+    'warlock',
+    'wizard',
 ];
 
 export type Spell = {

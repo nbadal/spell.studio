@@ -1,8 +1,8 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import cardsReducer from "./cards";
-import spellsReducer from "./spells";
-import colorsReducer from "./colors";
-import layoutReducer from "./layout";
+import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import cardsReducer from './cards';
+import spellsReducer from './spells';
+import colorsReducer from './colors';
+import layoutReducer from './layout';
 
 const rootReducer = combineReducers({
     cards: cardsReducer,
