@@ -12,18 +12,16 @@ import { selectCardAtIdx } from "../store/cards/selectors";
 const mapStateToProps = (state: RootState, props: Props) => {
     const card: Card = selectCardAtIdx(props.cardIndex)(state);
     return {
-        card: card,
+        card,
         selectionActive: state.cards.selectedTitles.length > 0,
         selected: state.cards.selectedTitles.includes(card.title),
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        selectCard: (card: Card) => dispatch(selectCard(card)),
-        unselectCard: (card: Card) => dispatch(unselectCard(card)),
-    };
-};
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    selectCard: (card: Card) => dispatch(selectCard(card)),
+    unselectCard: (card: Card) => dispatch(unselectCard(card)),
+});
 
 const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
@@ -115,8 +113,7 @@ function processText(text: string): ReactNode {
                     {value}
                 </span>
             );
-        } else {
-            return value;
         }
+        return value;
     });
 }

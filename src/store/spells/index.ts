@@ -1,5 +1,5 @@
-import { SpellFilter, SpellsState } from "./types";
 import { createSlice } from "@reduxjs/toolkit";
+import { SpellFilter, SpellsState } from "./types";
 import { allSpells } from "../../data/SpellRepo";
 
 const initialFilter: SpellFilter = {

@@ -2,14 +2,6 @@ import React, { Component } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import _ from "lodash";
-import { RootState } from "../store/store";
-import {
-    AllSpellClasses,
-    AllSpellSchools,
-    SpellClass,
-    SpellFilter,
-    SpellSchool,
-} from "../store/spells/types";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
@@ -17,17 +9,27 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
-import { createStyles, Theme, withStyles, WithStyles } from "@material-ui/core/styles";
+import {
+    createStyles, Theme, withStyles, WithStyles,
+} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { Typography } from "@material-ui/core";
-import { CardColor, ColorMode } from "../store/colors/types";
 import TextField from "@material-ui/core/TextField";
 import { SketchPicker } from "react-color";
-import { selectCardCount } from "../store/cards/selectors";
-import { changeClassColor, changeColorMode, changeSchoolColor } from "../store/colors";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import { changeClassColor, changeColorMode, changeSchoolColor } from "../store/colors";
+import { selectCardCount } from "../store/cards/selectors";
+import { CardColor, ColorMode } from "../store/colors/types";
+import {
+    AllSpellClasses,
+    AllSpellSchools,
+    SpellClass,
+    SpellFilter,
+    SpellSchool,
+} from "../store/spells/types";
+import { RootState } from "../store/store";
 import { setFrontShown, setBackShown } from "../store/layout";
 import { filterSpells } from "../store/spells";
 
@@ -39,18 +41,16 @@ const mapStateToProps = (state: RootState) => ({
     showBack: state.layout.showBack,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        updateFilter: (filter: SpellFilter) => dispatch(filterSpells(filter)),
-        setFrontShown: (show: boolean) => dispatch(setFrontShown(show)),
-        setBackShown: (show: boolean) => dispatch(setBackShown(show)),
-        changeColorMode: (mode: ColorMode) => dispatch(changeColorMode(mode)),
-        changeClassColor: (spellClass: SpellClass, color: CardColor) =>
-            dispatch(changeClassColor({ color, spellClass })),
-        changeSchoolColor: (spellSchool: SpellSchool, color: CardColor) =>
-            dispatch(changeSchoolColor({ color, spellSchool })),
-    };
-};
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    updateFilter: (filter: SpellFilter) => dispatch(filterSpells(filter)),
+    setFrontShown: (show: boolean) => dispatch(setFrontShown(show)),
+    setBackShown: (show: boolean) => dispatch(setBackShown(show)),
+    changeColorMode: (mode: ColorMode) => dispatch(changeColorMode(mode)),
+    changeClassColor: (spellClass: SpellClass, color: CardColor) =>
+        dispatch(changeClassColor({ color, spellClass })),
+    changeSchoolColor: (spellSchool: SpellSchool, color: CardColor) =>
+        dispatch(changeSchoolColor({ color, spellSchool })),
+});
 
 const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
@@ -182,16 +182,16 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                 <Typography>Layout</Typography>
                 <Box className={classes.controlGroup}>
                     <FormControl>
-                        <FormGroup row={true}>
+                        <FormGroup row>
                             <FormControlLabel
-                                label={"Show Front"}
+                                label="Show Front"
                                 control={<Switch checked={this.props.showFront} />}
                                 onChange={(event, checked) => {
                                     this.props.setFrontShown(checked);
                                 }}
                             />
                             <FormControlLabel
-                                label={"Show Back"}
+                                label="Show Back"
                                 control={<Switch checked={this.props.showBack} />}
                                 onChange={(event, checked) => {
                                     this.props.setBackShown(checked);
@@ -216,8 +216,8 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                         </Select>
                     </FormControl>
                     <Box className={classes.colorGrid}>
-                        {this.props.colors.colorMode === ColorMode.BY_CLASS &&
-                            AllSpellClasses.map((spellClass) => {
+                        {this.props.colors.colorMode === ColorMode.BY_CLASS
+                            && AllSpellClasses.map((spellClass) => {
                                 const color = this.props.colors.byClass[spellClass];
                                 return this.ColorPicker(
                                     color,
@@ -227,8 +227,8 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                                     (newColor) => this.classColorPicked(spellClass, newColor),
                                 );
                             })}
-                        {this.props.colors.colorMode === ColorMode.BY_SCHOOL &&
-                            AllSpellSchools.map((spellSchool) => {
+                        {this.props.colors.colorMode === ColorMode.BY_SCHOOL
+                            && AllSpellSchools.map((spellSchool) => {
                                 const color = this.props.colors.bySchool[spellSchool];
                                 return this.ColorPicker(
                                     color,
@@ -259,8 +259,8 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                     <TextField
                         label={label}
                         value={color.toUpperCase()}
-                        size={"small"}
-                        variant={"outlined"}
+                        size="small"
+                        variant="outlined"
                         disabled
                     />
                     {showPicker && (
@@ -297,7 +297,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
     };
 
     private updateFilter(newData: Partial<SpellFilter>) {
-        const newFilter = Object.assign({}, this.props.filter);
+        const newFilter = { ...this.props.filter };
         Object.assign(newFilter, newData);
         this.props.updateFilter(newFilter);
     }

@@ -1,5 +1,5 @@
-import { LayoutState } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { LayoutState } from "./types";
 
 const initialLayoutState: LayoutState = {
     showFront: true,

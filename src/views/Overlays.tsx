@@ -4,11 +4,13 @@ import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 import PrintIcon from "@material-ui/icons/Print";
 import React, { Component } from "react";
-import { createStyles, Theme, withStyles, WithStyles } from "@material-ui/core/styles";
-import { RootState } from "../store/store";
-import { selectFilteredCards } from "../store/cards/selectors";
+import {
+    createStyles, Theme, withStyles, WithStyles,
+} from "@material-ui/core/styles";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../store/store";
+import { selectFilteredCards } from "../store/cards/selectors";
 import { clearSelection } from "../store/cards";
 
 const mapStateToProps = (state: RootState) => ({
@@ -16,11 +18,9 @@ const mapStateToProps = (state: RootState) => ({
     selectedCount: state.cards.selectedTitles.length,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        clearSelection: () => dispatch(clearSelection()),
-    };
-};
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    clearSelection: () => dispatch(clearSelection()),
+});
 
 const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
@@ -40,21 +40,21 @@ class Overlays extends Component<ReduxProps & StyleProps> {
     render() {
         const { classes } = this.props;
         return (
-            <Box className={"Overlays"} displayPrint="none">
+            <Box className="Overlays" displayPrint="none">
                 <Snackbar
                     open={this.props.selectedCount > 0}
                     anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
                     message={
-                        "Selected: " + this.props.selectedCount + " / " + this.props.spellCount
+                        `Selected: ${this.props.selectedCount} / ${this.props.spellCount}`
                     }
-                    action={
+                    action={(
                         <Button color="secondary" size="small" onClick={this.clearSelection}>
                             CLEAR
                         </Button>
-                    }
+                    )}
                 />
                 <Fab className={classes.fab} onClick={this.handlePrint}>
-                    <PrintIcon color={"primary"} />
+                    <PrintIcon color="primary" />
                 </Fab>
             </Box>
         );

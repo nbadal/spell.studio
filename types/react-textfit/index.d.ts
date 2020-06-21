@@ -1,5 +1,5 @@
 declare module "react-textfit" {
-    import React, {Component} from "react";
+    import React, { Component } from "react";
 
     export interface TextfitProps {
         mode?: "single" | "multi";

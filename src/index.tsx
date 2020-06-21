@@ -4,10 +4,10 @@ import { Provider } from "react-redux";
 
 import "./index.css";
 
+import CssBaseline from "@material-ui/core/CssBaseline";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { configureAppStore } from "./store/store";
-import CssBaseline from "@material-ui/core/CssBaseline";
 
 // import {processBTM} from "./scripts/btm-processing";
 // processBTM();
@@ -16,10 +16,10 @@ const store = configureAppStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <React.Fragment>
+        <>
             <CssBaseline />
             <App />
-        </React.Fragment>
+        </>
     </Provider>,
     document.getElementById("root"),
 );

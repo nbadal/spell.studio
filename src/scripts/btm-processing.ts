@@ -2,8 +2,8 @@
 import btm1 from "../data/raw/BTMorton/raw-BTMorton.json";
 import { Spell, SpellClass, SpellSchool } from "../store/spells/types";
 
-const rawSpells = btm1["Spellcasting"]["Spell Descriptions"];
-const rawLists = btm1["Spellcasting"]["Spell Lists"];
+const rawSpells = btm1.Spellcasting["Spell Descriptions"];
+const rawLists = btm1.Spellcasting["Spell Lists"];
 
 export function processBTM(): Spell[] {
     const spellSets: { [klass: string]: string[] } = {
@@ -33,7 +33,7 @@ export function processBTM(): Spell[] {
             /(V)?(?:, )?(S)?(?:, )?(M)?(?: )?(?:\(([^)]+)\))?/,
         );
         if (!componentInfo || !typeInfo) {
-            console.error("No match for " + name);
+            console.error(`No match for ${name}`);
             continue;
         }
 
@@ -54,15 +54,15 @@ export function processBTM(): Spell[] {
         // console.log(spellContent);
 
         const newSpell: Spell = {
-            name: name,
-            classes: classes,
+            name,
+            classes,
             level: Number.parseInt(typeInfo[1] || "0"),
             school: typeInfo[2].toLowerCase() as SpellSchool,
             ritual: !!typeInfo[3],
             castingTime: castingTime!,
             range: range!,
             duration: duration!,
-            concentration: concentration,
+            concentration,
             components: {
                 verbal: !!componentInfo[1],
                 somatic: !!componentInfo[2],
@@ -70,7 +70,7 @@ export function processBTM(): Spell[] {
                 materialInfo: componentInfo[4],
             },
             details: spellContent,
-            higherLevels: higherLevels,
+            higherLevels,
         };
         newSpells.push(newSpell);
     }

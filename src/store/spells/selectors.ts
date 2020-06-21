@@ -12,18 +12,15 @@ const getColors = (state: RootState) => state.colors;
 
 export const selectFilteredSpells = createSelector(
     [selectAllSpells, selectFilter],
-    (spells, filter) => {
-        return spells.filter((s) => {
-            const levelInRange = s.level >= filter.levelMin && s.level <= filter.levelMax;
+    (spells, filter) => spells.filter((s) => {
+        const levelInRange = s.level >= filter.levelMin && s.level <= filter.levelMax;
 
-            const anyClassesMatch =
-                !filter.classes ||
-                filter.classes.length === 0 ||
-                filter.classes.some((fClass) => s.classes.includes(fClass));
+        const anyClassesMatch = !filter.classes
+                || filter.classes.length === 0
+                || filter.classes.some((fClass) => s.classes.includes(fClass));
 
-            return levelInRange && anyClassesMatch;
-        });
-    },
+        return levelInRange && anyClassesMatch;
+    }),
 );
 
 function filterSpellClasses(filter: SpellFilter, spellClasses: SpellClass[]) {
@@ -36,24 +33,20 @@ export const selectFilteredSpellClasses = createSelector(
     filterSpellClasses,
 );
 
-export const selectSpellClass = createSelector([selectFilteredSpellClasses], (classes) => {
-    return classes[0];
-});
+export const selectSpellClass = createSelector([selectFilteredSpellClasses], (classes) => classes[0]);
 
 export const selectFilteredSpellCards = createSelector(
     [selectFilteredSpells, selectFilter, getColors],
-    (spells, filter, colors) => {
-        return spells.map((spell) => {
-            const spellClass = filterSpellClasses(filter, spell.classes)[0];
-            switch (colors.colorMode) {
-                case ColorMode.BY_SCHOOL:
-                    return getSpellCard(spell, spellClass, colors.bySchool[spell.school]);
-                default:
-                case ColorMode.BY_CLASS:
-                    return getSpellCard(spell, spellClass, colors.byClass[spellClass]);
-            }
-        });
-    },
+    (spells, filter, colors) => spells.map((spell) => {
+        const spellClass = filterSpellClasses(filter, spell.classes)[0];
+        switch (colors.colorMode) {
+            case ColorMode.BY_SCHOOL:
+                return getSpellCard(spell, spellClass, colors.bySchool[spell.school]);
+            default:
+            case ColorMode.BY_CLASS:
+                return getSpellCard(spell, spellClass, colors.byClass[spellClass]);
+        }
+    }),
 );
 
 function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: CardColor): Card {
@@ -107,7 +100,7 @@ function spellSubtitle(spell: Spell): string {
         case 7:
         case 8:
         case 9:
-            spellType += spell.level + "th-level ";
+            spellType += `${spell.level}th-level `;
             break;
     }
 

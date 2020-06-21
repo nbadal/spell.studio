@@ -1,5 +1,5 @@
-import { CardColor, ColorMode, ColorsState } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CardColor, ColorMode, ColorsState } from "./types";
 import { SpellClass, SpellSchool } from "../spells/types";
 
 const initialColorsState: ColorsState = {
