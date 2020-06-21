@@ -1,11 +1,12 @@
 import React, { Component, ReactNode } from "react";
+import Textfit from "react-textfit";
+import { connect, ConnectedProps } from "react-redux";
+import { Dispatch } from "redux";
+import { Box } from "@material-ui/core";
 import { Card, CardStat } from "../store/cards/types";
 import "../css/CardFront.css";
 import { ConcentrationIcon } from "./ConcentrationIcon";
-import Textfit from "react-textfit";
 import { RootState } from "../store/store";
-import { connect, ConnectedProps } from "react-redux";
-import { Dispatch } from "redux";
 import { selectCard, unselectCard } from "../store/cards";
 import { selectCardAtIdx } from "../store/cards/selectors";
 
@@ -31,9 +32,38 @@ interface Props {
 }
 
 class CardFront extends Component<Props & ReduxProps> {
+    private statCell = (prop: CardStat) => (
+        <div className="StatCell">
+            <div className="CellContent">
+                <div className="StatsTitle" style={{ color: this.props.card.color }}>
+                    {prop.name}
+                </div>
+                <div className="StatsValue">{prop.value}</div>
+                {prop.icon && (
+                    <div className="StatsBadge">
+                        <ConcentrationIcon
+                            style={{
+                                fontSize: 18,
+                                color: this.props.card.color,
+                            }}
+                        />
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+
+    private onClick = () => {
+        if (this.props.selected) {
+            this.props.unselectCard(this.props.card);
+        } else {
+            this.props.selectCard(this.props.card);
+        }
+    };
+
     public render() {
         return (
-            <div
+            <Box
                 className={
                     !this.props.selectionActive || this.props.selected
                         ? "CardFront"
@@ -68,38 +98,9 @@ class CardFront extends Component<Props & ReduxProps> {
                     <div />
                     <div>SpellStudio°</div>
                 </div>
-            </div>
+            </Box>
         );
     }
-
-    private statCell = (prop: CardStat) => (
-        <div className="StatCell">
-            <div className="CellContent">
-                <div className="StatsTitle" style={{ color: this.props.card.color }}>
-                    {prop.name}
-                </div>
-                <div className="StatsValue">{prop.value}</div>
-                {prop.icon && (
-                    <div className="StatsBadge">
-                        <ConcentrationIcon
-                            style={{
-                                fontSize: 18,
-                                color: this.props.card.color,
-                            }}
-                        />
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-
-    private onClick = () => {
-        if (this.props.selected) {
-            this.props.unselectCard(this.props.card);
-        } else {
-            this.props.selectCard(this.props.card);
-        }
-    };
 }
 
 export default reduxConnector(CardFront);
@@ -109,7 +110,7 @@ function processText(text: string): ReactNode {
         if (index % 2) {
             // Odd indexes are within **'s
             return (
-                <span key={index} className="BoldDetail">
+                <span key={value} className="BoldDetail">
                     {value}
                 </span>
             );

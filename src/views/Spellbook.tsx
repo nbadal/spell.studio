@@ -40,25 +40,6 @@ type StyleProps = WithStyles<typeof styles>;
 const stylesConnector = withStyles(styles);
 
 class Spellbook extends Component<ReduxProps & StyleProps> {
-    public render() {
-        const { classes } = this.props;
-        return (
-            <Box className="Spellbook">
-                <Box className={classes.screenSpellbook}>
-                    <AutoSizer>{(size) => this.renderGrid(size)}</AutoSizer>
-                </Box>
-                <Box className={classes.printSpellbook}>
-                    {this.props.cards.map((card, index) => (
-                        <React.Fragment key={card.title}>
-                            {this.props.showCard && <CardFront cardIndex={index} />}
-                            {this.props.showBack && <CardBack spellIndex={index} />}
-                        </React.Fragment>
-                    ))}
-                </Box>
-            </Box>
-        );
-    }
-
     private renderGrid = (gridSize: Size) => {
         let cellWidth = 0;
         if (this.props.showCard) {
@@ -97,6 +78,25 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
             </Box>
         );
     };
+
+    public render() {
+        const { classes } = this.props;
+        return (
+            <Box className="Spellbook">
+                <Box className={classes.screenSpellbook}>
+                    <AutoSizer>{(size) => this.renderGrid(size)}</AutoSizer>
+                </Box>
+                <Box className={classes.printSpellbook}>
+                    {this.props.cards.map((card, index) => (
+                        <React.Fragment key={card.title}>
+                            {this.props.showCard && <CardFront cardIndex={index} />}
+                            {this.props.showBack && <CardBack spellIndex={index} />}
+                        </React.Fragment>
+                    ))}
+                </Box>
+            </Box>
+        );
+    }
 }
 
 export default stylesConnector(reduxConnector(Spellbook));

@@ -11,6 +11,7 @@ declare module "react-textfit" {
         content?: React.ReactNode;
     }
 
+    // eslint-disable-next-line react/prefer-stateless-function
     export default class Textfit extends Component<TextfitProps> {
     }
 }

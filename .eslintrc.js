@@ -36,8 +36,11 @@ module.exports = {
 
     // Consider changing:
     quotes: "off",
+    "no-use-before-define": "off",
+    "no-param-reassign": "off",
+    "no-console": "off",
+    "import/prefer-default-export": "off",
     "react/destructuring-assignment": "off",
-    "default-case": "off",
 
     // Fix TS import extension requirements
     'import/extensions': ['error', 'ignorePackages', {

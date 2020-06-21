@@ -37,6 +37,14 @@ type StyleProps = WithStyles<typeof styles>;
 const stylesConnector = withStyles(styles);
 
 class Overlays extends Component<ReduxProps & StyleProps> {
+    private clearSelection = () => {
+        this.props.clearSelection();
+    };
+
+    private handlePrint = () => {
+        window.print();
+    };
+
     render() {
         const { classes } = this.props;
         return (
@@ -59,14 +67,6 @@ class Overlays extends Component<ReduxProps & StyleProps> {
             </Box>
         );
     }
-
-    private clearSelection = () => {
-        this.props.clearSelection();
-    };
-
-    private handlePrint = () => {
-        window.print();
-    };
 }
 
 export default stylesConnector(reduxConnector(Overlays));

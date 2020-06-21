@@ -33,7 +33,8 @@ export const selectFilteredSpellClasses = createSelector(
     filterSpellClasses,
 );
 
-export const selectSpellClass = createSelector([selectFilteredSpellClasses], (classes) => classes[0]);
+export const selectSpellClass = createSelector([selectFilteredSpellClasses],
+    (classes) => classes[0]);
 
 export const selectFilteredSpellCards = createSelector(
     [selectFilteredSpells, selectFilter, getColors],
@@ -102,6 +103,7 @@ function spellSubtitle(spell: Spell): string {
         case 9:
             spellType += `${spell.level}th-level `;
             break;
+        // no default
     }
 
     spellType += spell.school;
@@ -132,20 +134,20 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
         yield { text: `Material: ${spell.components.materialInfo}` };
     }
 
-    const spellDetails: CardDetail[] = [];
+    const details: CardDetail[] = [];
     // Parse spell detail entries
-    for (const spellDetail of spell.details) {
+    spell.details.forEach((spellDetail) => {
         if (typeof spellDetail === "string") {
-            spellDetails.push({
+            details.push({
                 text: spellDetail,
             });
         }
         // TODO: parse more detail types.
-    }
-    spellDetails[spellDetails.length - 1].expand = true; // Expand last detail entry.
-    for (const detail of spellDetails) {
-        yield detail;
-    }
+    });
+
+    details[details.length - 1].expand = true; // Expand last detail entry.
+
+    yield* details;
 
     if (spell.higherLevels) {
         yield {
@@ -173,6 +175,8 @@ function getSmallChar(spellClass: SpellClass): string {
             return "\uf123\uf1e5"; // raise-zombie sheikah-eye
         case "wizard":
             return "\uecbe"; // fire-ray
+        default:
+            throw Error("Missing spell class small char");
     }
 }
 
@@ -194,5 +198,7 @@ function getLargeChar(spellClass: SpellClass): string {
             return "\ueb9d"; // death-juice
         case "wizard":
             return "\uec57"; // enlightenment
+        default:
+            throw Error("Missing spell class large char");
     }
 }

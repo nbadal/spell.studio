@@ -33,38 +33,6 @@ interface Props {
 }
 
 class CardBack extends Component<Props & ReduxProps> {
-    public render() {
-        const cardColor = this.props.card.color;
-        return (
-            <Box
-                className={
-                    !this.props.selectionActive || this.props.selected
-                        ? "CardBack"
-                        : "DisabledCardBack"
-                }
-                style={{ backgroundColor: cardColor }}
-                onClick={this.onClick}
-            >
-                <Box className="ArtBackground" style={{ color: cardColor }}>
-                    <Box className="ArtInner" style={{ borderColor: cardColor }}>
-                        {this.renderDiamond(1)}
-                        {this.renderDiamond(2)}
-                        {this.renderDiamond(3)}
-                        {this.renderDiamond(4)}
-                        <CardIconView
-                            className="Icon"
-                            height="1.5in"
-                            icon={this.props.card.icon}
-                            fill={cardColor}
-                        />
-                        <Box className="TRCorner">{this.props.card.backCharacter}</Box>
-                        <Box className="BLCorner">{this.props.card.backCharacter}</Box>
-                    </Box>
-                </Box>
-            </Box>
-        );
-    }
-
     private onClick = () => {
         if (this.props.selected) {
             this.props.unselectCard(this.props.card);
@@ -91,6 +59,7 @@ class CardBack extends Component<Props & ReduxProps> {
             case 4:
                 angle = baseAngle + 180;
                 break;
+            // no default
         }
 
         const transform = `rotate(${angle} 50 50)`;
@@ -132,6 +101,38 @@ class CardBack extends Component<Props & ReduxProps> {
                     </text>
                 </g>
             </svg>
+        );
+    }
+
+    public render() {
+        const cardColor = this.props.card.color;
+        return (
+            <Box
+                className={
+                    !this.props.selectionActive || this.props.selected
+                        ? "CardBack"
+                        : "DisabledCardBack"
+                }
+                style={{ backgroundColor: cardColor }}
+                onClick={this.onClick}
+            >
+                <Box className="ArtBackground" style={{ color: cardColor }}>
+                    <Box className="ArtInner" style={{ borderColor: cardColor }}>
+                        {this.renderDiamond(1)}
+                        {this.renderDiamond(2)}
+                        {this.renderDiamond(3)}
+                        {this.renderDiamond(4)}
+                        <CardIconView
+                            className="Icon"
+                            height="1.5in"
+                            icon={this.props.card.icon}
+                            fill={cardColor}
+                        />
+                        <Box className="TRCorner">{this.props.card.backCharacter}</Box>
+                        <Box className="BLCorner">{this.props.card.backCharacter}</Box>
+                    </Box>
+                </Box>
+            </Box>
         );
     }
 }

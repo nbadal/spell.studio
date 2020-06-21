@@ -26,6 +26,8 @@ export const selectSpellColor = createSelector(
                 return schoolColor;
             case ColorMode.BY_CLASS:
                 return classColor;
+            default:
+                throw Error("Missing color mode case");
         }
     },
 );

@@ -110,6 +110,70 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
         this.state = {};
     }
 
+    private ColorPicker = (
+        color: string,
+        label: string,
+        showPicker: boolean,
+        clickHandler: () => void,
+        colorHandler: (newColor: string) => void,
+    ) => {
+        const { classes } = this.props;
+        return (
+            <React.Fragment key={label}>
+                <Box className={classes.color} style={{ backgroundColor: color }} />
+                <Box onClick={clickHandler}>
+                    <TextField
+                        label={label}
+                        value={color.toUpperCase()}
+                        size="small"
+                        variant="outlined"
+                        disabled
+                    />
+                    {showPicker && (
+                        <Box className={classes.picker}>
+                            <Box className={classes.overlayClose} onClick={clickHandler} />
+                            <SketchPicker
+                                disableAlpha
+                                color={color}
+                                onChange={(newColor) => colorHandler(newColor.hex)}
+                            />
+                        </Box>
+                    )}
+                </Box>
+            </React.Fragment>
+        );
+    };
+
+    private classColorClicked = (spellClass: SpellClass) => {
+        if (spellClass === this.state.showClassColorPicker) {
+            this.setState({ showSchoolColorPicker: undefined, showClassColorPicker: undefined });
+        } else {
+            this.setState({ showSchoolColorPicker: undefined, showClassColorPicker: spellClass });
+        }
+    };
+
+    private schoolColorClicked = (spellSchool: SpellSchool) => {
+        if (spellSchool === this.state.showSchoolColorPicker) {
+            this.setState({ showSchoolColorPicker: undefined, showClassColorPicker: undefined });
+        } else {
+            this.setState({ showSchoolColorPicker: spellSchool, showClassColorPicker: undefined });
+        }
+    };
+
+    private classColorPicked = (spellClass: SpellClass, color: string) => {
+        this.props.changeClassColor(spellClass, color);
+    };
+
+    private schoolColorPicked = (spellSchool: SpellSchool, color: string) => {
+        this.props.changeSchoolColor(spellSchool, color);
+    };
+
+    private updateFilter(newData: Partial<SpellFilter>) {
+        const newFilter = { ...this.props.filter };
+        Object.assign(newFilter, newData);
+        this.props.updateFilter(newFilter);
+    }
+
     public render() {
         const { classes } = this.props;
 
@@ -130,8 +194,8 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                                 </Box>
                             )}
                             onChange={(event) => {
-                                const classes = Array.from(event.target.value as SpellClass[]);
-                                this.updateFilter({ classes });
+                                const spellClasses = Array.from(event.target.value as SpellClass[]);
+                                this.updateFilter({ classes: spellClasses });
                             }}
                         >
                             {AllSpellClasses.map((klass) => (
@@ -149,7 +213,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                             value={this.props.filter.levelMin}
                             onChange={(event) => {
                                 const value = event.target.value as string;
-                                const levelMin = Number.parseInt(value);
+                                const levelMin = Number.parseInt(value, 10);
                                 this.updateFilter({ levelMin });
                             }}
                         >
@@ -167,7 +231,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                             value={this.props.filter.levelMax}
                             onChange={(event) => {
                                 const value = event.target.value as string;
-                                const levelMax = Number.parseInt(value);
+                                const levelMax = Number.parseInt(value, 10);
                                 this.updateFilter({ levelMax });
                             }}
                         >
@@ -217,89 +281,31 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                     </FormControl>
                     <Box className={classes.colorGrid}>
                         {this.props.colors.colorMode === ColorMode.BY_CLASS
-                            && AllSpellClasses.map((spellClass) => {
-                                const color = this.props.colors.byClass[spellClass];
-                                return this.ColorPicker(
-                                    color,
-                                    spellClass,
-                                    this.state.showClassColorPicker === spellClass,
-                                    () => this.classColorClicked(spellClass),
-                                    (newColor) => this.classColorPicked(spellClass, newColor),
-                                );
-                            })}
+                        && AllSpellClasses.map((spellClass) => {
+                            const color = this.props.colors.byClass[spellClass];
+                            return this.ColorPicker(
+                                color,
+                                spellClass,
+                                this.state.showClassColorPicker === spellClass,
+                                () => this.classColorClicked(spellClass),
+                                (newColor) => this.classColorPicked(spellClass, newColor),
+                            );
+                        })}
                         {this.props.colors.colorMode === ColorMode.BY_SCHOOL
-                            && AllSpellSchools.map((spellSchool) => {
-                                const color = this.props.colors.bySchool[spellSchool];
-                                return this.ColorPicker(
-                                    color,
-                                    spellSchool,
-                                    this.state.showSchoolColorPicker === spellSchool,
-                                    () => this.schoolColorClicked(spellSchool),
-                                    (newColor) => this.schoolColorPicked(spellSchool, newColor),
-                                );
-                            })}
+                        && AllSpellSchools.map((spellSchool) => {
+                            const color = this.props.colors.bySchool[spellSchool];
+                            return this.ColorPicker(
+                                color,
+                                spellSchool,
+                                this.state.showSchoolColorPicker === spellSchool,
+                                () => this.schoolColorClicked(spellSchool),
+                                (newColor) => this.schoolColorPicked(spellSchool, newColor),
+                            );
+                        })}
                     </Box>
                 </Box>
             </Box>
         );
-    }
-
-    private ColorPicker = (
-        color: string,
-        label: string,
-        showPicker: boolean,
-        clickHandler: () => void,
-        colorHandler: (newColor: string) => void,
-    ) => {
-        const { classes } = this.props;
-        return (
-            <React.Fragment key={label}>
-                <Box className={classes.color} style={{ backgroundColor: color }} />
-                <Box onClick={clickHandler}>
-                    <TextField
-                        label={label}
-                        value={color.toUpperCase()}
-                        size="small"
-                        variant="outlined"
-                        disabled
-                    />
-                    {showPicker && (
-                        <Box className={classes.picker}>
-                            <Box className={classes.overlayClose} onClick={clickHandler} />
-                            <SketchPicker
-                                disableAlpha
-                                color={color}
-                                onChange={(newColor) => colorHandler(newColor.hex)}
-                            />
-                        </Box>
-                    )}
-                </Box>
-            </React.Fragment>
-        );
-    };
-
-    private classColorClicked = (spellClass: SpellClass) => {
-        const picker = spellClass === this.state.showClassColorPicker ? undefined : spellClass;
-        this.setState({ showSchoolColorPicker: undefined, showClassColorPicker: picker });
-    };
-
-    private schoolColorClicked = (spellSchool: SpellSchool) => {
-        const picker = spellSchool === this.state.showSchoolColorPicker ? undefined : spellSchool;
-        this.setState({ showSchoolColorPicker: picker, showClassColorPicker: undefined });
-    };
-
-    private classColorPicked = (spellClass: SpellClass, color: string) => {
-        this.props.changeClassColor(spellClass, color);
-    };
-
-    private schoolColorPicked = (spellSchool: SpellSchool, color: string) => {
-        this.props.changeSchoolColor(spellSchool, color);
-    };
-
-    private updateFilter(newData: Partial<SpellFilter>) {
-        const newFilter = { ...this.props.filter };
-        Object.assign(newFilter, newData);
-        this.props.updateFilter(newFilter);
     }
 }
 

@@ -17,9 +17,9 @@ export function processBTM(): Spell[] {
         wizard: flattenSpellList(rawLists["Wizard Spells"]),
     };
 
-    const newSpells = [];
+    const newSpells: Spell[] = [];
 
-    for (const name in rawSpells) {
+    Object.keys(rawSpells).forEach((name) => {
         const spellContent = (rawSpells as any)[name].content as any[];
 
         const typeStr: string = spellContent[0] || "";
@@ -34,15 +34,12 @@ export function processBTM(): Spell[] {
         );
         if (!componentInfo || !typeInfo) {
             console.error(`No match for ${name}`);
-            continue;
+            return;
         }
 
-        const classes: SpellClass[] = [];
-        for (const klass in spellSets) {
-            if (spellSets[klass].includes(name)) {
-                classes.push(klass as SpellClass);
-            }
-        }
+        const classes: SpellClass[] = Object.keys(spellSets)
+            .filter((klass) => spellSets[klass].includes(name))
+            .map((klass) => klass as SpellClass);
 
         const castingTime = popSection("**Casting Time:** ", spellContent);
         const range = popSection("**Range:** ", spellContent);
@@ -56,7 +53,7 @@ export function processBTM(): Spell[] {
         const newSpell: Spell = {
             name,
             classes,
-            level: Number.parseInt(typeInfo[1] || "0"),
+            level: Number.parseInt(typeInfo[1] || "0", 10),
             school: typeInfo[2].toLowerCase() as SpellSchool,
             ritual: !!typeInfo[3],
             castingTime: castingTime!,
@@ -73,22 +70,19 @@ export function processBTM(): Spell[] {
             higherLevels,
         };
         newSpells.push(newSpell);
-    }
+    });
     return newSpells;
 }
 
 /** Return a list of spells, originally split by level grouping */
-function flattenSpellList(spellsByLevel: { [level: string]: string[] }) {
-    const spells = [];
-    for (const level in spellsByLevel) {
-        spells.push(...spellsByLevel[level]);
-    }
-    return spells;
+function flattenSpellList(spellsByLevel: { [level: string]: string[] }): string[] {
+    return Object.keys(spellsByLevel)
+        .flatMap((level) => spellsByLevel[level]);
 }
 
 /** Return the first matching item without the given prefix, removing it from the provided array. */
 function popSection(prefix: string, content: any[]): string | undefined {
-    for (let i = 0; i < content.length; i++) {
+    for (let i = 0; i < content.length; i += 1) {
         const item = content[i];
         if (typeof item === "string" && item.startsWith(prefix)) {
             content = content.splice(i, 1);
