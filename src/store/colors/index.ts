@@ -46,9 +46,12 @@ const colorsSlice = createSlice({
         ) => {
             state.bySchool[action.payload.spellSchool] = action.payload.color;
         },
+        setDefaultColors: () => initialColorsState,
     },
 });
 
-export const { changeColorMode, changeClassColor, changeSchoolColor } = colorsSlice.actions;
+export const {
+    changeColorMode, changeClassColor, changeSchoolColor, setDefaultColors,
+} = colorsSlice.actions;
 
 export default colorsSlice.reducer;

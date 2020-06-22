@@ -19,7 +19,10 @@ import { SketchPicker } from 'react-color';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import { changeClassColor, changeColorMode, changeSchoolColor } from '../store/colors';
+import Button from '@material-ui/core/Button';
+import {
+    changeClassColor, changeColorMode, changeSchoolColor, setDefaultColors,
+} from '../store/colors';
 import { selectCardCount } from '../store/cards/selectors';
 import { CardColor, ColorMode } from '../store/colors/types';
 import {
@@ -30,8 +33,8 @@ import {
     SpellSchool,
 } from '../store/spells/types';
 import { RootState } from '../store/store';
-import { setFrontShown, setBackShown } from '../store/layout';
-import { filterSpells } from '../store/spells';
+import { setFrontShown, setBackShown, resetLayout } from '../store/layout';
+import { filterSpells, resetSpellFilter } from '../store/spells';
 
 const mapStateToProps = (state: RootState) => ({
     filter: state.spells.filter,
@@ -50,6 +53,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         dispatch(changeClassColor({ color, spellClass })),
     changeSchoolColor: (spellSchool: SpellSchool, color: CardColor) =>
         dispatch(changeSchoolColor({ color, spellSchool })),
+    resetFilter: () => dispatch(resetSpellFilter()),
+    resetLayout: () => dispatch(resetLayout()),
+    resetColors: () => dispatch(setDefaultColors()),
 });
 
 const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
@@ -167,6 +173,12 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
     private schoolColorPicked = (spellSchool: SpellSchool, color: string) => {
         this.props.changeSchoolColor(spellSchool, color);
     };
+
+    private resetClicked = () => {
+        this.props.resetFilter();
+        this.props.resetLayout();
+        this.props.resetColors();
+    }
 
     private updateFilter(newData: Partial<SpellFilter>) {
         const newFilter = { ...this.props.filter };
@@ -303,6 +315,9 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                             );
                         })}
                     </Box>
+                </Box>
+                <Box className={classes.controlGroup}>
+                    <Button onClick={() => this.resetClicked()}>Reset</Button>
                 </Box>
             </Box>
         );

@@ -16,9 +16,10 @@ const layoutSlice = createSlice({
         setBackShown: (state, action: PayloadAction<boolean>) => {
             state.showBack = action.payload;
         },
+        resetLayout: () => initialLayoutState,
     },
 });
 
-export const { setFrontShown, setBackShown } = layoutSlice.actions;
+export const { setFrontShown, setBackShown, resetLayout } = layoutSlice.actions;
 
 export default layoutSlice.reducer;

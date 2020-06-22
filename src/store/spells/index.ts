@@ -20,9 +20,12 @@ const cardsSlice = createSlice({
         filterSpells: (state, action) => {
             state.filter = action.payload;
         },
+        resetSpellFilter: (state) => {
+            state.filter = initialFilter;
+        },
     },
 });
 
-export const { filterSpells } = cardsSlice.actions;
+export const { filterSpells, resetSpellFilter } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
