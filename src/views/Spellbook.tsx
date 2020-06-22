@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
 import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
+import { useMediaQuery } from '@material-ui/core';
 import { RootState } from '../store/store';
 import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
 import CardFront from './CardFront';
@@ -83,19 +84,25 @@ const Spellbook = (props: ReduxProps & StyleProps) => {
         classes, cards, showCard, showBack,
     } = props;
 
+    const isPrint = useMediaQuery('print');
+
     return (
         <Box className="Spellbook">
-            <Box className={classes.screenSpellbook}>
-                <AutoSizer>{(size) => renderGrid(props, size)}</AutoSizer>
-            </Box>
-            <Box className={classes.printSpellbook}>
-                {cards.map((card, index) => (
-                    <React.Fragment key={card.title}>
-                        {showCard && <CardFront cardIndex={index} />}
-                        {showBack && <CardBack spellIndex={index} />}
-                    </React.Fragment>
-                ))}
-            </Box>
+            {!isPrint && (
+                <Box className={classes.screenSpellbook}>
+                    <AutoSizer>{(size) => renderGrid(props, size)}</AutoSizer>
+                </Box>
+            )}
+            {isPrint && (
+                <Box className={classes.printSpellbook}>
+                    {cards.map((card, index) => (
+                        <React.Fragment key={card.title}>
+                            {showCard && <CardFront cardIndex={index} />}
+                            {showBack && <CardBack spellIndex={index} />}
+                        </React.Fragment>
+                    ))}
+                </Box>
+            )}
         </Box>
     );
 };
