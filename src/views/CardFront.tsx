@@ -33,7 +33,7 @@ interface Props {
 
 class CardFront extends Component<Props & ReduxProps> {
     private statCell = (prop: CardStat) => (
-        <div className="StatCell">
+        <div className="StatCell" key={prop.name}>
             <div className="CellContent">
                 <div className="StatsTitle" style={{ color: this.props.card.color }}>
                     {prop.name}
@@ -83,7 +83,7 @@ class CardFront extends Component<Props & ReduxProps> {
                 </div>
                 <div className="DetailsContainer">
                     {this.props.card.details.map((detail) => (
-                        <>
+                        <React.Fragment key={detail.text}>
                             {detail.header && <div className="HigherLevels">{detail.header}</div>}
                             <div
                                 className="DetailsBlock"
@@ -91,7 +91,7 @@ class CardFront extends Component<Props & ReduxProps> {
                             >
                                 {processText(detail.text)}
                             </div>
-                        </>
+                        </React.Fragment>
                     ))}
                 </div>
                 <div className="CardFooter">
