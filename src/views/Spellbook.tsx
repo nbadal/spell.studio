@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
@@ -39,67 +39,65 @@ const styles = () =>
 type StyleProps = WithStyles<typeof styles>;
 const stylesConnector = withStyles(styles);
 
-class Spellbook extends Component<ReduxProps & StyleProps> {
-    private renderGrid = (gridSize: Size) => {
-        let cellWidth = 0;
-        if (this.props.showCard) {
-            cellWidth += 256;
-        }
-        if (this.props.showBack) {
-            cellWidth += 256;
-        }
-        if (cellWidth === 0) {
-            return (<></>);
-        }
-        const cellHeight = 352;
-        const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
-        const rowCount = Math.max(1, this.props.cardCount / columnCount);
-        return (
-            <FixedSizeGrid
-                width={gridSize.width}
-                height={gridSize.height}
-                columnCount={columnCount}
-                columnWidth={cellWidth}
-                rowHeight={cellHeight}
-                rowCount={rowCount}
-            >
-                {(props: GridChildComponentProps) => {
-                    const idx = props.rowIndex * columnCount + props.columnIndex;
-                    return this.renderCardCell(props, idx);
-                }}
-            </FixedSizeGrid>
-        );
-    };
+const renderGrid = (props: ReduxProps, gridSize: Size) => {
+    const { showBack, showCard, cardCount } = props;
 
-    private renderCardCell = (props: GridChildComponentProps, spellIdx: number) => {
-        if (spellIdx >= this.props.cardCount) return <Box style={props.style} />;
-
-        return (
-            <Box style={props.style}>
-                {this.props.showCard && <CardFront cardIndex={spellIdx} />}
-                {this.props.showBack && <CardBack spellIndex={spellIdx} />}
-            </Box>
-        );
-    };
-
-    public render() {
-        const { classes } = this.props;
-        return (
-            <Box className="Spellbook">
-                <Box className={classes.screenSpellbook}>
-                    <AutoSizer>{(size) => this.renderGrid(size)}</AutoSizer>
-                </Box>
-                <Box className={classes.printSpellbook}>
-                    {this.props.cards.map((card, index) => (
-                        <React.Fragment key={card.title}>
-                            {this.props.showCard && <CardFront cardIndex={index} />}
-                            {this.props.showBack && <CardBack spellIndex={index} />}
-                        </React.Fragment>
-                    ))}
-                </Box>
-            </Box>
-        );
+    let cellWidth = 0;
+    if (showCard) {
+        cellWidth += 256;
     }
-}
+    if (showBack) {
+        cellWidth += 256;
+    }
+    if (cellWidth === 0) {
+        return (<></>);
+    }
+    const cellHeight = 352;
+    const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
+    const rowCount = Math.max(1, cardCount / columnCount);
+    return (
+        <FixedSizeGrid
+            width={gridSize.width}
+            height={gridSize.height}
+            columnCount={columnCount}
+            columnWidth={cellWidth}
+            rowHeight={cellHeight}
+            rowCount={rowCount}
+        >
+            {(gridProps: GridChildComponentProps) => {
+                const idx = gridProps.rowIndex * columnCount + gridProps.columnIndex;
+                if (idx >= cardCount) return <Box style={gridProps.style} />;
+                return (
+                    <Box style={gridProps.style}>
+                        {showCard && <CardFront cardIndex={idx} />}
+                        {showBack && <CardBack spellIndex={idx} />}
+                    </Box>
+                );
+            }}
+        </FixedSizeGrid>
+    );
+};
+
+const Spellbook = (props: ReduxProps & StyleProps) => {
+    const {
+        classes, cards, showCard, showBack,
+    } = props;
+
+    return (
+        <Box className="Spellbook">
+            <Box className={classes.screenSpellbook}>
+                <AutoSizer>{(size) => renderGrid(props, size)}</AutoSizer>
+            </Box>
+            <Box className={classes.printSpellbook}>
+                {cards.map((card, index) => (
+                    <React.Fragment key={card.title}>
+                        {showCard && <CardFront cardIndex={index} />}
+                        {showBack && <CardBack spellIndex={index} />}
+                    </React.Fragment>
+                ))}
+            </Box>
+        </Box>
+    );
+};
 
 export default stylesConnector(reduxConnector(Spellbook));
