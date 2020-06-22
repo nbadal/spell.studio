@@ -6,8 +6,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
-    "plugin:import/errors",
-    "plugin:import/warnings",
+    'airbnb/hooks',
     "plugin:import/typescript",
   ],
   globals: {
