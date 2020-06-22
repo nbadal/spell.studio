@@ -48,6 +48,9 @@ class Spellbook extends Component<ReduxProps & StyleProps> {
         if (this.props.showBack) {
             cellWidth += 256;
         }
+        if (cellWidth === 0) {
+            return (<></>);
+        }
         const cellHeight = 352;
         const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
         const rowCount = Math.max(1, this.props.cardCount / columnCount);
