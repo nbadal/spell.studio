@@ -40,6 +40,11 @@ module.exports = {
         'import/prefer-default-export': 'off',
         'react/destructuring-assignment': 'off',
 
+        // Fix for CRA's setupTests.ts for jest
+        'import/no-extraneous-dependencies': ['error', {
+            devDependencies: ['**/setupTests.ts']
+        }],
+
         // Fix TS import extension requirements
         'import/extensions': ['error', 'ignorePackages', {
             js: 'never',
