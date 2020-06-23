@@ -62,4 +62,10 @@ module.exports = {
         'no-unused-vars': 'off', // off the eslint core rule.
         '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
     },
+    overrides: [{
+        files: ['**/__tests__/*'],
+        env: {
+            jest: true,
+        }
+    }]
 };
