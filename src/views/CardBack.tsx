@@ -65,10 +65,10 @@ class CardBack extends Component<Props & ReduxProps> {
         const transform = `rotate(${angle} 50 50)`;
         // let transform = undefined;
 
-        const smallText = _.times(32)
+        const smallText = _.times(25)
             .map(() => this.props.card.backIconsSmall)
             .join('');
-        const largeText = _.times(32)
+        const largeText = _.times(15)
             .map(() => this.props.card.backIconsLarge)
             .join('');
 
