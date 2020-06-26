@@ -55,7 +55,7 @@ const renderGrid = (props: ReduxProps, gridSize: Size) => {
     }
     const cellHeight = 352;
     const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
-    const rowCount = Math.max(1, cardCount / columnCount);
+    const rowCount = Math.max(1, Math.ceil(cardCount / columnCount));
     return (
         <FixedSizeGrid
             width={gridSize.width}
