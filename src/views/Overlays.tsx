@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core/styles';
 import { Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RootState } from '../store/store';
 import { selectFilteredCards } from '../store/cards/selectors';
 import { clearSelection } from '../store/cards';
@@ -41,10 +42,6 @@ class Overlays extends Component<ReduxProps & StyleProps> {
         this.props.clearSelection();
     };
 
-    private handlePrint = () => {
-        window.print();
-    };
-
     render() {
         const { classes } = this.props;
         return (
@@ -61,9 +58,10 @@ class Overlays extends Component<ReduxProps & StyleProps> {
                         </Button>
                     )}
                 />
-                <Fab className={classes.fab} onClick={this.handlePrint}>
+                <Fab className={classes.fab} component={Link} to="/print" target="_blank">
                     <PrintIcon color="primary" />
                 </Fab>
+
             </Box>
         );
     }
