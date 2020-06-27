@@ -84,7 +84,7 @@ const Spellbook = (props: ReduxProps & StyleProps) => {
         classes, cards, showCard, showBack,
     } = props;
 
-    const isPrint = useMediaQuery('print');
+    const isPrint = useMediaQuery('print', { noSsr: true });
 
     return (
         <Box className="Spellbook">
