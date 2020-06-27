@@ -84,7 +84,7 @@ const styles = (theme: Theme) =>
         },
         color: {
             width: 12,
-            height: '100%',
+            height: 40,
         },
         picker: {
             position: 'absolute',
