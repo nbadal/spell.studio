@@ -14,8 +14,8 @@ const mapStateToProps = (state: RootState, props: Props) => {
     const card: Card = selectCardAtIdx(props.cardIndex)(state);
     return {
         card,
-        selectionActive: state.cards.selectedTitles.length > 0,
-        selected: state.cards.selectedTitles.includes(card.title),
+        selectionActive: state.cards.selectedUids.length > 0,
+        selected: state.cards.selectedUids.includes(card.uid),
     };
 };
 

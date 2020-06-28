@@ -38,20 +38,24 @@ export const selectSpellClass = createSelector([selectFilteredSpellClasses],
 
 export const selectFilteredSpellCards = createSelector(
     [selectFilteredSpells, selectFilter, getColors],
-    (spells, filter, colors) => spells.map((spell) => {
-        const spellClass = filterSpellClasses(filter, spell.classes)[0];
-        switch (colors.colorMode) {
-            case ColorMode.BY_SCHOOL:
-                return getSpellCard(spell, spellClass, colors.bySchool[spell.school]);
-            default:
-            case ColorMode.BY_CLASS:
-                return getSpellCard(spell, spellClass, colors.byClass[spellClass]);
-        }
+    (spells, filter, colors) => spells.flatMap((spell) => {
+        const spellClasses = filterSpellClasses(filter, spell.classes);
+        // Return one card for each spell class
+        return spellClasses.map((spellClass) => {
+            switch (colors.colorMode) {
+                case ColorMode.BY_SCHOOL:
+                    return getSpellCard(spell, spellClass, colors.bySchool[spell.school]);
+                default:
+                case ColorMode.BY_CLASS:
+                    return getSpellCard(spell, spellClass, colors.byClass[spellClass]);
+            }
+        });
     }),
 );
 
 function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: CardColor): Card {
     return {
+        uid: `${spellClass}/${spell.name}`,
         title: spell.name,
         subtitle: spellSubtitle(spell),
         stats: [

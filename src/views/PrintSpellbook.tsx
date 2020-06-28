@@ -14,7 +14,7 @@ const PrintSpellbook = () => {
     return (
         <Box className="Spellbook">
             {cards.map((card, index) => (
-                <React.Fragment key={card.title}>
+                <React.Fragment key={card.uid}>
                     {showCard && <CardFront cardIndex={index} />}
                     {showBack && <CardBack spellIndex={index} />}
                 </React.Fragment>

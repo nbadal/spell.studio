@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Card, CardsState } from './types';
 
 const initialCardsState: CardsState = {
-    selectedTitles: [],
+    selectedUids: [],
 };
 
 const cardsSlice = createSlice({
@@ -10,16 +10,16 @@ const cardsSlice = createSlice({
     initialState: initialCardsState,
     reducers: {
         selectCard: (state, action: PayloadAction<Card>) => {
-            state.selectedTitles = [action.payload.title, ...state.selectedTitles];
+            state.selectedUids = [action.payload.uid, ...state.selectedUids];
         },
         unselectCard: (state, action: PayloadAction<Card>) => {
-            // We use `title` because the object will be proxied so === wont work.
-            state.selectedTitles = state.selectedTitles.filter(
-                (title) => title !== action.payload.title,
+            // We use the unique id because the object will be proxied so === wont work.
+            state.selectedUids = state.selectedUids.filter(
+                (title) => title !== action.payload.uid,
             );
         },
         clearSelection: (state) => {
-            state.selectedTitles = [];
+            state.selectedUids = [];
         },
     },
 });

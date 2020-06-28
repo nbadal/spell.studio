@@ -2,10 +2,11 @@ import { CardColor } from '../colors/types';
 import { SpellClass } from '../spells/types';
 
 export type CardsState = {
-    selectedTitles: string[];
+    selectedUids: string[];
 };
 
 export type Card = {
+    uid: string;
     title: string;
     subtitle: string;
     stats: CardStat[];
