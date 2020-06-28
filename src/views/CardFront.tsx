@@ -95,7 +95,7 @@ class CardFront extends Component<Props & ReduxProps> {
                     ))}
                 </div>
                 <div className="CardFooter">
-                    <div />
+                    <div className="Category">{this.props.card.category}</div>
                     <div>SpellStudio°</div>
                 </div>
             </Box>

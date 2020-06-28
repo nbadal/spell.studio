@@ -8,7 +8,7 @@
     break-inside: avoid;
 
     margin: 8px;
-    padding: 10px;
+    padding: 10px 10px 6px 10px;
     border-radius: 12px;
 
     font-family: "modesto-text", serif;
@@ -168,4 +168,14 @@
     font-size: 10px;
     line-height: 10px;
     font-weight: bold;
+}
+
+.Category {
+    font-size: 11px;
+    line-height: 11px;
+    font-family: "modesto-expanded", serif;
+    font-weight: 400;
+    font-style: normal;
+    /*text-transform: uppercase;*/
+    text-align: center;
 }

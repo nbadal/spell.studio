@@ -78,6 +78,7 @@ function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: CardColo
             },
         ],
         details: Array.from(spellDetails(spell)),
+        category: spellClass.substring(0, 1).toUpperCase() + spellClass.substring(1),
         backCharacter: spell.level,
         icon: spellClass,
         backIconsSmall: getSmallChar(spellClass),

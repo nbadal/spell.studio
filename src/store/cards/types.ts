@@ -11,6 +11,7 @@ export type Card = {
     subtitle: string;
     stats: CardStat[];
     details: CardDetail[];
+    category: string;
     color: CardColor;
     icon: CardIcon;
     backCharacter: string | number;
