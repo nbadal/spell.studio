@@ -3,6 +3,7 @@ import {
     FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import cardsReducer from './cards';
 import spellsReducer from './spells';
 import colorsReducer from './colors';
@@ -16,9 +17,10 @@ const rootReducer = combineReducers({
 });
 
 export function configureAppStore() {
-    const persistedReducer = persistReducer(
+    const persistedReducer = persistReducer<RootState>(
         {
             key: 'root',
+            stateReconciler: autoMergeLevel2,
             storage,
         },
         rootReducer,
