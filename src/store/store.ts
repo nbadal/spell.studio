@@ -11,7 +11,7 @@ import layoutReducer from './layout';
 
 const rootReducer = combineReducers({
     cards: cardsReducer,
-    spells: spellsReducer,
+    spells: persistReducer({ key: 'spells', storage, blacklist: ['all'] }, spellsReducer),
     colors: colorsReducer,
     layout: layoutReducer,
 });
@@ -21,6 +21,7 @@ export function configureAppStore() {
         {
             key: 'root',
             stateReconciler: autoMergeLevel2,
+            blacklist: ['spells'],
             storage,
         },
         rootReducer,
