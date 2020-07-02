@@ -10,7 +10,7 @@ import {
 import { Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../store/store';
+import { RootState } from '../store';
 import { selectFilteredCards } from '../store/cards/selectors';
 import { clearSelection } from '../store/cards';
 

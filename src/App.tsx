@@ -11,7 +11,7 @@ import Controls from './views/Controls';
 import Spellbook from './views/Spellbook';
 import TopBar from './views/TopBar';
 import Overlays from './views/Overlays';
-import { configureAppStore } from './store/store';
+import { configureAppStore } from './store';
 import PrintSpellbook from './views/PrintSpellbook';
 
 function App() {

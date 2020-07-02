@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { RootState } from '../index';
 import { Spell, SpellClass, SpellFilter } from './types';
 import { Card, CardDetail } from '../cards/types';
 import { CardColor, ColorMode } from '../colors/types';

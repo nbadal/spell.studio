@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
-import { RootState } from '../store/store';
+import { RootState } from '../store';
 import { selectFilteredCards } from '../store/cards/selectors';
 import CardFront from './CardFront';
 import CardBack from './CardBack';

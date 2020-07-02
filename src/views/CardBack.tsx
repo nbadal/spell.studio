@@ -7,7 +7,7 @@ import { Box } from '@material-ui/core';
 import _ from 'lodash';
 import { selectCard, unselectCard } from '../store/cards';
 import { CardIconView } from './CardIconView';
-import { RootState } from '../store/store';
+import { RootState } from '../store';
 import { selectCardAtIdx } from '../store/cards/selectors';
 import { Card } from '../store/cards/types';
 

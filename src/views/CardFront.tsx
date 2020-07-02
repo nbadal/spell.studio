@@ -8,7 +8,7 @@ import {
 } from '../store/cards/types';
 import '../css/CardFront.css';
 import { ConcentrationIcon } from './ConcentrationIcon';
-import { RootState } from '../store/store';
+import { RootState } from '../store';
 import { selectCard, unselectCard } from '../store/cards';
 import { selectCardAtIdx } from '../store/cards/selectors';
 

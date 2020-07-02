@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
-import { RootState } from '../store/store';
+import { RootState } from '../store';
 import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
 import CardFront from './CardFront';
 import CardBack from './CardBack';

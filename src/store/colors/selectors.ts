@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { RootState } from '../index';
 import { ColorMode, ColorsState } from './types';
 import { selectSpellClass } from '../spells/selectors';
 import { Spell, SpellSchool } from '../spells/types';

@@ -32,7 +32,7 @@ import {
     SpellFilter,
     SpellSchool,
 } from '../store/spells/types';
-import { RootState } from '../store/store';
+import { RootState } from '../store';
 import { setFrontShown, setBackShown, resetLayout } from '../store/layout';
 import { filterSpells, resetSpellFilter } from '../store/spells';
 
