@@ -144,8 +144,24 @@
     text-align: justify;
 }
 
+.DetailsBlock :first-child, .DetailsBlock :last-child {
+    padding-top: unset;
+    padding-bottom: unset;
+}
+
+.DetailsBlock ul {
+    margin: 0;
+    list-style-type: square;
+    list-style-position: outside;
+    padding-inline-start: 12px;
+}
+
 .BoldDetail {
     font-weight: bold;
+}
+
+.ItalicDetail {
+    font-style: italic;
 }
 
 .HigherLevels {

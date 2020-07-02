@@ -136,7 +136,7 @@ function spellComponentsString(spell: Spell): string {
 
 function* spellDetails(spell: Spell): Generator<CardDetail> {
     if (spell.components.materialInfo) {
-        yield { text: `Material: ${spell.components.materialInfo}` };
+        yield { type: 'text', text: `Material: ${spell.components.materialInfo}` };
     }
 
     const details: CardDetail[] = [];
@@ -144,7 +144,14 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
     spell.details.forEach((spellDetail) => {
         if (typeof spellDetail === 'string') {
             details.push({
+                type: 'text',
                 text: spellDetail,
+            });
+        }
+        if (Array.isArray(spellDetail)) {
+            details.push({
+                type: 'list',
+                items: spellDetail,
             });
         }
         // TODO: parse more detail types.
@@ -156,6 +163,7 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
 
     if (spell.higherLevels) {
         yield {
+            type: 'text',
             header: 'At Higher Levels',
             text: spell.higherLevels,
         };

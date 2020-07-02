@@ -21,11 +21,28 @@ export type Card = {
 
 export type CardIcon = SpellClass;
 
-export type CardDetail = {
+export type CardDetail = (CardTextDetail | CardListDetail) & { type: 'text' | 'list' };
+
+export function isText(detail: CardDetail): detail is CardTextDetail {
+    return detail.type === 'text';
+}
+
+export function isList(detail: CardDetail): detail is CardListDetail {
+    return detail.type === 'list';
+}
+
+export type CardTextDetail = {
+    type: 'text',
     header?: string;
     text: string;
     expand?: boolean;
 };
+
+export type CardListDetail = {
+    type: 'list',
+    items: string[];
+    expand?: boolean;
+}
 
 export type CardStat = {
     name: string;

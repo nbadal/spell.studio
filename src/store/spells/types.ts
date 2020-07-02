@@ -1,4 +1,6 @@
-export type SpellDetail = string | unknown;
+export type SpellDetail = TextDetail | ListDetail | unknown;
+export type TextDetail = string
+export type ListDetail = string[]
 
 export type SpellSchool =
     | 'conjuration'

@@ -3,7 +3,9 @@ import Textfit from 'react-textfit';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Box } from '@material-ui/core';
-import { Card, CardStat } from '../store/cards/types';
+import {
+    Card, CardStat, isList, isText,
+} from '../store/cards/types';
 import '../css/CardFront.css';
 import { ConcentrationIcon } from './ConcentrationIcon';
 import { RootState } from '../store/store';
@@ -82,17 +84,38 @@ class CardFront extends Component<Props & ReduxProps> {
                     {this.props.card.stats.map((prop) => this.statCell(prop))}
                 </div>
                 <div className="DetailsContainer">
-                    {this.props.card.details.map((detail) => (
-                        <React.Fragment key={detail.text}>
-                            {detail.header && <div className="HigherLevels">{detail.header}</div>}
-                            <div
-                                className="DetailsBlock"
-                                style={{ flexGrow: detail.expand ? 1 : 0 }}
-                            >
-                                {processText(detail.text)}
-                            </div>
-                        </React.Fragment>
-                    ))}
+                    {this.props.card.details.map((detail) => {
+                        if (isText(detail)) {
+                            return (
+                                <React.Fragment key={detail.text}>
+                                    {detail.header && <div className="HigherLevels">{detail.header}</div>}
+                                    <div
+                                        className="DetailsBlock"
+                                        style={{ flexGrow: detail.expand ? 1 : 0 }}
+                                    >
+                                        {processText(detail.text)}
+                                    </div>
+                                </React.Fragment>
+                            );
+                        }
+                        if (isList(detail)) {
+                            return (
+                                <div
+                                    key={detail.items.join(',')}
+                                    className="DetailsBlock"
+                                    style={{ flexGrow: detail.expand ? 1 : 0 }}
+                                >
+                                    <ul>
+                                        {detail.items.map((item) => (
+                                            <li>{processText(item)}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            );
+                        }
+
+                        return undefined;
+                    })}
                 </div>
                 <div className="CardFooter">
                     <div className="Category">{this.props.card.category}</div>
@@ -108,13 +131,23 @@ export default reduxConnector(CardFront);
 function processText(text: string): ReactNode {
     return text.split('***').map((value, index) => {
         if (index % 2) {
-            // Odd indexes are within **'s
+            // Odd indexes are within ***'s
             return (
                 <span key={value} className="BoldDetail">
                     {value}
                 </span>
             );
         }
-        return value;
+        return value.split('*').map((value2, index2) => {
+            if (index2 % 2) {
+                // Odd indexes are within *'s
+                return (
+                    <span key={value2} className="ItalicDetail">
+                        {value2}
+                    </span>
+                );
+            }
+            return value2;
+        });
     });
 }
