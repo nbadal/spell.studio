@@ -210,12 +210,29 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                                 this.updateFilter({ classes: spellClasses });
                             }}
                         >
-                            {AllSpellClasses.map((klass) => (
-                                <MenuItem className={classes.capitalized} key={klass} value={klass}>
-                                    <Checkbox checked={this.props.filter.classes.includes(klass)} />
-                                    <ListItemText primary={klass} />
-                                </MenuItem>
-                            ))}
+                            {AllSpellClasses.map((klass) => {
+                                const color = this.props.colors.byClass[klass];
+                                const checked = this.props.filter.classes.includes(klass);
+                                const ColorCheckbox = withStyles({
+                                    root: {
+                                        color,
+                                        '&$checked': {
+                                            color,
+                                        },
+                                    },
+                                    // eslint-disable-next-line react/jsx-props-no-spreading
+                                })((props) => <Checkbox color="default" checked={checked} {...props} />);
+                                return (
+                                    <MenuItem
+                                        className={classes.capitalized}
+                                        key={klass}
+                                        value={klass}
+                                    >
+                                        <ColorCheckbox />
+                                        <ListItemText primary={klass} />
+                                    </MenuItem>
+                                );
+                            })}
                         </Select>
                     </FormControl>
                     <FormControl className={classes.selectControl}>
