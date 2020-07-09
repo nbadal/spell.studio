@@ -10,7 +10,7 @@
     "@reduxjs/toolkit": "^1.4.0",
     "@rolodromo/gameicons-webfont": "^1.3.1",
     "csstype": "^2.6.11",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "react": "^16.12.0",
     "react-color": "^2.18.0",
     "react-dom": "^16.12.0",
