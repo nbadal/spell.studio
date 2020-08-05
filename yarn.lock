@@ -1640,10 +1640,10 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@testing-library/dom@^7.17.1", "@testing-library/dom@^7.21.6":
-  version "7.21.6"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.21.6.tgz#e69349184e558472fe3f54eb67e6960d080925c3"
-  integrity sha512-Xj6AMM9Xb24NSeann91fmXFuyJEzZ1lpVgiaPiy/KY2pNX9y4OeDrEm2ZYZt6mfZgFSGZW0eEWpF7YfcvRq5LQ==
+"@testing-library/dom@^7.17.1", "@testing-library/dom@^7.21.8":
+  version "7.21.8"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.21.8.tgz#b64b266264bff9135eba3b5c6d4ddc995a3371e6"
+  integrity sha512-iK1rJubFoeD5gxCryokwh09tnJa1Y4doNDbNFYYqOqz6ELwB1+kEAwlezA5xwMi8QrK7xg+1/aBMzb9X/A/EmA==
   dependencies:
     "@babel/runtime" "^7.10.3"
     "@types/aria-query" "^4.2.0"
