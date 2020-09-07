@@ -42,7 +42,7 @@ module.exports = {
 
         // Fix for CRA's setupTests.ts for jest
         'import/no-extraneous-dependencies': ['error', {
-            devDependencies: ['**/setupTests.ts', '**/craco.config.js']
+            devDependencies: ['**/setupTests.ts', '**/craco.config.js'],
         }],
 
         // Fix TS import extension requirements
@@ -66,6 +66,6 @@ module.exports = {
         files: ['**/__tests__/*'],
         env: {
             jest: true,
-        }
-    }]
+        },
+    }],
 };
