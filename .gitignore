@@ -74,7 +74,10 @@ node_modules/
 /web/coverage
 
 # production
-/web/build
+build/
+
+# generated
+/web/src/gen/
 
 # misc
 .DS_Store
