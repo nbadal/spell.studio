@@ -80,13 +80,14 @@
 .DiamondLine {
     stroke-width: 2.5;
 }
-
 .DiamondTextSm {
+    font-family: 'IconFont', serif;
     text-anchor: middle;
     font-size: 7px;
 }
 
 .DiamondTextLg {
+    font-family: 'IconFont', serif;
     text-anchor: middle;
     font-size: 12px;
 }

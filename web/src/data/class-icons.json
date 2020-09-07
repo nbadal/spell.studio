@@ -1,0 +1,22 @@
+{
+  "large": {
+    "bard": ["lyre"],
+    "cleric": ["scales"],
+    "druid": ["eclipse-flare"],
+    "paladin": ["two-handed-sword"],
+    "ranger": ["curvy-knife"],
+    "sorcerer": ["kindle"],
+    "warlock": ["death-juice"],
+    "wizard": ["enlightenment"]
+  },
+  "small": {
+    "bard": ["musical-notes", "double-quaver"],
+    "cleric": ["trample", "hammer-drop"],
+    "druid": ["oak-leaf", "curled-leaf"],
+    "paladin": ["edged-shield", "lorc-fist"],
+    "ranger": ["paw-print"],
+    "sorcerer": ["lightning-slashes", "kindle"],
+    "warlock": ["raise-zombie", "sheikah-eye"],
+    "wizard": ["fire-ray"]
+  }
+}

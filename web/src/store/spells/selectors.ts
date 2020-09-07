@@ -3,6 +3,11 @@ import { RootState } from '../index';
 import { Spell, SpellClass, SpellFilter } from './types';
 import { Card, CardDetail } from '../cards/types';
 import { CardColor, ColorMode } from '../colors/types';
+import * as ClassIcons from '../../data/class-icons.json';
+
+// This is required to dynamically access the JSON keys. Import requires 'default' usage.
+// eslint-disable-next-line global-require
+const IconFont = require('../../gen/font/icons.json') as {[iconName: string]: string};
 
 const selectAllSpells = (state: RootState) => state.spells.all;
 const selectFilter = (state: RootState) => state.spells.filter;
@@ -171,47 +176,13 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
 }
 
 function getSmallChar(spellClass: SpellClass): string {
-    switch (spellClass) {
-        case 'bard':
-            return '\uefd8\uebe7'; // musical-notes double-quaver
-        case 'cleric':
-            return '\uf3df\uedb1'; // trample hammer-drop
-        case 'druid':
-            return '\uf001\ueb79'; // oak-leaf curled-leaf
-        case 'paladin':
-            return '\uec2d\uecd6'; // edged-shield fist
-        case 'ranger':
-            return '\uf064'; // pawprint
-        case 'sorcerer':
-            return '\ueeff'; // lightning-slashes //kindle
-        case 'warlock':
-            return '\uf123\uf1e5'; // raise-zombie sheikah-eye
-        case 'wizard':
-            return '\uecbe'; // fire-ray
-        default:
-            throw Error('Missing spell class small char');
-    }
+    return ClassIcons.small[spellClass]
+        .map((iconName) => IconFont[iconName] || '')
+        .join();
 }
 
 function getLargeChar(spellClass: SpellClass): string {
-    switch (spellClass) {
-        case 'bard':
-            return '\uef32'; // lyre
-        case 'cleric':
-            return '\uf1a6'; // scales
-        case 'druid':
-            return '\uec29'; // eclipse-flare
-        case 'paladin':
-            return '\uf42e'; // two-handed-sword
-        case 'ranger':
-            return '\ueb80'; // curvy-knife
-        case 'sorcerer':
-            return '\uee9e'; // kindle
-        case 'warlock':
-            return '\ueb9d'; // death-juice
-        case 'wizard':
-            return '\uec57'; // enlightenment
-        default:
-            throw Error('Missing spell class large char');
-    }
+    return ClassIcons.large[spellClass]
+        .map((iconName) => IconFont[iconName] || '')
+        .join();
 }

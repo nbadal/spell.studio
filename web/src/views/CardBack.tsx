@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '@rolodromo/gameicons-webfont/css/rpgen-gameicons.min.css';
 import '../css/CardBack.css';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -84,7 +83,7 @@ class CardBack extends Component<Props & ReduxProps> {
                         y2={52}
                         stroke={cardColor}
                     />
-                    <text className="gi DiamondTextSm" x={50} y={49.5} fill={cardColor}>
+                    <text className="gi DiamondTextSm" x={50} y={50.5} fill={cardColor}>
                         {smallText}
                     </text>
 
@@ -96,7 +95,7 @@ class CardBack extends Component<Props & ReduxProps> {
                         y2={42}
                         stroke={cardColor}
                     />
-                    <text className="gi DiamondTextLg" x={50} y={39} fill={cardColor}>
+                    <text className="DiamondTextLg" x={50} y={41} fill={cardColor}>
                         {largeText}
                     </text>
                 </g>

@@ -9,3 +9,8 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+@font-face {
+    font-family: 'IconFont';
+    src: local('IconFont'), url(./gen/font/icons.woff) format('woff');
+}

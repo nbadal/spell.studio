@@ -67,15 +67,17 @@ node_modules/
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
 /.pnp
 .pnp.js
 
 # testing
-/coverage
+/web/coverage
 
 # production
-/build
+build/
+
+# generated
+/web/src/gen/
 
 # misc
 .DS_Store

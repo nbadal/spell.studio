@@ -8,18 +8,30 @@ jobs:
   build:
     name: Build and Deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
     steps:
     - name: Checkout Repo
       uses: actions/checkout@master
-    - name: Set Up Cache
+    # ROOT
+    - name: Root - Install Dependencies
       uses: bahmutov/npm-install@v1
-    - name: Install Dependencies
-      run: yarn install
-    - name: Check for Lint
+      with:
+        working-directory: .
+    - name: Root - Run Build Scripts
+      run: yarn build
+      working-directory: .
+    # WEB
+    - name: Web - Install Dependencies
+      uses: bahmutov/npm-install@v1
+      with:
+        working-directory: web
+    - name: Web - Check for Lint
       run: yarn lint
-    - name: Run Tests
+    - name: Web - Run Tests
       run: yarn test
-    - name: Build Site
+    - name: Web - Build Site
       run: yarn build
     - name: Deploy to Firebase
       uses: w9jds/firebase-action@master
