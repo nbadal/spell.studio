@@ -14,18 +14,22 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@master
-    - name: Web - Set Up Cache
+    # ROOT
+    - name: Root - Install Dependencies
+      uses: bahmutov/npm-install@v1
+      with:
+        working-directory: .
+    - name: Root - Run Build Scripts
+      run: yarn build
+      working-directory: .
+    # WEB
+    - name: Web - Install Dependencies
       uses: bahmutov/npm-install@v1
       with:
         working-directory: web
-    - name: Web - Install Dependencies
-      run: yarn install
     - name: Web - Check for Lint
       run: yarn lint
     - name: Web - Run Tests
       run: yarn test
-    - name: Root - Build
-      run: yarn build
-      working-directory: .
     - name: Web - Build
       run: yarn build
