@@ -1,7 +1,7 @@
-diff --git a/node_modules/react-textfit/lib/Textfit.js b/node_modules/react-textfit/lib/Textfit.js
-index 4d44f41..48fd2ef 100644
---- a/node_modules/react-textfit/lib/Textfit.js
-+++ b/node_modules/react-textfit/lib/Textfit.js
+diff --git a/lib/Textfit.js b/lib/Textfit.js
+index 4d44f412842136a9317cbe0087c31f8f769b056d..7ec94cb4dab8445e1e10560cf9f5c113d5da07f3 100644
+--- a/lib/Textfit.js
++++ b/lib/Textfit.js
 @@ -84,7 +84,7 @@ var TextFit = function (_React$Component) {
      }
  

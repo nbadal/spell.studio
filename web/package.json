@@ -17,7 +17,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-textfit": "^1.1.0",
+    "react-textfit": "patch:react-textfit@^1.1.0#./patches/react-textfit.patch",
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "redux": "^4.0.5",
@@ -48,8 +48,6 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
-    "patch-package": "^6.2.2",
-    "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.1.1",
     "typescript": "~4.0.2"
   },
@@ -59,7 +57,6 @@
     "test": "craco test",
     "eject": "craco eject",
     "deploy": "craco build && firebase deploy --only hosting",
-    "postinstall": "patch-package",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "browserslist": {
