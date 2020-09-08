@@ -20,7 +20,7 @@ jobs:
       id: root-yarn-cache # use this to check for `cache-hit` (`steps.root-yarn-cache.outputs.cache-hit != 'true'`)
       with:
         path: .yarn/cache
-        key: ${{ runner.os }}-webyarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-rootyarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-webyarn-
     - name: Root - Install Dependencies
