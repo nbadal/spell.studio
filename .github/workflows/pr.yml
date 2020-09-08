@@ -23,10 +23,16 @@ jobs:
       run: yarn build
       working-directory: .
     # WEB
-    - name: Web - Install Dependencies
-      uses: bahmutov/npm-install@v1
+    - name: Web - Check Cache
+      uses: actions/cache@v2
+      id: web-yarn-cache # use this to check for `cache-hit` (`steps.web-yarn-cache.outputs.cache-hit != 'true'`)
       with:
-        working-directory: web
+        path: web/.yarn/cache
+        key: ${{ runner.os }}-webyarn-${{ hashFiles('web/**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-webyarn-
+    - name: Web - Install Dependencies
+      run: yarn install
     - name: Web - Check for Lint
       run: yarn lint
     - name: Web - Run Tests
