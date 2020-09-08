@@ -15,8 +15,16 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@master
     # ROOT
+    - name: Root - Check Cache
+      uses: actions/cache@v2
+      id: root-yarn-cache # use this to check for `cache-hit` (`steps.root-yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: .yarn/cache
+        key: ${{ runner.os }}-webyarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-webyarn-
     - name: Root - Install Dependencies
-      uses: bahmutov/npm-install@v1
+      run: yarn install
       with:
         working-directory: .
     - name: Root - Run Build Scripts
