@@ -25,8 +25,7 @@ jobs:
           ${{ runner.os }}-webyarn-
     - name: Root - Install Dependencies
       run: yarn install
-      with:
-        working-directory: .
+      working-directory: .
     - name: Root - Run Build Scripts
       run: yarn build
       working-directory: .
