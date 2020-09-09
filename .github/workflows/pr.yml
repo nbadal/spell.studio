@@ -22,7 +22,7 @@ jobs:
         path: .yarn/cache
         key: ${{ runner.os }}-rootyarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-webyarn-
+          ${{ runner.os }}-yarn-
     - name: Root - Install Dependencies
       run: yarn install
       working-directory: .
