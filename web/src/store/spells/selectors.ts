@@ -3,7 +3,11 @@ import { RootState } from '../index';
 import { Spell, SpellClass, SpellFilter } from './types';
 import { Card, CardDetail } from '../cards/types';
 import { CardColor, ColorMode } from '../colors/types';
-import * as ClassIcons from '../../data/class-icons.json';
+
+const ClassIcons = require('../../data/class-icons.json') as {
+    "large": {[klass: string]: string[]},
+    "small": {[klass: string]: string[]},
+};
 
 // This is required to dynamically access the JSON keys. Import requires 'default' usage.
 // eslint-disable-next-line global-require

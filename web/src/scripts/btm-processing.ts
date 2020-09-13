@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/no-non-null-assertion */
-import btm1 from '../data/raw/BTMorton/raw-BTMorton.json';
 import { Spell, SpellClass, SpellSchool } from '../store/spells/types';
 
+const btm1 = require('../data/raw/BTMorton/raw-BTMorton.json');
 const rawSpells = btm1.Spellcasting['Spell Descriptions'];
 const rawLists = btm1.Spellcasting['Spell Lists'];
 
