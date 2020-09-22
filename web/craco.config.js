@@ -6,7 +6,7 @@ module.exports = {
             plugins: [
                 purgecss({
                     content: ['./src/**/*.html', './src/**/*.tsx', './src/**/*.ts'],
-                    whitelistPatterns: [/Diamond/],
+                    safelist: [/Diamond/],
                 }),
             ],
         },
