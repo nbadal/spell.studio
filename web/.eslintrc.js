@@ -61,6 +61,10 @@ module.exports = {
         // Fix for unused import false positive:
         'no-unused-vars': 'off', // off the eslint core rule.
         '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
+
+        // Use typescript no-shadow:
+        'no-shadow': 'off',
+        '@typescript-eslint/no-shadow': 'error',
     },
     overrides: [{
         files: ['**/__tests__/*'],
