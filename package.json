@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@momentum-ui/webfonts-generator": "^2.2.0",
-    "@types/node": "^14.14.25",
+    "@types/node": "^14.14.30",
     "@types/unzipper": "^0.10.3",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.4"
