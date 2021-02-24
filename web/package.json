@@ -9,7 +9,7 @@
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.4.0",
     "csstype": "^3.0.3",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-color": "^2.19.3",
     "react-dom": "^16.14.0",
