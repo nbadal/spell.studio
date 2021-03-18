@@ -34,26 +34,33 @@ interface Props {
 }
 
 class CardFront extends Component<Props & ReduxProps> {
-    private statCell = (prop: CardStat) => (
-        <div className="StatCell" key={prop.name}>
-            <div className="CellContent">
-                <div className="StatsTitle" style={{ color: this.props.card.color }}>
-                    {prop.name}
-                </div>
-                <div className="StatsValue">{prop.value}</div>
-                {prop.icon && (
-                    <div className="StatsBadge">
-                        <ConcentrationIcon
-                            style={{
-                                fontSize: 18,
-                                color: this.props.card.color,
-                            }}
-                        />
+    private statCell = (prop: CardStat, idx: number) => {
+        // If we're the last cell in an odd list of stats, stretch to fill remaining space
+        const cardCount = this.props.card.stats.length;
+        const cellClasses = ['StatCell'];
+        if (cardCount % 2 !== 0 && idx === cardCount - 1) cellClasses.push('StatCellStretch');
+
+        return (
+            <div className={cellClasses.join(' ')} key={prop.name}>
+                <div className="CellContent">
+                    <div className="StatsTitle" style={{ color: this.props.card.color }}>
+                        {prop.name}
                     </div>
-                )}
+                    <div className="StatsValue">{prop.value}</div>
+                    {prop.icon && (
+                        <div className="StatsBadge">
+                            <ConcentrationIcon
+                                style={{
+                                    fontSize: 18,
+                                    color: this.props.card.color,
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
-    );
+        );
+    };
 
     private onClick = () => {
         if (this.props.selected) {
@@ -81,7 +88,7 @@ class CardFront extends Component<Props & ReduxProps> {
                 </div>
                 <div className="Subtitle">{this.props.card.subtitle}</div>
                 <div className="StatsTable">
-                    {this.props.card.stats.map((prop) => this.statCell(prop))}
+                    {this.props.card.stats.map((prop, idx) => this.statCell(prop, idx))}
                 </div>
                 <div className="DetailsContainer">
                     {this.props.card.details.map((detail) => {
