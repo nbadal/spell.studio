@@ -7,15 +7,16 @@ import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { PersistGate } from 'redux-persist/integration/react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Controls from './views/Controls';
 import Spellbook from './views/Spellbook';
 import TopBar from './views/TopBar';
 import Overlays from './views/Overlays';
 import { configureAppStore } from './store';
 import PrintSpellbook from './views/PrintSpellbook';
+import { CardToolbar } from './views/CardToolbar';
 
-function App() {
+export const App = () => {
     const appStore = configureAppStore();
+
     return (
         <Provider store={appStore.store}>
             <PersistGate persistor={appStore.persistor}>
@@ -37,7 +38,7 @@ function App() {
                                 <Box className="TopBar">
                                     <TopBar />
                                 </Box>
-                                <Controls />
+                                <CardToolbar />
                                 <Spellbook />
                                 <Overlays />
                             </div>
@@ -47,6 +48,4 @@ function App() {
             </PersistGate>
         </Provider>
     );
-}
-
-export default App;
+};
