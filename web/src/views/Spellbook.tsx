@@ -7,6 +7,7 @@ import { RootState } from '../store';
 import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
 import CardFront from './CardFront';
 import CardBack from './CardBack';
+import { AddCard } from './AddCard';
 
 const mapStateToProps = (state: RootState) => ({
     cards: selectFilteredCards(state),
@@ -33,8 +34,9 @@ const Spellbook = (props: ReduxProps) => {
             return (<></>);
         }
         const cellHeight = 352;
+        const cellCount = cardCount + 1;
         const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
-        const rowCount = Math.max(1, Math.ceil(cardCount / columnCount));
+        const rowCount = Math.max(1, Math.ceil(cellCount / columnCount));
         return (
             <FixedSizeGrid
                 width={gridSize.width}
@@ -46,11 +48,15 @@ const Spellbook = (props: ReduxProps) => {
             >
                 {(gridProps: GridChildComponentProps) => {
                     const idx = gridProps.rowIndex * columnCount + gridProps.columnIndex;
-                    if (idx >= cardCount) return <Box style={gridProps.style} />;
+                    if (idx === 0) {
+                        return <Box style={gridProps.style}><AddCard /></Box>;
+                    }
+                    const cardIdx = idx - 1;
+                    if (cardIdx >= cardCount) return <Box style={gridProps.style} />;
                     return (
                         <Box style={gridProps.style}>
-                            {showCard && <CardFront cardIndex={idx} />}
-                            {showBack && <CardBack spellIndex={idx} />}
+                            {showCard && <CardFront cardIndex={cardIdx} />}
+                            {showBack && <CardBack spellIndex={cardIdx} />}
                         </Box>
                     );
                 }}
