@@ -114,7 +114,7 @@ class CardFront extends Component<Props & ReduxProps> {
                                 >
                                     <ul>
                                         {detail.items.map((item) => (
-                                            <li>{processText(item)}</li>
+                                            <li key={item}>{processText(item)}</li>
                                         ))}
                                     </ul>
                                 </div>
