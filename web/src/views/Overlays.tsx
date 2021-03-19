@@ -14,6 +14,7 @@ import { RootState } from '../store';
 import { selectFilteredCards } from '../store/cards/selectors';
 import { clearSelection } from '../store/cards';
 import { AddCardDialog } from './AddCardDialog';
+import { PostImportDialog } from './PostImportDialog';
 
 const mapStateToProps = (state: RootState) => ({
     spellCount: selectFilteredCards(state).length,
@@ -63,6 +64,7 @@ class Overlays extends Component<ReduxProps & StyleProps> {
                     <PrintIcon color="primary" />
                 </Fab>
                 <AddCardDialog />
+                <PostImportDialog />
             </Box>
         );
     }

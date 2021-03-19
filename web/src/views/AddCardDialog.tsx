@@ -9,34 +9,52 @@ import CodeIcon from '@material-ui/icons/Code';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { hideModals } from '../store/modals';
+import { hideModals, showModal } from '../store/modals';
 import { DialogTitleWithClose } from './DialogTitleWithClose';
 
 export const AddCardDialog = () => {
     const openModal = useSelector((state: RootState) => state.modals.openModal);
     const dispatch = useDispatch();
     const onClose = () => dispatch(hideModals());
+
+    interface ButtonProps {
+        icon: React.ReactNode,
+        labelText: string,
+        onClick: () => void,
+    }
+
+    const ButtonItem = (props: ButtonProps) => (
+        <Box className="AddButton" onClick={props.onClick}>
+            <Box className="AddButtonIcon">{props.icon}</Box>
+            <span className="AddButtonLabel">{props.labelText}</span>
+        </Box>
+    );
+
     return (
         <Dialog maxWidth="lg" fullWidth open={openModal === 'add-card'} onClose={onClose}>
             <DialogTitleWithClose onClose={onClose}>Add Cards</DialogTitleWithClose>
             <DialogContent>
                 <Box className="AddButtons">
-                    <Box className="AddButton">
-                        <Box className="AddButtonIcon"><ImportContactsIcon fontSize="large" /></Box>
-                        <span className="AddButtonLabel">Import example cards (D&D 5e SRD)</span>
-                    </Box>
-                    <Box className="AddButton">
-                        <Box className="AddButtonIcon"><InsertDriveFileIcon fontSize="large" /></Box>
-                        <span className="AddButtonLabel">Import cards from file</span>
-                    </Box>
-                    <Box className="AddButton">
-                        <Box className="AddButtonIcon"><CodeIcon fontSize="large" /></Box>
-                        <span className="AddButtonLabel">Import cards from JSON</span>
-                    </Box>
-                    <Box className="AddButton">
-                        <Box className="AddButtonIcon"><AddIcon fontSize="large" /></Box>
-                        <span className="AddButtonLabel">Add card manually</span>
-                    </Box>
+                    <ButtonItem
+                        icon={<ImportContactsIcon fontSize="large" />}
+                        labelText="Import example cards (D&D 5e SRD)"
+                        onClick={() => dispatch(showModal('post-import'))}
+                    />
+                    <ButtonItem
+                        icon={<InsertDriveFileIcon fontSize="large" />}
+                        labelText="Import cards from file"
+                        onClick={() => {}}
+                    />
+                    <ButtonItem
+                        icon={<CodeIcon fontSize="large" />}
+                        labelText="Import cards from JSON"
+                        onClick={() => {}}
+                    />
+                    <ButtonItem
+                        icon={<AddIcon fontSize="large" />}
+                        labelText="Add card manually"
+                        onClick={() => {}}
+                    />
                 </Box>
             </DialogContent>
         </Dialog>

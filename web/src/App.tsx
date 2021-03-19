@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import './App.css';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { PersistGate } from 'redux-persist/integration/react';

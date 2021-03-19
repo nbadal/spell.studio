@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from 'react';
 import Textfit from 'react-textfit';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import {
     Card, CardStat, isList, isText,
 } from '../store/cards/types';

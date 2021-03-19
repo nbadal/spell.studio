@@ -7,7 +7,7 @@ import CodeIcon from '@material-ui/icons/Code';
 
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
-import { ButtonBase } from '@material-ui/core';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 export enum Activity {
     STYLE = 'Style',

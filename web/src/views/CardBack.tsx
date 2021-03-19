@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/CardBack.css';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import _ from 'lodash';
 import { selectCard, unselectCard } from '../store/cards';
 import { CardIconView } from './CardIconView';
