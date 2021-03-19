@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Card, CardsState } from './types';
+import { addCards } from './actions';
 
 const initialCardsState: CardsState = {
+    all: [],
     selectedUids: [],
 };
 
@@ -21,6 +23,11 @@ const cardsSlice = createSlice({
         clearSelection: (state) => {
             state.selectedUids = [];
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(addCards, (state, action) => {
+            state.all.push(...action.payload);
+        });
     },
 });
 

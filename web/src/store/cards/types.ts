@@ -2,6 +2,7 @@ import { CardColor } from '../colors/types';
 import { SpellClass } from '../spells/types';
 
 export type CardsState = {
+    all: Card[],
     selectedUids: string[];
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
@@ -8,19 +8,15 @@ import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
 import CardFront from './CardFront';
 import CardBack from './CardBack';
 import { AddCard } from './AddCard';
+import { AddCardButtons } from './AddCardButtons';
 
-const mapStateToProps = (state: RootState) => ({
-    cards: selectFilteredCards(state),
-    cardCount: selectCardCount(state),
-    showCard: state.layout.showFront,
-    showBack: state.layout.showBack,
-});
-
-const reduxConnector = connect(mapStateToProps);
-type ReduxProps = ConnectedProps<typeof reduxConnector>;
-
-const Spellbook = (props: ReduxProps) => {
-    const { showBack, showCard, cardCount } = props;
+export const Spellbook = () => {
+    const { showBack, showCard, cardCount } = useSelector((state: RootState) => ({
+        cards: selectFilteredCards(state),
+        cardCount: selectCardCount(state),
+        showCard: state.layout.showFront,
+        showBack: state.layout.showBack,
+    }));
 
     const renderGrid = (gridSize: Size) => {
         let cellWidth = 0;
@@ -66,9 +62,12 @@ const Spellbook = (props: ReduxProps) => {
 
     return (
         <Box className="Spellbook">
-            <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
+            {cardCount > 0 && (
+                <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
+            )}
+            {cardCount === 0 && (
+                <AddCardButtons />
+            )}
         </Box>
     );
 };
-
-export default reduxConnector(Spellbook);

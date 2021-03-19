@@ -7,12 +7,12 @@ import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { PersistGate } from 'redux-persist/integration/react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Spellbook from './views/Spellbook';
 import TopBar from './views/TopBar';
 import Overlays from './views/Overlays';
 import { configureAppStore } from './store';
 import PrintSpellbook from './views/PrintSpellbook';
 import { CardToolbar } from './views/CardToolbar';
+import { Spellbook } from './views/Spellbook';
 
 export const App = () => {
     const appStore = configureAppStore();
