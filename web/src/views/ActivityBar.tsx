@@ -7,6 +7,7 @@ import CodeIcon from '@material-ui/icons/Code';
 
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
+import { ButtonBase } from '@material-ui/core';
 
 export enum Activity {
     STYLE = 'Style',
@@ -32,15 +33,16 @@ export const ActivityBar = (props: ActivityBarProps) => {
         const selected = selectedActivity === itemProps.activity;
         return (
             <Tooltip title={itemProps.activity} placement="right">
-                <Box
-                    className={selected ? 'ActivityItem SelectedItem' : 'ActivityItem'}
+                <ButtonBase
                     onClick={() => {
                         console.log(`${itemProps.activity} Clicked!`);
                         onActivityClicked(itemProps.activity);
                     }}
                 >
-                    {itemProps.icon}
-                </Box>
+                    <Box className={selected ? 'ActivityItem SelectedItem' : 'ActivityItem'}>
+                        {itemProps.icon}
+                    </Box>
+                </ButtonBase>
             </Tooltip>
         );
     };

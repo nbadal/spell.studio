@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../store';
 import { selectFilteredCards } from '../store/cards/selectors';
 import { clearSelection } from '../store/cards';
+import { AddCardDialog } from './AddCardDialog';
 
 const mapStateToProps = (state: RootState) => ({
     spellCount: selectFilteredCards(state).length,
@@ -61,7 +62,7 @@ class Overlays extends Component<ReduxProps & StyleProps> {
                 <Fab className={classes.fab} component={Link} to="/print" target="_blank">
                     <PrintIcon color="primary" />
                 </Fab>
-
+                <AddCardDialog />
             </Box>
         );
     }
