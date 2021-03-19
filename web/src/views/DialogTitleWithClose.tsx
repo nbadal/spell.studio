@@ -23,10 +23,7 @@ type MaterialStyle<S> = {
     classes: Record<keyof S, string>
 }
 
-type Props = {
-    children: React.ReactNode,
-    onClose: () => void,
-} & DialogTitleProps & MaterialStyle<ReturnType<typeof styles>>
+type Props = { onClose: () => void } & DialogTitleProps & MaterialStyle<ReturnType<typeof styles>>
 
 export const DialogTitleWithClose = withStyles(styles)((props: Props) => {
     const {
@@ -36,11 +33,9 @@ export const DialogTitleWithClose = withStyles(styles)((props: Props) => {
         // eslint-disable-next-line react/jsx-props-no-spreading
         <DialogTitle disableTypography className={classes?.root} {...other}>
             <Typography variant="h6">{children}</Typography>
-            {onClose ? (
-                <IconButton aria-label="close" className={classes?.closeButton} onClick={onClose}>
-                    <CloseIcon />
-                </IconButton>
-            ) : null}
+            <IconButton aria-label="close" className={classes?.closeButton} onClick={onClose}>
+                <CloseIcon />
+            </IconButton>
         </DialogTitle>
     );
 });
