@@ -8,7 +8,8 @@ import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
 import { useDispatch } from 'react-redux';
 import { allSRDSpells } from '../store/import';
-import { importCards } from '../store/import/actions';
+import { setImportedCards } from '../store/import/actions';
+import { showModal } from '../store/modals';
 
 export const AddCardButtons = () => {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export const AddCardButtons = () => {
             <ButtonItem
                 icon={<ImportContactsIcon fontSize="large" />}
                 labelText="Import example cards (D&D 5e SRD)"
-                onClick={() => dispatch(importCards(allSRDSpells))}
+                onClick={() => dispatch(setImportedCards(allSRDSpells))}
             />
             <ButtonItem
                 icon={<InsertDriveFileIcon fontSize="large" />}
@@ -43,6 +44,7 @@ export const AddCardButtons = () => {
                 icon={<CodeIcon fontSize="large" />}
                 labelText="Import cards from JSON"
                 onClick={() => {
+                    dispatch(showModal('import-json'));
                 }}
             />
             <ButtonItem

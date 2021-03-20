@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OpenAppModal, ModalsState } from './types';
-import { importCards } from '../import/actions';
+import { setImportedCards } from '../import/actions';
 import { closeModals } from './actions';
 import { addCards } from '../cards/actions';
 
@@ -22,7 +22,7 @@ const modalsSlice = createSlice({
         };
 
         builder
-            .addCase(importCards, (state) => {
+            .addCase(setImportedCards, (state) => {
                 state.openModal = 'post-import';
             })
             .addCase(closeModals, closeModalsReducer)
