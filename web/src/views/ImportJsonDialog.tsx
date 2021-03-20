@@ -8,21 +8,31 @@ import 'ace-builds/src-noconflict/theme-monokai';
 import DialogContent from '@material-ui/core/DialogContent';
 import Dialog from '@material-ui/core/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
+import { DialogActions } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import { RootState } from '../store';
 import { DialogTitleWithClose } from './DialogTitleWithClose';
 import { closeModals } from '../store/modals/actions';
 import { importJsonChanged } from '../store/import';
-import { selectImportJsonType } from '../store/import/selectors';
+import { selectParsedJsonCards } from '../store/import/selectors';
+import { setImportedCards } from '../store/import/actions';
 
 export const ImportJsonDialog = () => {
-    const { openModal, importJson, jsonType } = useSelector((state: RootState) => ({
+    const dispatch = useDispatch();
+    const { openModal, importJson, jsonResults } = useSelector((state: RootState) => ({
         openModal: state.modals.openModal,
         importJson: state.imports.json,
-        jsonType: selectImportJsonType(state),
+        jsonResults: selectParsedJsonCards(state),
     }));
-    const dispatch = useDispatch();
+    const [jsonType, jsonCards] = jsonResults;
+
     const onClose = () => {
         dispatch(closeModals());
+        dispatch(importJsonChanged(''));
+    };
+
+    const doImport = () => {
+        dispatch(setImportedCards(jsonCards));
         dispatch(importJsonChanged(''));
     };
 
@@ -39,8 +49,11 @@ export const ImportJsonDialog = () => {
                     value={importJson}
                     onChange={(text) => dispatch(importJsonChanged(text))}
                 />
-                <b>{`Found Type: ${jsonType}`}</b>
+                <b>{`Found Type: ${jsonType} and ${jsonCards.length} cards`}</b>
             </DialogContent>
+            <DialogActions>
+                <Button disabled={jsonCards.length === 0} onClick={() => doImport()}>Import</Button>
+            </DialogActions>
         </Dialog>
     );
 };
