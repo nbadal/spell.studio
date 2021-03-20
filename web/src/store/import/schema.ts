@@ -1,4 +1,5 @@
 import Ajv, { JSONSchemaType, Schema } from 'ajv';
+import { Card, CardDetail, CardStat } from '../cards/types';
 
 const ajv = new Ajv();
 
@@ -50,3 +51,75 @@ export type RpgCard = {
 export const validateRpgCard = ajv.compile<RpgCard>(rpgCardSchema);
 
 export const validateRpgCardList = ajv.compile<RpgCard[]>(rpgCardListSchema);
+
+export const convertRpgCard = (rpgCard: RpgCard): Card => {
+    let subtitle = '';
+    const stats: CardStat[] = [];
+    const details: CardDetail[] = [];
+
+    let sectionTitle: string | undefined;
+    rpgCard.contents.forEach((contentStr) => {
+        const parts = contentStr.split('|').map((s) => s.trim());
+
+        /* eslint-disable prefer-destructuring */
+        switch (parts[0]) {
+            case 'subtitle':
+                subtitle = parts[1];
+                break;
+            case 'property':
+                stats.push({ name: parts[1], value: parts[2] });
+                break;
+            case 'section':
+                sectionTitle = parts[1];
+                break;
+            case 'text':
+                details.push({
+                    header: sectionTitle,
+                    type: 'text',
+                    text: parts[1],
+                });
+                // We only need to use the section title once
+                if (sectionTitle) sectionTitle = undefined;
+                break;
+            case 'rule':
+            case 'ruler':
+            case 'boxes':
+            case 'description':
+            case 'dndstats':
+            case 'center':
+            case 'justify':
+            case 'bullet':
+            case 'fill':
+            case 'disabled':
+            case 'picture':
+            case 'icon':
+            default:
+                // STUB. Unhandled.
+                break;
+        }
+        /* eslint-enable prefer-destructuring */
+    });
+
+    if (details.length > 0) {
+        details[details.length - 1].expand = true;
+    } else {
+        throw new Error('Details are required for a card.');
+    }
+
+    return {
+        title: rpgCard.title,
+        color: rpgCard.color,
+        stats,
+        subtitle,
+        details,
+        // TODO: how to support these?
+        backCharacter: subtitle.substring(0, 1),
+        category: 'TODO',
+        backIconsSmall: 'TODO',
+        backIconsLarge: 'TODO',
+        uid: Math.random().toString(36),
+        icon: 'bard',
+    };
+};
+
+export const convertRpgCards = (rpgCards: RpgCard[]): Card[] => rpgCards.map(convertRpgCard);
