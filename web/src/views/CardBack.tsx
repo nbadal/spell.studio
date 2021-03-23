@@ -125,6 +125,7 @@ class CardBack extends Component<Props & ReduxProps> {
                             className="Icon"
                             height="1.5in"
                             icon={this.props.card.icon}
+                            iconCharacter={this.props.card.iconCharacter}
                             fill={cardColor}
                         />
                         <Box className="TRCorner">{this.props.card.backCharacter}</Box>

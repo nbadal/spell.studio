@@ -124,14 +124,12 @@ function* spellDetails(spell: Spell): Generator<CardDetail> {
     }
 }
 
+export const getGameIcon = (iconName: string) => IconFont[iconName] || '';
+
 function getSmallChar(spellClass: SpellClass): string {
-    return ClassIcons.small[spellClass]
-        .map((iconName) => IconFont[iconName] || '')
-        .join();
+    return ClassIcons.small[spellClass].map(getGameIcon).join();
 }
 
 function getLargeChar(spellClass: SpellClass): string {
-    return ClassIcons.large[spellClass]
-        .map((iconName) => IconFont[iconName] || '')
-        .join();
+    return ClassIcons.large[spellClass].map(getGameIcon).join();
 }

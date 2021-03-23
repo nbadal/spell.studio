@@ -1,5 +1,8 @@
 import Ajv, { JSONSchemaType, Schema } from 'ajv';
-import { Card, CardDetail, CardStat } from '../cards/types';
+import {
+    Card, CardDetail, CardStat, isText,
+} from '../cards/types';
+import { getGameIcon } from '../spells/convert';
 
 const ajv = new Ajv();
 
@@ -81,10 +84,15 @@ export const convertRpgCard = (rpgCard: RpgCard): Card => {
                 // We only need to use the section title once
                 if (sectionTitle) sectionTitle = undefined;
                 break;
+            case 'description':
+                details.push({
+                    type: 'text',
+                    text: `***${parts[1]}.*** ${parts[2]}`,
+                });
+                break;
             case 'rule':
             case 'ruler':
             case 'boxes':
-            case 'description':
             case 'dndstats':
             case 'center':
             case 'justify':
@@ -100,25 +108,32 @@ export const convertRpgCard = (rpgCard: RpgCard): Card => {
         /* eslint-enable prefer-destructuring */
     });
 
+    // Replace bold / italic HTML tags
+    details.filter(isText).forEach((detail) => {
+        detail.text = detail.text.replaceAll(/<\/?b>/g, '***');
+        detail.text = detail.text.replaceAll(/<\/?i>/g, '*');
+    });
+
     if (details.length > 0) {
         details[details.length - 1].expand = true;
     } else {
         throw new Error('Details are required for a card.');
     }
 
+    const rpgIcon = getGameIcon(rpgCard.icon_back || '');
     return {
         title: rpgCard.title,
         color: rpgCard.color,
         stats,
         subtitle,
         details,
+        backIconsSmall: rpgIcon,
+        backIconsLarge: rpgIcon,
+        iconCharacter: rpgIcon,
         // TODO: how to support these?
         backCharacter: subtitle.substring(0, 1),
         category: 'TODO',
-        backIconsSmall: 'TODO',
-        backIconsLarge: 'TODO',
         uid: Math.random().toString(36),
-        icon: 'bard',
     };
 };
 

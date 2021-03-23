@@ -14,7 +14,8 @@ export type Card = {
     details: CardDetail[];
     category: string;
     color: CardColor;
-    icon: CardIcon;
+    icon?: CardIcon;
+    iconCharacter?: string;
     backCharacter: string | number;
     backIconsSmall: string;
     backIconsLarge: string;
