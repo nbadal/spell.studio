@@ -4,6 +4,7 @@ import BrushIcon from '@material-ui/icons/Brush';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CodeIcon from '@material-ui/icons/Code';
+import BugReportIcon from '@material-ui/icons/BugReport';
 
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -14,6 +15,7 @@ export enum Activity {
     LAYOUT = 'Layout',
     FILTERING = 'Filtering',
     EXPORT = 'Export',
+    DEBUG = 'Debugging',
 }
 
 interface ActivityBarProps {
@@ -53,6 +55,9 @@ export const ActivityBar = (props: ActivityBarProps) => {
             <ActivityItem activity={Activity.LAYOUT} icon={<FileCopyIcon />} />
             <ActivityItem activity={Activity.FILTERING} icon={<FilterListIcon />} />
             <ActivityItem activity={Activity.EXPORT} icon={<CodeIcon />} />
+            {process.env.NODE_ENV === 'development' && (
+                <ActivityItem activity={Activity.DEBUG} icon={<BugReportIcon />} />
+            )}
         </Box>
     );
 };

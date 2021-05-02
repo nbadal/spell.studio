@@ -23,6 +23,7 @@ const cardsSlice = createSlice({
         clearSelection: (state) => {
             state.selectedUids = [];
         },
+        resetCards: () => initialCardsState,
     },
     extraReducers: (builder) => {
         builder.addCase(addCards, (state, action) => {
@@ -31,6 +32,8 @@ const cardsSlice = createSlice({
     },
 });
 
-export const { selectCard, unselectCard, clearSelection } = cardsSlice.actions;
+export const {
+    selectCard, unselectCard, clearSelection, resetCards,
+} = cardsSlice.actions;
 
 export default cardsSlice.reducer;
