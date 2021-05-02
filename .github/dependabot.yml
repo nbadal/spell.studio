@@ -5,11 +5,15 @@ updates:
     open-pull-requests-limit: 10
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "@types/*"
   - package-ecosystem: "npm"
     directory: "web"
     open-pull-requests-limit: 10
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "@types/*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
