@@ -6,13 +6,18 @@ import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import CodeIcon from '@material-ui/icons/Code';
 import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { allSRDSpells } from '../store/import';
 import { setImportedCards } from '../store/import/actions';
 import { showModal } from '../store/modals';
+import { RootState } from '../store';
 
 export const AddCardButtons = () => {
     const dispatch = useDispatch();
+
+    const { cardCount } = useSelector((state: RootState) => ({
+        cardCount: state.cards.all.length,
+    }));
 
     interface ButtonProps {
         icon: React.ReactNode,
@@ -29,11 +34,13 @@ export const AddCardButtons = () => {
 
     return (
         <Box className="AddButtons">
-            <ButtonItem
-                icon={<ImportContactsIcon fontSize="large" />}
-                labelText="Import example cards (D&D 5e SRD)"
-                onClick={() => dispatch(setImportedCards(allSRDSpells))}
-            />
+            {cardCount === 0 && (
+                <ButtonItem
+                    icon={<ImportContactsIcon fontSize="large" />}
+                    labelText="Import example cards (D&D 5e SRD)"
+                    onClick={() => dispatch(setImportedCards(allSRDSpells))}
+                />
+            )}
             <ButtonItem
                 icon={<InsertDriveFileIcon fontSize="large" />}
                 labelText="Import cards from file"
