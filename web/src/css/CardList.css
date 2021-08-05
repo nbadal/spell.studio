@@ -1,0 +1,27 @@
+.ImportCardList {
+    width: 350px;
+    max-height: 500px;
+    overflow-y: scroll;
+    padding-right: 16px;
+}
+
+.CardItem {
+    height: 42px;
+    color: white;
+    font-weight: bold;
+    background-color: navy;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin: 2px 0;
+    padding: 0 2px;
+}
+
+.CardItemTitle {
+    flex-grow: 1;
+}
+
+.CardItemIcon {
+    font-family: 'IconFont', serif;
+    margin: 0 10px;
+}
