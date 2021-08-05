@@ -19,6 +19,7 @@ import { ImportJsonDialog } from './ImportJsonDialog';
 
 const mapStateToProps = (state: RootState) => ({
     spellCount: selectFilteredCards(state).length,
+    multiSelect: state.cards.multiSelect,
     selectedCount: state.cards.selectedUids.length,
 });
 
@@ -46,14 +47,14 @@ class Overlays extends Component<ReduxProps & StyleProps> {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, selectedCount, multiSelect } = this.props;
         return (
             <Box className="Overlays" displayPrint="none">
                 <Snackbar
-                    open={this.props.selectedCount > 0}
+                    open={multiSelect && selectedCount > 0}
                     anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
                     message={
-                        `Selected: ${this.props.selectedCount} / ${this.props.spellCount}`
+                        `Selected: ${selectedCount} / ${this.props.spellCount}`
                     }
                     action={(
                         <Button color="secondary" size="small" onClick={this.clearSelection}>

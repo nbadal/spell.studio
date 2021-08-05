@@ -4,6 +4,7 @@ import { addCards } from './actions';
 
 const initialCardsState: CardsState = {
     all: [],
+    multiSelect: false,
     selectedUids: [],
 };
 
@@ -12,7 +13,11 @@ const cardsSlice = createSlice({
     initialState: initialCardsState,
     reducers: {
         selectCard: (state, action: PayloadAction<Card>) => {
-            state.selectedUids = [action.payload.uid, ...state.selectedUids];
+            if (state.multiSelect) {
+                state.selectedUids = [action.payload.uid, ...state.selectedUids];
+            } else {
+                state.selectedUids = [action.payload.uid];
+            }
         },
         unselectCard: (state, action: PayloadAction<Card>) => {
             // We use the unique id because the object will be proxied so === wont work.
