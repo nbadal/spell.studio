@@ -178,7 +178,7 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
         this.props.resetFilter();
         this.props.resetLayout();
         this.props.resetColors();
-    }
+    };
 
     private updateFilter(newData: Partial<SpellFilter>) {
         const newFilter = { ...this.props.filter };
@@ -310,27 +310,27 @@ class Controls extends Component<ReduxProps & StyleProps, State> {
                     </FormControl>
                     <Box className={classes.colorGrid}>
                         {this.props.colors.colorMode === ColorMode.BY_CLASS
-                        && AllSpellClasses.map((spellClass) => {
-                            const color = this.props.colors.byClass[spellClass];
-                            return this.ColorPicker(
-                                color,
-                                spellClass,
-                                this.state.showClassColorPicker === spellClass,
-                                () => this.classColorClicked(spellClass),
-                                (newColor) => this.classColorPicked(spellClass, newColor),
-                            );
-                        })}
+                            && AllSpellClasses.map((spellClass) => {
+                                const color = this.props.colors.byClass[spellClass];
+                                return this.ColorPicker(
+                                    color,
+                                    spellClass,
+                                    this.state.showClassColorPicker === spellClass,
+                                    () => this.classColorClicked(spellClass),
+                                    (newColor) => this.classColorPicked(spellClass, newColor),
+                                );
+                            })}
                         {this.props.colors.colorMode === ColorMode.BY_SCHOOL
-                        && AllSpellSchools.map((spellSchool) => {
-                            const color = this.props.colors.bySchool[spellSchool];
-                            return this.ColorPicker(
-                                color,
-                                spellSchool,
-                                this.state.showSchoolColorPicker === spellSchool,
-                                () => this.schoolColorClicked(spellSchool),
-                                (newColor) => this.schoolColorPicked(spellSchool, newColor),
-                            );
-                        })}
+                            && AllSpellSchools.map((spellSchool) => {
+                                const color = this.props.colors.bySchool[spellSchool];
+                                return this.ColorPicker(
+                                    color,
+                                    spellSchool,
+                                    this.state.showSchoolColorPicker === spellSchool,
+                                    () => this.schoolColorClicked(spellSchool),
+                                    (newColor) => this.schoolColorPicked(spellSchool, newColor),
+                                );
+                            })}
                     </Box>
                 </Box>
                 <Box className={classes.controlGroup}>
