@@ -30,7 +30,7 @@ function App() {
                     </Helmet>
                     <Routes>
                         <Route path="/print" element={<PrintSpellbook />} />
-                        <Route path="/" element={<AppMain />} />
+                        <Route path="/" element={<Home />} />
                     </Routes>
                 </HashRouter>
             </PersistGate>
@@ -38,7 +38,7 @@ function App() {
     );
 }
 
-function AppMain() {
+function Home() {
     return (
         <div className="App">
             <Box className="TopBar">
