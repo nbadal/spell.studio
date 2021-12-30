@@ -27,13 +27,16 @@ const useStyles = makeStyles({
 
 function TopBar() {
     const classes = useStyles();
+    const versionInfo = `${process.env.REACT_APP_REVISION} ${process.env.REACT_APP_BUILDTIME}`;
     return (
         <Box displayPrint="none">
             <AppBar position="static">
                 <Toolbar>
                     <Box className={classes.titleContainer}>
                         <Typography className={classes.title}>SpellStudio</Typography>
-                        <Typography className={classes.version}>ALPHA</Typography>
+                        <Typography className={classes.version} title={versionInfo}>
+                            ALPHA
+                        </Typography>
                     </Box>
                     <Box>
                         <IconButton
