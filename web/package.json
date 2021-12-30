@@ -51,8 +51,8 @@
     "typescript": "~4.5.4"
   },
   "scripts": {
-    "start": "source build-vars.sh && craco start",
-    "build": "source build-vars.sh && craco build",
+    "start": ". build-vars.sh && craco start",
+    "build": ". build-vars.sh && craco build",
     "test": "craco test",
     "eject": "craco eject",
     "deploy": "craco build && firebase deploy --only hosting",
