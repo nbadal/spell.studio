@@ -38,8 +38,10 @@ export const selectFilteredSpellClasses = createSelector(
     filterSpellClasses,
 );
 
-export const selectSpellClass = createSelector([selectFilteredSpellClasses],
-    (classes) => classes[0]);
+export const selectSpellClass = createSelector(
+    [selectFilteredSpellClasses],
+    (classes) => classes[0],
+);
 
 export const selectFilteredSpellCards = createSelector(
     [selectFilteredSpells, selectFilter, getColors],
@@ -50,8 +52,8 @@ export const selectFilteredSpellCards = createSelector(
             switch (colors.colorMode) {
                 case ColorMode.BY_SCHOOL:
                     return getSpellCard(spell, spellClass, colors.bySchool[spell.school]);
-                default:
                 case ColorMode.BY_CLASS:
+                default:
                     return getSpellCard(spell, spellClass, colors.byClass[spellClass]);
             }
         });

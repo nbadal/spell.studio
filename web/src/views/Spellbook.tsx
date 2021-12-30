@@ -18,7 +18,7 @@ const mapStateToProps = (state: RootState) => ({
 const reduxConnector = connect(mapStateToProps);
 type ReduxProps = ConnectedProps<typeof reduxConnector>;
 
-const Spellbook = (props: ReduxProps) => {
+function Spellbook(props: ReduxProps) {
     const { showBack, showCard, cardCount } = props;
 
     const renderGrid = (gridSize: Size) => {
@@ -30,7 +30,7 @@ const Spellbook = (props: ReduxProps) => {
             cellWidth += 256;
         }
         if (cellWidth === 0) {
-            return (<></>);
+            return null;
         }
         const cellHeight = 352;
         const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
@@ -63,6 +63,6 @@ const Spellbook = (props: ReduxProps) => {
             <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
         </Box>
     );
-};
+}
 
 export default reduxConnector(Spellbook);
