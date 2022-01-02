@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import { Activity, ActivityBar } from './ActivityBar';
 import { SideBar } from './SideBar';
 
-export const CardToolbar = () => {
+export function CardToolbar() {
     const [selectedActivity, setActivity] = useState<Activity | null>(null);
 
     const activityClicked = (clickedActivity: Activity) => {
@@ -26,4 +26,4 @@ export const CardToolbar = () => {
             {selectedActivity && (<SideBar selectedActivity={selectedActivity} />)}
         </Box>
     );
-};
+}

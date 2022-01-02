@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import { resetCards } from '../store/cards';
 
-export const ActivityDebug = () => {
+export function ActivityDebug() {
     const dispatch = useDispatch();
 
     const doReset = () => {
@@ -18,4 +18,4 @@ export const ActivityDebug = () => {
             <Button variant="contained" color="secondary" startIcon={<RotateLeftIcon />} onClick={doReset}>Full Reset</Button>
         </Box>
     );
-};
+}

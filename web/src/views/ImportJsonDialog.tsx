@@ -17,7 +17,7 @@ import { importJsonChanged } from '../store/import';
 import { selectParsedJsonCards } from '../store/import/selectors';
 import { setImportedCards } from '../store/import/actions';
 
-export const ImportJsonDialog = () => {
+export function ImportJsonDialog() {
     const dispatch = useDispatch();
     const { openModal, importJson, jsonResults } = useSelector((state: RootState) => ({
         openModal: state.modals.openModal,
@@ -56,4 +56,4 @@ export const ImportJsonDialog = () => {
             </DialogActions>
         </Dialog>
     );
-};
+}

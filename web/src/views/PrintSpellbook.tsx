@@ -6,7 +6,7 @@ import { selectFilteredCards } from '../store/cards/selectors';
 import CardFront from './CardFront';
 import CardBack from './CardBack';
 
-const PrintSpellbook = () => {
+function PrintSpellbook() {
     const cards = useSelector(selectFilteredCards);
     const showCard = useSelector((state: RootState) => state.layout.showFront);
     const showBack = useSelector((state: RootState) => state.layout.showBack);
@@ -21,6 +21,6 @@ const PrintSpellbook = () => {
             ))}
         </Box>
     );
-};
+}
 
 export default PrintSpellbook;

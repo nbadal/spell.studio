@@ -16,30 +16,32 @@ export interface CardListProps {
     onCardSelected: (cardUid: string, selected: boolean) => any,
 }
 
-export const CardList = (props: CardListProps) => (
-    <FixedSizeList
-        width={props.width}
-        height={props.height}
-        className="ImportCardList"
-        itemCount={props.cards.length}
-        itemSize={46}
-    >
-        {(itemProps: ListChildComponentProps) => {
-            const { index, style } = itemProps;
-            const card = props.cards[index];
-            return (
-                <ImportCardItem
-                    card={card}
-                    isSelected={props.selectedCards.has(card.uid)}
-                    onChange={(checked) => {
-                        props.onCardSelected(card.uid, checked);
-                    }}
-                    style={style}
-                />
-            );
-        }}
-    </FixedSizeList>
-);
+export function CardList(props: CardListProps) {
+    return (
+        <FixedSizeList
+            width={props.width}
+            height={props.height}
+            className="ImportCardList"
+            itemCount={props.cards.length}
+            itemSize={46}
+        >
+            {(itemProps: ListChildComponentProps) => {
+                const { index, style } = itemProps;
+                const card = props.cards[index];
+                return (
+                    <ImportCardItem
+                        card={card}
+                        isSelected={props.selectedCards.has(card.uid)}
+                        onChange={(checked) => {
+                            props.onCardSelected(card.uid, checked);
+                        }}
+                        style={style}
+                    />
+                );
+            }}
+        </FixedSizeList>
+    );
+}
 
 interface ImportCardItemProps {
     card: Card,
@@ -48,7 +50,7 @@ interface ImportCardItemProps {
     style: CSSProperties,
 }
 
-const ImportCardItem = (props: ImportCardItemProps) => {
+function ImportCardItem(props: ImportCardItemProps) {
     const useStyles = makeStyles({
         root: {
             color: grey[50],
@@ -80,4 +82,4 @@ const ImportCardItem = (props: ImportCardItemProps) => {
             </Box>
         </Box>
     );
-};
+}

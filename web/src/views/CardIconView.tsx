@@ -10,8 +10,8 @@ import { ReactComponent as WarlockIcon } from '../svg/classes/warlock.svg';
 import { ReactComponent as WizardIcon } from '../svg/classes/wizard.svg';
 
 interface Props {
-    icon?: CardIcon;
-    iconCharacter?: string;
+    icon: CardIcon | undefined;
+    iconCharacter: string | undefined;
     className: string;
     height: string;
     fill: string;

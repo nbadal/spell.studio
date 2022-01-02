@@ -8,11 +8,13 @@ interface SideBarProps {
     selectedActivity: Activity | null,
 }
 
-export const SideBar = (props: SideBarProps) => (
-    <Box className="SideBar">
-        {props.selectedActivity && activityComponent(props.selectedActivity)}
-    </Box>
-);
+export function SideBar(props: SideBarProps) {
+    return (
+        <Box className="SideBar">
+            {props.selectedActivity && activityComponent(props.selectedActivity)}
+        </Box>
+    );
+}
 
 const activityComponent = (activity: Activity) => {
     switch (activity) {

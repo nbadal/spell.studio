@@ -15,7 +15,7 @@ interface Props {
     cardIndex: number;
 }
 
-const CardFront = (props: Props) => {
+function CardFront(props: Props) {
     const dispatch = useDispatch();
 
     const card = useSelector<RootState, Card>(selectCardAtIdx(props.cardIndex));
@@ -121,7 +121,7 @@ const CardFront = (props: Props) => {
             </div>
         </Box>
     );
-};
+}
 
 export default CardFront;
 

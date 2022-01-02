@@ -23,41 +23,57 @@ interface ActivityBarProps {
     selectedActivity: Activity | null,
 }
 
-export const ActivityBar = (props: ActivityBarProps) => {
+export function ActivityBar(props: ActivityBarProps) {
     const { onActivityClicked, selectedActivity } = props;
 
-    interface ActivityItemProps {
-        icon: React.ReactNode,
-        activity: Activity
-    }
+    const items = [
+        { activity: Activity.STYLE, icon: <BrushIcon /> },
+        { activity: Activity.LAYOUT, icon: <FileCopyIcon /> },
+        { activity: Activity.FILTERING, icon: <FilterListIcon /> },
+        { activity: Activity.EXPORT, icon: <CodeIcon /> },
+    ];
 
-    const ActivityItem = (itemProps: ActivityItemProps) => {
-        const selected = selectedActivity === itemProps.activity;
-        return (
-            <Tooltip title={itemProps.activity} placement="right">
-                <ButtonBase
-                    onClick={() => {
-                        console.log(`${itemProps.activity} Clicked!`);
-                        onActivityClicked(itemProps.activity);
-                    }}
-                >
-                    <Box className={selected ? 'ActivityItem SelectedItem' : 'ActivityItem'}>
-                        {itemProps.icon}
-                    </Box>
-                </ButtonBase>
-            </Tooltip>
-        );
-    };
+    if (process.env.NODE_ENV === 'development') {
+        items.push({ activity: Activity.DEBUG, icon: <BugReportIcon /> });
+    }
 
     return (
         <Box className="ActivityBar">
-            <ActivityItem activity={Activity.STYLE} icon={<BrushIcon />} />
-            <ActivityItem activity={Activity.LAYOUT} icon={<FileCopyIcon />} />
-            <ActivityItem activity={Activity.FILTERING} icon={<FilterListIcon />} />
-            <ActivityItem activity={Activity.EXPORT} icon={<CodeIcon />} />
-            {process.env.NODE_ENV === 'development' && (
-                <ActivityItem activity={Activity.DEBUG} icon={<BugReportIcon />} />
-            )}
+            {items.map((item) => (
+                <ActivityItem
+                    key={item.activity}
+                    title={item.activity}
+                    selected={selectedActivity === item.activity}
+                    icon={item.icon}
+                    onItemClicked={() => onActivityClicked(item.activity)}
+                />
+            ))}
         </Box>
     );
-};
+}
+
+interface ActivityItemProps {
+    icon: React.ReactNode,
+    title: string,
+    selected: boolean,
+    onItemClicked: () => any,
+}
+
+function ActivityItem(itemProps: ActivityItemProps) {
+    const {
+        title, onItemClicked, selected, icon,
+    } = itemProps;
+    return (
+        <Tooltip title={title} placement="right">
+            <ButtonBase
+                onClick={() => {
+                    onItemClicked();
+                }}
+            >
+                <Box className={selected ? 'ActivityItem SelectedItem' : 'ActivityItem'}>
+                    {icon}
+                </Box>
+            </ButtonBase>
+        </Tooltip>
+    );
+}

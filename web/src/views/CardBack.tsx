@@ -13,7 +13,7 @@ interface Props {
     spellIndex: number;
 }
 
-const CardBack = (props: Props) => {
+function CardBack(props: Props) {
     const card = useSelector<RootState, Card>(selectCardAtIdx(props.spellIndex));
     const selectionActive = useSelector<RootState, boolean>(
         (state) => state.cards.selectedUids.length > 0,
@@ -124,6 +124,6 @@ const CardBack = (props: Props) => {
             </Box>
         </Box>
     );
-};
+}
 
 export default CardBack;

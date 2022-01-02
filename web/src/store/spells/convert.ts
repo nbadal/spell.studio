@@ -1,5 +1,5 @@
 import { Spell, SpellClass } from './types';
-import * as ClassIcons from '../../data/class-icons.json';
+import ClassIcons from '../../data/class-icons.json';
 import { Card, CardDetail } from '../cards/types';
 import { CardColor } from '../colors/types';
 

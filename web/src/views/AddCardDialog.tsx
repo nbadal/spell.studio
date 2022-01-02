@@ -8,7 +8,7 @@ import { DialogTitleWithClose } from './DialogTitleWithClose';
 import { AddCardButtons } from './AddCardButtons';
 import { closeModals } from '../store/modals/actions';
 
-export const AddCardDialog = () => {
+export function AddCardDialog() {
     const openModal = useSelector((state: RootState) => state.modals.openModal);
     const dispatch = useDispatch();
     const onClose = () => dispatch(closeModals());
@@ -21,4 +21,4 @@ export const AddCardDialog = () => {
             </DialogContent>
         </Dialog>
     );
-};
+}

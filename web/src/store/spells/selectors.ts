@@ -31,8 +31,10 @@ export const selectFilteredSpellClasses = createSelector(
     filterSpellClasses,
 );
 
-export const selectSpellClass = createSelector([selectFilteredSpellClasses],
-    (classes) => classes[0]);
+export const selectSpellClass = createSelector(
+    [selectFilteredSpellClasses],
+    (classes) => classes[0],
+);
 
 // export const selectFilteredSpellCards = createSelector(
 //     [selectFilteredSpells, selectFilter, getColors],

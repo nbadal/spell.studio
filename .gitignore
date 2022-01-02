@@ -79,6 +79,9 @@ build/
 # generated
 /web/src/gen/
 
+# local secrets
+.secrets
+
 # misc
 .DS_Store
 .env.local

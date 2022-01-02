@@ -10,7 +10,7 @@ import CardBack from './CardBack';
 import { AddCard } from './AddCard';
 import { AddCardButtons } from './AddCardButtons';
 
-export const Spellbook = () => {
+export function Spellbook() {
     const { showBack, showCard, cardCount } = useSelector((state: RootState) => ({
         cards: selectFilteredCards(state),
         cardCount: selectCardCount(state),
@@ -27,7 +27,7 @@ export const Spellbook = () => {
             cellWidth += 256;
         }
         if (cellWidth === 0) {
-            return (<></>);
+            return null;
         }
         const cellHeight = 352;
         const cellCount = cardCount + 1;
@@ -70,4 +70,4 @@ export const Spellbook = () => {
             )}
         </Box>
     );
-};
+}

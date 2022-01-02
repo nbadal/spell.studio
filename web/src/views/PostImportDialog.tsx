@@ -12,7 +12,7 @@ import { closeModals } from '../store/modals/actions';
 import { addCards } from '../store/cards/actions';
 import { CardList } from './CardList';
 
-export const PostImportDialog = () => {
+export function PostImportDialog() {
     const { openModal, importCards } = useSelector((state: RootState) => ({
         openModal: state.modals.openModal,
         importCards: state.imports.importedCards,
@@ -55,4 +55,4 @@ export const PostImportDialog = () => {
             </DialogActions>
         </Dialog>
     );
-};
+}

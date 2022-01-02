@@ -12,25 +12,12 @@ import { setImportedCards } from '../store/import/actions';
 import { showModal } from '../store/modals';
 import { RootState } from '../store';
 
-export const AddCardButtons = () => {
+export function AddCardButtons() {
     const dispatch = useDispatch();
 
     const { cardCount } = useSelector((state: RootState) => ({
         cardCount: state.cards.all.length,
     }));
-
-    interface ButtonProps {
-        icon: React.ReactNode,
-        labelText: string,
-        onClick: () => void,
-    }
-
-    const ButtonItem = (props: ButtonProps) => (
-        <Box className="AddButton" onClick={props.onClick}>
-            <Box className="AddButtonIcon">{props.icon}</Box>
-            <span className="AddButtonLabel">{props.labelText}</span>
-        </Box>
-    );
 
     return (
         <Box className="AddButtons">
@@ -62,4 +49,19 @@ export const AddCardButtons = () => {
             />
         </Box>
     );
-};
+}
+
+interface ButtonProps {
+    icon: React.ReactNode,
+    labelText: string,
+    onClick: () => void,
+}
+
+function ButtonItem(props: ButtonProps) {
+    return (
+        <Box className="AddButton" onClick={props.onClick}>
+            <Box className="AddButtonIcon">{props.icon}</Box>
+            <span className="AddButtonLabel">{props.labelText}</span>
+        </Box>
+    );
+}
