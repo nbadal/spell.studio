@@ -5,8 +5,8 @@ import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
 import { RootState } from '../store';
 import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
-import CardFront from './CardFront';
-import CardBack from './CardBack';
+import { CardFront } from './CardFront';
+import { CardBack } from './CardBack';
 import { AddCard } from './AddCard';
 import { AddCardButtons } from './AddCardButtons';
 

@@ -15,7 +15,7 @@ interface Props {
     cardIndex: number;
 }
 
-function CardFront(props: Props) {
+export function CardFront(props: Props) {
     const dispatch = useDispatch();
 
     const card = useSelector<RootState, Card>(selectCardAtIdx(props.cardIndex));
@@ -122,8 +122,6 @@ function CardFront(props: Props) {
         </Box>
     );
 }
-
-export default CardFront;
 
 function processText(text: string): ReactNode {
     return text.split('***').map((value, index) => {

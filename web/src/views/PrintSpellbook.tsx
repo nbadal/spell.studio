@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import { RootState } from '../store';
 import { selectFilteredCards } from '../store/cards/selectors';
-import CardFront from './CardFront';
-import CardBack from './CardBack';
+import { CardFront } from './CardFront';
+import { CardBack } from './CardBack';
 
-function PrintSpellbook() {
+export function PrintSpellbook() {
     const cards = useSelector(selectFilteredCards);
     const showCard = useSelector((state: RootState) => state.layout.showFront);
     const showBack = useSelector((state: RootState) => state.layout.showBack);
@@ -22,5 +22,3 @@ function PrintSpellbook() {
         </Box>
     );
 }
-
-export default PrintSpellbook;
