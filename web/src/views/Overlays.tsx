@@ -3,13 +3,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import PrintIcon from '@material-ui/icons/Print';
-import React, { Component } from 'react';
-import {
-    createStyles, Theme, withStyles, WithStyles,
-} from '@material-ui/core/styles';
-import { Dispatch } from 'redux';
-import { connect, ConnectedProps } from 'react-redux';
+import React from 'react';
+import { createStyles, Theme } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
 import { RootState } from '../store';
 import { selectFilteredCards } from '../store/cards/selectors';
 import { clearSelection } from '../store/cards';
@@ -17,60 +15,42 @@ import { AddCardDialog } from './AddCardDialog';
 import { PostImportDialog } from './PostImportDialog';
 import { ImportJsonDialog } from './ImportJsonDialog';
 
-const mapStateToProps = (state: RootState) => ({
-    spellCount: selectFilteredCards(state).length,
-    multiSelect: state.cards.multiSelect,
-    selectedCount: state.cards.selectedUids.length,
-});
+const useStyles = makeStyles((theme: Theme) => createStyles({
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(3),
+    },
+}));
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    clearSelection: () => dispatch(clearSelection()),
-});
+export function Overlays() {
+    const classes = useStyles();
+    const dispatch = useDispatch();
 
-const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
-type ReduxProps = ConnectedProps<typeof reduxConnector>;
+    const { selectedCount, multiSelect, spellCount } = useSelector((state: RootState) => ({
+        spellCount: selectFilteredCards(state).length,
+        multiSelect: state.cards.multiSelect,
+        selectedCount: state.cards.selectedUids.length,
+    }));
 
-const styles = (theme: Theme) =>
-    createStyles({
-        fab: {
-            position: 'absolute',
-            bottom: theme.spacing(2),
-            right: theme.spacing(3),
-        },
-    });
-type StyleProps = WithStyles<typeof styles>;
-const stylesConnector = withStyles(styles);
-
-class Overlays extends Component<ReduxProps & StyleProps> {
-    private clearSelection = () => {
-        this.props.clearSelection();
-    };
-
-    render() {
-        const { classes, selectedCount, multiSelect } = this.props;
-        return (
-            <Box className="Overlays" displayPrint="none">
-                <Snackbar
-                    open={multiSelect && selectedCount > 0}
-                    anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
-                    message={
-                        `Selected: ${selectedCount} / ${this.props.spellCount}`
-                    }
-                    action={(
-                        <Button color="secondary" size="small" onClick={this.clearSelection}>
-                            CLEAR
-                        </Button>
-                    )}
-                />
-                <Fab className={classes.fab} component={Link} to="/print" target="_blank">
-                    <PrintIcon color="primary" />
-                </Fab>
-                <AddCardDialog />
-                <PostImportDialog />
-                <ImportJsonDialog />
-            </Box>
-        );
-    }
+    return (
+        <Box className="Overlays" displayPrint="none">
+            <Snackbar
+                open={multiSelect && selectedCount > 0}
+                anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+                message={
+                    `Selected: ${selectedCount} / ${spellCount}`
+                }
+                action={(
+                    <Button color="secondary" size="small" onClick={() => dispatch(clearSelection())}>CLEAR</Button>
+                )}
+            />
+            <Fab className={classes.fab} component={Link} to="/print" target="_blank">
+                <PrintIcon color="primary" />
+            </Fab>
+            <AddCardDialog />
+            <PostImportDialog />
+            <ImportJsonDialog />
+        </Box>
+    );
 }
-
-export default stylesConnector(reduxConnector(Overlays));

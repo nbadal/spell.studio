@@ -8,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { PersistGate } from 'redux-persist/integration/react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import TopBar from './views/TopBar';
-import Overlays from './views/Overlays';
+import { Overlays } from './views/Overlays';
 import { configureAppStore } from './store';
 import PrintSpellbook from './views/PrintSpellbook';
 import { CardToolbar } from './views/CardToolbar';
