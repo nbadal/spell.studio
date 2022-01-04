@@ -52,7 +52,7 @@ interface ImportCardItemProps {
 
 function ImportCardItem(props: ImportCardItemProps) {
     const useStyles = makeStyles({
-        root: {
+        checkbox: {
             color: grey[50],
             '& checked': {
                 color: grey[200],
@@ -70,7 +70,7 @@ function ImportCardItem(props: ImportCardItemProps) {
             <Box className={`CardItem ${classes.cardItem}`}>
                 <Checkbox
                     color="default"
-                    className={classes.root}
+                    className={classes.checkbox}
                     checked={props.isSelected}
                     onChange={(e) => props.onChange(e.target.checked)}
                 />
