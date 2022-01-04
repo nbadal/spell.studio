@@ -58,13 +58,16 @@ function ImportCardItem(props: ImportCardItemProps) {
                 color: grey[200],
             },
         },
+        cardItem: {
+            backgroundColor: props.card.color,
+        },
     });
 
     const classes = useStyles();
 
     return (
         <Box style={props.style}>
-            <Box className="CardItem">
+            <Box className={`CardItem ${classes.cardItem}`}>
                 <Checkbox
                     color="default"
                     className={classes.root}
