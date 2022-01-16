@@ -31,5 +31,10 @@ jobs:
       run: yarn lint
     - name: Web - Run Tests
       run: yarn test
-    - name: Web - Build
+    - name: Web - Build Site
       run: yarn build
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPELL_STUDIO }}'
+        projectId: spell-studio
