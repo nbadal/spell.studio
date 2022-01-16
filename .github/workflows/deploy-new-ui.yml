@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ new-ui ]
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2.4.0
+    # ROOT
+    - name: Root - Install Dependencies
+      uses: bahmutov/npm-install@v1
+      with:
+        working-directory: .
+    - name: Root - Run Build Scripts
+      run: yarn build
+      working-directory: .
+    # WEB
+    - name: Web - Install Dependencies
+      uses: bahmutov/npm-install@v1
+      with:
+        working-directory: web
+    - name: Web - Check for Lint
+      run: yarn lint
+    - name: Web - Run Tests
+      run: yarn test
+    - name: Web - Build Site
+      run: yarn build
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPELL_STUDIO }}'
+        channelId: live
+        projectId: spell-studio-new-ui
