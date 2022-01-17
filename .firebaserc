@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "spell-studio"
-  }
+    "main": "spell-studio",
+    "dev": "spell-studio-dev"
+  },
+  "targets": {}
 }

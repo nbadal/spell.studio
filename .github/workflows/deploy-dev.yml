@@ -1,12 +1,12 @@
-name: Check PR
+name: Deploy
 
 on:
-  pull_request:
+  push:
     branches: [ develop ]
 
 jobs:
   build:
-    name: Build and Test
+    name: Build and Deploy
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -37,4 +37,5 @@ jobs:
       with:
         repoToken: '${{ secrets.GITHUB_TOKEN }}'
         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPELL_STUDIO }}'
-        projectId: spell-studio
+        channelId: live
+        projectId: spell-studio-dev
