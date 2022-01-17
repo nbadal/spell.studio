@@ -36,6 +36,6 @@ jobs:
     - uses: FirebaseExtended/action-hosting-deploy@v0
       with:
         repoToken: '${{ secrets.GITHUB_TOKEN }}'
-        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPELL_STUDIO }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPELL_STUDIO_DEV }}'
         channelId: live
         projectId: spell-studio-dev
