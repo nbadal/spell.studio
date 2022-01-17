@@ -1,12 +1,12 @@
-name: Check PR
+name: Deploy
 
 on:
-  pull_request:
+  push:
     branches: [ develop ]
 
 jobs:
   build:
-    name: Build and Test
+    name: Build and Deploy
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -36,5 +36,6 @@ jobs:
     - uses: FirebaseExtended/action-hosting-deploy@v0
       with:
         repoToken: '${{ secrets.GITHUB_TOKEN }}'
-        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPELL_STUDIO }}'
-        projectId: spell-studio
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPELL_STUDIO_DEV }}'
+        channelId: live
+        projectId: spell-studio-dev
