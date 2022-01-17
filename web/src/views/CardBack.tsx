@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../css/CardBack.css';
-import { connect, ConnectedProps } from 'react-redux';
-import { Dispatch } from 'redux';
-import { Box } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import Box from '@material-ui/core/Box';
 import _ from 'lodash';
 import { selectCard, unselectCard } from '../store/cards';
 import { CardIconView } from './CardIconView';
@@ -10,37 +9,28 @@ import { RootState } from '../store';
 import { selectCardAtIdx } from '../store/cards/selectors';
 import { Card } from '../store/cards/types';
 
-const mapStateToProps = (state: RootState, props: Props) => {
-    const card = selectCardAtIdx(props.spellIndex)(state);
-    return {
-        card,
-        selectionActive: state.cards.selectedUids.length > 0,
-        selected: state.cards.selectedUids.includes(card.uid),
-    };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    selectCard: (card: Card) => dispatch(selectCard(card)),
-    unselectCard: (card: Card) => dispatch(unselectCard(card)),
-});
-
-const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
-type ReduxProps = ConnectedProps<typeof reduxConnector>;
-
 interface Props {
     spellIndex: number;
 }
 
-class CardBack extends Component<Props & ReduxProps> {
-    private onClick = () => {
-        if (this.props.selected) {
-            this.props.unselectCard(this.props.card);
+export function CardBack(props: Props) {
+    const card = useSelector<RootState, Card>(selectCardAtIdx(props.spellIndex));
+    const selectionActive = useSelector<RootState, boolean>(
+        (state) => state.cards.selectedUids.length > 0,
+    );
+    const selected = useSelector<RootState, boolean>(
+        (state) => state.cards.selectedUids.includes(card.uid),
+    );
+
+    const onClick = () => {
+        if (selected) {
+            unselectCard(card);
         } else {
-            this.props.selectCard(this.props.card);
+            selectCard(card);
         }
     };
 
-    private renderDiamond(quadrant: 1 | 2 | 3 | 4) {
+    const renderDiamond = (quadrant: 1 | 2 | 3 | 4) => {
         // TODO: Use actual aspect ratio here:
         const baseAngle = (Math.atan2(146, 98) * 180) / Math.PI;
 
@@ -65,13 +55,13 @@ class CardBack extends Component<Props & ReduxProps> {
         // let transform = undefined;
 
         const smallText = _.times(25)
-            .map(() => this.props.card.backIconsSmall)
+            .map(() => card.backIconsSmall)
             .join('');
         const largeText = _.times(15)
-            .map(() => this.props.card.backIconsLarge)
+            .map(() => card.backIconsLarge)
             .join('');
 
-        const cardColor = this.props.card.color;
+        const cardColor = card.color;
         return (
             <svg className={`Diamond${quadrant}`} viewBox="0 0 100 100">
                 <g transform={transform}>
@@ -101,39 +91,37 @@ class CardBack extends Component<Props & ReduxProps> {
                 </g>
             </svg>
         );
-    }
+    };
 
-    public render() {
-        const cardColor = this.props.card.color;
-        return (
-            <Box
-                className={
-                    !this.props.selectionActive || this.props.selected
-                        ? 'CardBack'
-                        : 'DisabledCardBack'
-                }
-                style={{ backgroundColor: cardColor }}
-                onClick={this.onClick}
-            >
-                <Box className="ArtBackground" style={{ color: cardColor }}>
-                    <Box className="ArtInner" style={{ borderColor: cardColor }}>
-                        {this.renderDiamond(1)}
-                        {this.renderDiamond(2)}
-                        {this.renderDiamond(3)}
-                        {this.renderDiamond(4)}
-                        <CardIconView
-                            className="Icon"
-                            height="1.5in"
-                            icon={this.props.card.icon}
-                            fill={cardColor}
-                        />
-                        <Box className="TRCorner">{this.props.card.backCharacter}</Box>
-                        <Box className="BLCorner">{this.props.card.backCharacter}</Box>
-                    </Box>
+    const cardColor = card.color;
+
+    return (
+        <Box
+            className={
+                !selectionActive || selected
+                    ? 'CardBack'
+                    : 'DisabledCardBack'
+            }
+            style={{ backgroundColor: cardColor }}
+            onClick={onClick}
+        >
+            <Box className="ArtBackground" style={{ color: cardColor }}>
+                <Box className="ArtInner" style={{ borderColor: cardColor }}>
+                    {renderDiamond(1)}
+                    {renderDiamond(2)}
+                    {renderDiamond(3)}
+                    {renderDiamond(4)}
+                    <CardIconView
+                        className="Icon"
+                        height="1.5in"
+                        icon={card.icon}
+                        iconCharacter={card.iconCharacter}
+                        fill={cardColor}
+                    />
+                    <Box className="TRCorner">{card.backCharacter}</Box>
+                    <Box className="BLCorner">{card.backCharacter}</Box>
                 </Box>
             </Box>
-        );
-    }
+        </Box>
+    );
 }
-
-export default reduxConnector(CardBack);

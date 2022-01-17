@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     },
 });
 
-function TopBar() {
+export function TopBar() {
     const classes = useStyles();
     const versionInfo = `${process.env.REACT_APP_REVISION} ${process.env.REACT_APP_BUILDTIME}`;
     return (
@@ -52,5 +52,3 @@ function TopBar() {
         </Box>
     );
 }
-
-export default TopBar;

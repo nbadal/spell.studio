@@ -1,8 +1,7 @@
-import React, { Component, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import Textfit from 'react-textfit';
-import { connect, ConnectedProps } from 'react-redux';
-import { Dispatch } from 'redux';
-import { Box } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import Box from '@material-ui/core/Box';
 import {
     Card, CardStat, isList, isText,
 } from '../store/cards/types';
@@ -12,38 +11,31 @@ import { RootState } from '../store';
 import { selectCard, unselectCard } from '../store/cards';
 import { selectCardAtIdx } from '../store/cards/selectors';
 
-const mapStateToProps = (state: RootState, props: Props) => {
-    const card: Card = selectCardAtIdx(props.cardIndex)(state);
-    return {
-        card,
-        selectionActive: state.cards.selectedUids.length > 0,
-        selected: state.cards.selectedUids.includes(card.uid),
-    };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    selectCard: (card: Card) => dispatch(selectCard(card)),
-    unselectCard: (card: Card) => dispatch(unselectCard(card)),
-});
-
-const reduxConnector = connect(mapStateToProps, mapDispatchToProps);
-type ReduxProps = ConnectedProps<typeof reduxConnector>;
-
 interface Props {
     cardIndex: number;
 }
 
-class CardFront extends Component<Props & ReduxProps> {
-    private statCell = (prop: CardStat, idx: number) => {
+export function CardFront(props: Props) {
+    const dispatch = useDispatch();
+
+    const card = useSelector<RootState, Card>(selectCardAtIdx(props.cardIndex));
+    const selectionActive = useSelector<RootState, boolean>(
+        (state) => state.cards.selectedUids.length > 0,
+    );
+    const selected = useSelector<RootState, boolean>(
+        (state) => state.cards.selectedUids.includes(card.uid),
+    );
+
+    const statCell = (prop: CardStat, idx: number) => {
         // If we're the last cell in an odd list of stats, stretch to fill remaining space
-        const cardCount = this.props.card.stats.length;
+        const cardCount = card.stats.length;
         const cellClasses = ['StatCell'];
         if (cardCount % 2 !== 0 && idx === cardCount - 1) cellClasses.push('StatCellStretch');
 
         return (
             <div className={cellClasses.join(' ')} key={prop.name}>
                 <div className="CellContent">
-                    <div className="StatsTitle" style={{ color: this.props.card.color }}>
+                    <div className="StatsTitle" style={{ color: card.color }}>
                         {prop.name}
                     </div>
                     <div className="StatsValue">{prop.value}</div>
@@ -52,7 +44,7 @@ class CardFront extends Component<Props & ReduxProps> {
                             <ConcentrationIcon
                                 style={{
                                     fontSize: 18,
-                                    color: this.props.card.color,
+                                    color: card.color,
                                 }}
                             />
                         </div>
@@ -62,78 +54,74 @@ class CardFront extends Component<Props & ReduxProps> {
         );
     };
 
-    private onClick = () => {
-        if (this.props.selected) {
-            this.props.unselectCard(this.props.card);
+    const onClick = () => {
+        if (selected) {
+            dispatch(unselectCard(card));
         } else {
-            this.props.selectCard(this.props.card);
+            dispatch(selectCard(card));
         }
     };
 
-    public render() {
-        return (
-            <Box
-                className={
-                    !this.props.selectionActive || this.props.selected
-                        ? 'CardFront'
-                        : 'DisabledCardFront'
-                }
-                style={{ backgroundColor: this.props.card.color }}
-                onClick={this.onClick}
-            >
-                <div className="Title">
-                    <Textfit mode="single" max={14}>
-                        {this.props.card.title}
-                    </Textfit>
-                </div>
-                <div className="Subtitle">{this.props.card.subtitle}</div>
-                <div className="StatsTable">
-                    {this.props.card.stats.map((prop, idx) => this.statCell(prop, idx))}
-                </div>
-                <div className="DetailsContainer">
-                    {this.props.card.details.map((detail) => {
-                        if (isText(detail)) {
-                            return (
-                                <React.Fragment key={detail.text}>
-                                    {detail.header && <div className="HigherLevels">{detail.header}</div>}
-                                    <div
-                                        className="DetailsBlock"
-                                        style={{ flexGrow: detail.expand ? 1 : 0 }}
-                                    >
-                                        {processText(detail.text)}
-                                    </div>
-                                </React.Fragment>
-                            );
-                        }
-                        if (isList(detail)) {
-                            return (
+    return (
+        <Box
+            className={
+                !selectionActive || selected
+                    ? 'CardFront'
+                    : 'DisabledCardFront'
+            }
+            style={{ backgroundColor: card.color }}
+            onClick={onClick}
+        >
+            <div className="Title">
+                <Textfit mode="single" max={14}>
+                    {card.title}
+                </Textfit>
+            </div>
+            <div className="Subtitle">{card.subtitle}</div>
+            <div className="StatsTable">
+                {card.stats.map((prop, idx) => statCell(prop, idx))}
+            </div>
+            <div className="DetailsContainer">
+                {card.details.map((detail) => {
+                    if (isText(detail)) {
+                        return (
+                            <React.Fragment key={detail.text}>
+                                {detail.header && <div className="HigherLevels">{detail.header}</div>}
                                 <div
-                                    key={detail.items.join(',')}
                                     className="DetailsBlock"
                                     style={{ flexGrow: detail.expand ? 1 : 0 }}
                                 >
-                                    <ul>
-                                        {detail.items.map((item) => (
-                                            <li>{processText(item)}</li>
-                                        ))}
-                                    </ul>
+                                    {processText(detail.text)}
                                 </div>
-                            );
-                        }
+                            </React.Fragment>
+                        );
+                    }
+                    if (isList(detail)) {
+                        return (
+                            <div
+                                key={detail.items.join(',')}
+                                className="DetailsBlock"
+                                style={{ flexGrow: detail.expand ? 1 : 0 }}
+                            >
+                                <ul>
+                                    {detail.items.map((item) => (
+                                        <li key={item}>{processText(item)}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        );
+                    }
 
-                        return undefined;
-                    })}
-                </div>
-                <div className="CardFooter">
-                    <div className="Category">{this.props.card.category}</div>
-                    <div>SpellStudio°</div>
-                </div>
-            </Box>
-        );
-    }
+                    return undefined;
+                })}
+            </div>
+            <div className="CardFooter">
+                <div className="Category">{card.category}</div>
+                <div>SpellStudio°</div>
+            </div>
+        </Box>
+    );
 }
-
-export default reduxConnector(CardFront);
 
 function processText(text: string): ReactNode {
     return text.split('***').map((value, index) => {

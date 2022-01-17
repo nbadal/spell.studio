@@ -1,0 +1,40 @@
+.AddButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.AddButton {
+    height: 256px;
+    width: 192px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+
+    margin: 16px;
+    padding: 8px;
+
+    border: 2px solid gray;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+    text-align: center;
+}
+
+.AddButton:hover {
+    background: #f7f7f7;
+}
+
+.AddButtonIcon {
+    align-self: end;
+}
+
+.AddButtonLabel {
+    padding: 8px 32px;
+    align-self: start;
+}

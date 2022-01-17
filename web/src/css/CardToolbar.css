@@ -1,0 +1,38 @@
+.ActivityBar {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.ActivityItem {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+
+.ActivityItem:hover {
+    background-color: rgba(0, 0, 0, 0.10);
+}
+
+.ActivityItem svg {
+    font-size: 32px;
+}
+
+.SelectedItem {
+    border-left: 4px solid orangered;
+}
+
+.SideBar {
+    width: 256px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -8,23 +8,6 @@ generateFont().then(_ => {
     console.log("Job Done.");
 });
 
-async function parseUsedIcons() {
-    let raw = fs.readFileSync("./web/src/data/class-icons.json")
-    let data = JSON.parse(raw.toString())
-    let icons = new Set<string>();
-
-    ["large", "small"].forEach( size => {
-        for (const klass in data[size]) {
-            let klassIcons = data[size][klass] as string[];
-            klassIcons.forEach(value => {
-                icons.add(value)
-            })
-        }
-    })
-
-    return icons
-}
-
 async function cleanup(extractFolder: string, fontFolder: string) {
     return Promise.all(Array.of(extractFolder, fontFolder).map(async fileToDelete => {
         let exists = fs.existsSync(fileToDelete)
@@ -43,10 +26,6 @@ async function generateFont() {
     let fontName = "icons";
     let fontDestination = "./web/src/gen/font/"
 
-    console.log("Finding icons in use.")
-    let nameList =  Array.from(await parseUsedIcons());
-    console.log(`Site uses: ${nameList.join(", ")}`)
-
     console.log("Cleaning old folders.")
     await cleanup(extractFolder, fontFolder);
 
@@ -54,7 +33,7 @@ async function generateFont() {
     await downloadZip(zipUrl, zipPath)
 
     console.log("Extracting icons.")
-    await extractIcons(zipPath, extractFolder, nameList)
+    await extractIcons(zipPath, extractFolder)
 
     console.log("Generating font.")
     await makeFont(extractFolder, fontFolder, fontName);

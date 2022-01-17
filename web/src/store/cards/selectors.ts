@@ -1,12 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { selectFilteredSpellCards } from '../spells/selectors';
+import { RootState } from '../index';
 
-export const selectFilteredCards = createSelector([selectFilteredSpellCards], (spellCards) => {
-    // Return all cards.
-    const cards = [];
-    cards.push(...spellCards);
-    return cards;
-});
+export const selectFilteredCards = (state: RootState) => state.cards.all;
 
 export const selectCardCount = createSelector([selectFilteredCards], (cards) => cards.length);
 

@@ -1,25 +1,22 @@
 import React from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
 import { RootState } from '../store';
 import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
-import CardFront from './CardFront';
-import CardBack from './CardBack';
+import { CardFront } from './CardFront';
+import { CardBack } from './CardBack';
+import { AddCard } from './AddCard';
+import { AddCardButtons } from './AddCardButtons';
 
-const mapStateToProps = (state: RootState) => ({
-    cards: selectFilteredCards(state),
-    cardCount: selectCardCount(state),
-    showCard: state.layout.showFront,
-    showBack: state.layout.showBack,
-});
-
-const reduxConnector = connect(mapStateToProps);
-type ReduxProps = ConnectedProps<typeof reduxConnector>;
-
-function Spellbook(props: ReduxProps) {
-    const { showBack, showCard, cardCount } = props;
+export function Spellbook() {
+    const { showBack, showCard, cardCount } = useSelector((state: RootState) => ({
+        cards: selectFilteredCards(state),
+        cardCount: selectCardCount(state),
+        showCard: state.layout.showFront,
+        showBack: state.layout.showBack,
+    }));
 
     const renderGrid = (gridSize: Size) => {
         let cellWidth = 0;
@@ -33,8 +30,9 @@ function Spellbook(props: ReduxProps) {
             return null;
         }
         const cellHeight = 352;
+        const cellCount = cardCount + 1;
         const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
-        const rowCount = Math.max(1, Math.ceil(cardCount / columnCount));
+        const rowCount = Math.max(1, Math.ceil(cellCount / columnCount));
         return (
             <FixedSizeGrid
                 width={gridSize.width}
@@ -46,11 +44,15 @@ function Spellbook(props: ReduxProps) {
             >
                 {(gridProps: GridChildComponentProps) => {
                     const idx = gridProps.rowIndex * columnCount + gridProps.columnIndex;
-                    if (idx >= cardCount) return <Box style={gridProps.style} />;
+                    if (idx === 0) {
+                        return <Box style={gridProps.style}><AddCard /></Box>;
+                    }
+                    const cardIdx = idx - 1;
+                    if (cardIdx >= cardCount) return <Box style={gridProps.style} />;
                     return (
                         <Box style={gridProps.style}>
-                            {showCard && <CardFront cardIndex={idx} />}
-                            {showBack && <CardBack spellIndex={idx} />}
+                            {showCard && <CardFront cardIndex={cardIdx} />}
+                            {showBack && <CardBack spellIndex={cardIdx} />}
                         </Box>
                     );
                 }}
@@ -60,9 +62,12 @@ function Spellbook(props: ReduxProps) {
 
     return (
         <Box className="Spellbook">
-            <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
+            {cardCount > 0 && (
+                <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
+            )}
+            {cardCount === 0 && (
+                <AddCardButtons />
+            )}
         </Box>
     );
 }
-
-export default reduxConnector(Spellbook);

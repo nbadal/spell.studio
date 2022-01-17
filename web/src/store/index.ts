@@ -8,12 +8,16 @@ import cardsReducer from './cards';
 import spellsReducer from './spells';
 import colorsReducer from './colors';
 import layoutReducer from './layout';
+import modalReducer from './modals';
+import importsReducer from './import';
 
 const rootReducer = combineReducers({
     cards: cardsReducer,
     spells: persistReducer({ key: 'spells', storage, blacklist: ['all'] }, spellsReducer),
     colors: colorsReducer,
     layout: layoutReducer,
+    modals: modalReducer,
+    imports: importsReducer,
 });
 
 export function configureAppStore() {

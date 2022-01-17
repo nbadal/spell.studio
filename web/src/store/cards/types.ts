@@ -2,6 +2,8 @@ import { CardColor } from '../colors/types';
 import { SpellClass } from '../spells/types';
 
 export type CardsState = {
+    all: Card[],
+    multiSelect: boolean,
     selectedUids: string[];
 };
 
@@ -13,7 +15,8 @@ export type Card = {
     details: CardDetail[];
     category: string;
     color: CardColor;
-    icon: CardIcon;
+    icon?: CardIcon;
+    iconCharacter?: string;
     backCharacter: string | number;
     backIconsSmall: string;
     backIconsLarge: string;

@@ -4,7 +4,7 @@ body {
 
 .App {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: fit-content(320px) 1fr;
     grid-template-rows: auto 1fr;
     height: 100vh;
     max-height: 100vh;
@@ -15,16 +15,12 @@ body {
     grid-row: 1;
 }
 
-.Controls {
+.CardToolbar {
     grid-column: 1;
     grid-row: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px 16px;
-    background-color: #dfdfdf;
+    display: grid;
+    grid-template-columns: 64px auto;
     border-right: 1px solid #888888;
-    overflow-y: auto;
 }
 
 .Spellbook {
@@ -35,6 +31,7 @@ body {
 }
 
 .Overlays {
+    pointer-events: none;
     grid-column: 2;
     grid-row: 2;
 }
