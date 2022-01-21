@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/CardBack.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import _ from 'lodash';
 import { selectCard, unselectCard } from '../store/cards';
@@ -14,6 +14,7 @@ interface Props {
 }
 
 export function CardBack(props: Props) {
+    const dispatch = useDispatch();
     const card = useSelector<RootState, Card>(selectCardAtIdx(props.spellIndex));
     const selectionActive = useSelector<RootState, boolean>(
         (state) => state.cards.selectedUids.length > 0,
@@ -24,9 +25,9 @@ export function CardBack(props: Props) {
 
     const onClick = () => {
         if (selected) {
-            unselectCard(card);
+            dispatch(unselectCard(card));
         } else {
-            selectCard(card);
+            dispatch(selectCard(card));
         }
     };
 
