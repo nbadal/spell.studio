@@ -1,0 +1,46 @@
+<div class='CardFront' style="background-color: {{color}}">
+    <div class="Title">
+        {{title}}
+    </div>
+    <div class="Subtitle">{{subtitle}}</div>
+    <div class="StatsTable">
+        {{#each stats}}
+            <div class="StatCell">
+                <div class="CellContent">
+                    <div class="StatsTitle" style="color: {{../color}}">
+                        {{name}}
+                    </div>
+                    <div class="StatsValue">{{value}}</div>
+                    {{#icon}}
+                        <div class="StatsBadge">
+                            C <!-- TODO inline svg icon? -->
+                        </div>
+                    {{/icon}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    <div class="DetailsContainer">
+        {{#each details}}
+            {{#header}}
+                <div class="Header">{{this}}</div>
+            {{/header}}
+            <div class="DetailsBlock" {{#expand}}style="flex-grow: 1"{{/expand}}>
+                {{#if (isTextDetail this)}}
+                    {{processText text}}
+                {{/if}}
+                {{#if (isListDetail this)}}
+                    <ul>
+                        {{#each items}}
+                            <li>{{processText this}}</li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </div>
+        {{/each}}
+    </div>
+    <div class="CardFooter">
+        <div class="Category">{{category}}</div>
+        <div>SpellStudio°</div>
+    </div>
+</div>

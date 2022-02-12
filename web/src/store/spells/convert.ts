@@ -7,7 +7,7 @@ import { CardColor } from '../colors/types';
 // eslint-disable-next-line global-require
 const IconFont = require('../../gen/font/icons.json') as {[iconName: string]: string};
 
-export function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: CardColor): Card {
+export function getSpellCard(spell: Spell, spellClass: SpellClass, color: CardColor): Card {
     return {
         uid: `${spellClass}/${spell.name}`,
         title: spell.name,
@@ -37,7 +37,7 @@ export function getSpellCard(spell: Spell, spellClass: SpellClass, spellColor: C
         icon: spellClass,
         backIconsSmall: getSmallChar(spellClass),
         backIconsLarge: getLargeChar(spellClass),
-        color: spellColor,
+        color,
     };
 }
 

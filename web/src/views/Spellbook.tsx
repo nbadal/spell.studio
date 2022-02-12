@@ -5,30 +5,19 @@ import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
 import { RootState } from '../store';
 import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
-import { CardFront } from './CardFront';
-import { CardBack } from './CardBack';
 import { AddCard } from './AddCard';
 import { AddCardButtons } from './AddCardButtons';
+import { TemplateCard } from './TemplateCard';
+import { selectStyleCss } from '../store/template/selectors';
 
 export function Spellbook() {
-    const { showBack, showCard, cardCount } = useSelector((state: RootState) => ({
+    const { cardCount } = useSelector((state: RootState) => ({
         cards: selectFilteredCards(state),
         cardCount: selectCardCount(state),
-        showCard: state.layout.showFront,
-        showBack: state.layout.showBack,
     }));
 
     const renderGrid = (gridSize: Size) => {
-        let cellWidth = 0;
-        if (showCard) {
-            cellWidth += 256;
-        }
-        if (showBack) {
-            cellWidth += 256;
-        }
-        if (cellWidth === 0) {
-            return null;
-        }
+        const cellWidth = 256;
         const cellHeight = 352;
         const cellCount = cardCount + 1;
         const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
@@ -51,8 +40,7 @@ export function Spellbook() {
                     if (cardIdx >= cardCount) return <Box style={gridProps.style} />;
                     return (
                         <Box style={gridProps.style}>
-                            {showCard && <CardFront cardIndex={cardIdx} />}
-                            {showBack && <CardBack spellIndex={cardIdx} />}
+                            <TemplateCard cardIndex={cardIdx} />
                         </Box>
                     );
                 }}
@@ -60,8 +48,11 @@ export function Spellbook() {
         );
     };
 
+    const style = useSelector(selectStyleCss);
+
     return (
         <Box className="Spellbook">
+            <style>{style}</style>
             {cardCount > 0 && (
                 <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
             )}

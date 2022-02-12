@@ -43,6 +43,7 @@ export type CardTextDetail = {
 
 export type CardListDetail = {
     type: 'list',
+    header?: string;
     items: string[];
     expand?: boolean;
 }

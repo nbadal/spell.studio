@@ -168,7 +168,7 @@
     font-style: italic;
 }
 
-.HigherLevels {
+.Header {
     padding: 2px;
     text-align: center;
     color: white;
@@ -176,7 +176,7 @@
     line-height: 8px;
 }
 
-.HigherLevels ~ .DetailsBlock {
+.Header ~ .DetailsBlock {
     padding-top: 8px;
 }
 

@@ -10,6 +10,7 @@ import colorsReducer from './colors';
 import layoutReducer from './layout';
 import modalReducer from './modals';
 import importsReducer from './import';
+import templateReducer from './template';
 
 const rootReducer = combineReducers({
     cards: cardsReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     layout: layoutReducer,
     modals: modalReducer,
     imports: importsReducer,
+    template: templateReducer,
 });
 
 export function configureAppStore() {

@@ -1,22 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
-import { RootState } from '../store';
 import { selectFilteredCards } from '../store/cards/selectors';
-import { CardFront } from './CardFront';
-import { CardBack } from './CardBack';
+import { TemplateCard } from './TemplateCard';
+import { selectStyleCss } from '../store/template/selectors';
 
 export function PrintSpellbook() {
     const cards = useSelector(selectFilteredCards);
-    const showCard = useSelector((state: RootState) => state.layout.showFront);
-    const showBack = useSelector((state: RootState) => state.layout.showBack);
+    const style = useSelector(selectStyleCss);
 
     return (
         <Box className="Spellbook">
+            <style>{style}</style>
             {cards.map((card, index) => (
                 <React.Fragment key={card.uid}>
-                    {showCard && <CardFront cardIndex={index} />}
-                    {showBack && <CardBack spellIndex={index} />}
+                    <TemplateCard cardIndex={index} />
                 </React.Fragment>
             ))}
         </Box>
