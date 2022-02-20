@@ -52,7 +52,7 @@ export function Spellbook() {
 
     return (
         <Box className="Spellbook">
-            <style>{style}</style>
+            {typeof style === 'string' && (<style>{style}</style>)}
             {cardCount > 0 && (
                 <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
             )}
