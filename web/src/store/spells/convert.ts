@@ -12,25 +12,25 @@ export function getSpellCard(spell: Spell, spellClass: SpellClass, color: CardCo
         uid: `${spellClass}/${spell.name}`,
         title: spell.name,
         subtitle: spellSubtitle(spell),
-        stats: [
-            {
+        stats: {
+            'Casting Time': {
                 name: 'Casting Time',
                 value: spell.castingTime,
             },
-            {
+            Range: {
                 name: 'Range',
                 value: spell.range,
             },
-            {
+            Components: {
                 name: 'Components',
                 value: spellComponentsString(spell),
             },
-            {
+            Duration: {
                 name: 'Duration',
                 value: spell.duration,
                 icon: spell.concentration,
             },
-        ],
+        },
         details: Array.from(spellDetails(spell)),
         category: spellClass.substring(0, 1).toUpperCase() + spellClass.substring(1),
         backCharacter: spell.level,

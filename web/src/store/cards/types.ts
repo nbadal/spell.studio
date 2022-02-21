@@ -11,7 +11,7 @@ export type Card = {
     uid: string;
     title: string;
     subtitle: string;
-    stats: CardStat[];
+    stats: {[id: string]: CardStat};
     details: CardDetail[];
     category: string;
     color: CardColor;
@@ -24,7 +24,11 @@ export type Card = {
 
 export type CardIcon = SpellClass;
 
-export type CardDetail = (CardTextDetail | CardListDetail) & { type: 'text' | 'list' };
+export type CardDetail = (CardTextDetail | CardListDetail) & {
+    type: 'text' | 'list';
+    header?: string;
+    expand?: boolean;
+};
 
 export function isText(detail: CardDetail): detail is CardTextDetail {
     return detail.type === 'text';
@@ -36,16 +40,12 @@ export function isList(detail: CardDetail): detail is CardListDetail {
 
 export type CardTextDetail = {
     type: 'text',
-    header?: string;
     text: string;
-    expand?: boolean;
 };
 
 export type CardListDetail = {
     type: 'list',
-    header?: string;
     items: string[];
-    expand?: boolean;
 }
 
 export type CardStat = {

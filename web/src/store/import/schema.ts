@@ -57,7 +57,7 @@ export const validateRpgCardList = ajv.compile<RpgCard[]>(rpgCardListSchema);
 
 export const convertRpgCard = (rpgCard: RpgCard): Card => {
     let subtitle = '';
-    const stats: CardStat[] = [];
+    const stats: {[id: string]: CardStat} = {};
     const details: CardDetail[] = [];
 
     let sectionTitle: string | undefined;
@@ -70,7 +70,7 @@ export const convertRpgCard = (rpgCard: RpgCard): Card => {
                 subtitle = parts[1];
                 break;
             case 'property':
-                stats.push({ name: parts[1], value: parts[2] });
+                stats[parts[1]] = { name: parts[1], value: parts[2] };
                 break;
             case 'section':
                 sectionTitle = parts[1];
