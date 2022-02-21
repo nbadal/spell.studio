@@ -1,4 +1,6 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+    combineReducers, configureStore, getDefaultMiddleware, PreloadedState,
+} from '@reduxjs/toolkit';
 import {
     FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE,
 } from 'redux-persist';
@@ -22,7 +24,9 @@ const rootReducer = combineReducers({
     template: templateReducer,
 });
 
-export function configureAppStore() {
+export type RootState = ReturnType<typeof rootReducer>;
+
+export function configureAppStore(preloadedState?: PreloadedState<RootState>) {
     const persistedReducer = persistReducer<RootState>(
         {
             key: 'root',
@@ -34,6 +38,7 @@ export function configureAppStore() {
     );
 
     const store = configureStore({
+        preloadedState,
         reducer: persistedReducer,
         middleware: [
             ...getDefaultMiddleware({
@@ -56,5 +61,3 @@ export function configureAppStore() {
 
     return { store, persistor };
 }
-
-export type RootState = ReturnType<typeof rootReducer>;

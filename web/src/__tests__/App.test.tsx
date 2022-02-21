@@ -1,8 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, screen } from '../test-utils';
 import { App } from '../App';
 
 it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render((<App />), div);
+    render(<App />);
+    const titleElement = screen.getByText(/spellstudio/i);
+    expect(titleElement).toBeInTheDocument();
 });
