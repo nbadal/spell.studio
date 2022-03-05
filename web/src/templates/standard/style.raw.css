@@ -1,13 +1,12 @@
 .CardFront,
 .DisabledCardFront {
-    width: 2.5in;
-    height: 3.5in;
+    width: 100%;
+    height: 100%;
+    display: flex;
     vertical-align: top;
-    display: inline-flex;
     flex-direction: column;
     break-inside: avoid;
 
-    margin: 8px;
     padding: 10px 10px 6px 10px;
     border-radius: 12px;
 

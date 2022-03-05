@@ -30,6 +30,13 @@ body {
     overflow-y: auto;
 }
 
+.CardContainer {
+    display: inline-block;
+    width: 2.5in;
+    height: 3.5in;
+    margin: 8px;
+}
+
 .Overlays {
     grid-column: 2;
     grid-row: 2;

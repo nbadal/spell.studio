@@ -33,6 +33,7 @@ export function TemplateCard(props: Props) {
 
     return (
         <Box
+            className="CardContainer"
             onClick={onClick}
             dangerouslySetInnerHTML={{ __html: sanitize(result, { FORCE_BODY: true }) }}
         />
