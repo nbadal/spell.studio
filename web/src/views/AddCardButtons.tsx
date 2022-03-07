@@ -7,7 +7,8 @@ import CodeIcon from '@material-ui/icons/Code';
 import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
 import { useDispatch, useSelector } from 'react-redux';
-import { allSRDSpells } from '../store/import';
+import { useFilePicker } from 'use-file-picker';
+import { allSRDSpells, importJsonChanged } from '../store/import';
 import { setImportedCards } from '../store/import/actions';
 import { showModal } from '../store/modals';
 import { RootState } from '../store';
@@ -18,6 +19,17 @@ export function AddCardButtons() {
     const { cardCount } = useSelector((state: RootState) => ({
         cardCount: state.cards.all.length,
     }));
+
+    const [openFileSelector, fp] = useFilePicker({
+        accept: 'application/json',
+        multiple: false,
+    });
+
+    if (fp.filesContent && fp.filesContent[0]) {
+        dispatch(importJsonChanged(fp.filesContent[0].content));
+        dispatch(showModal('import-json'));
+        fp.clear();
+    }
 
     return (
         <Box className="AddButtons">
@@ -32,6 +44,7 @@ export function AddCardButtons() {
                 icon={<InsertDriveFileIcon fontSize="large" />}
                 labelText="Import cards from file"
                 onClick={() => {
+                    openFileSelector();
                 }}
             />
             <ButtonItem

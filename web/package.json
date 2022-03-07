@@ -31,7 +31,8 @@
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.6",
     "redux": "^4.1.2",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "use-file-picker": "^1.4.2"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.0",
