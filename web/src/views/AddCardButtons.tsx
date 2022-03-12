@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/AddCardButtons.css';
 
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import CodeIcon from '@material-ui/icons/Code';
 import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
@@ -41,7 +41,7 @@ export function AddCardButtons() {
                 />
             )}
             <ButtonItem
-                icon={<InsertDriveFileIcon fontSize="large" />}
+                icon={<FolderOpenIcon fontSize="large" />}
                 labelText="Import cards from file"
                 onClick={() => {
                     openFileSelector();
