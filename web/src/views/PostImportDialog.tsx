@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import '../css/PostImportDialog.css';
-import DialogContent from '@material-ui/core/DialogContent';
-import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import Dialog from '@mui/material/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import DialogActions from '@mui/material/DialogActions';
 import { RootState } from '../store';
 import { DialogTitleWithClose } from './DialogTitleWithClose';
 import { closeModals } from '../store/modals/actions';

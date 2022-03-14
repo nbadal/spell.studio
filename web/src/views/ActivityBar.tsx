@@ -1,14 +1,14 @@
 import React from 'react';
 
-import BrushIcon from '@material-ui/icons/Brush';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import CodeIcon from '@material-ui/icons/Code';
-import BugReportIcon from '@material-ui/icons/BugReport';
+import BrushIcon from '@mui/icons-material/Brush';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import CodeIcon from '@mui/icons-material/Code';
+import BugReportIcon from '@mui/icons-material/BugReport';
 
-import Box from '@material-ui/core/Box';
-import Tooltip from '@material-ui/core/Tooltip';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+import ButtonBase from '@mui/material/ButtonBase';
 
 export enum Activity {
     STYLE = 'Style',

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-import Box from '@material-ui/core/Box';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
 import {
     HashRouter, Route, Routes, useHref,
 } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/styles';
+import { createTheme } from '@mui/material';
 import { TopBar } from './views/TopBar';
 import { Overlays } from './views/Overlays';
 import { PrintSpellbook } from './views/PrintSpellbook';

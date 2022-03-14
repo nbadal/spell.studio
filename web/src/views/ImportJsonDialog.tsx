@@ -5,11 +5,11 @@ import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/theme-monokai';
 
-import DialogContent from '@material-ui/core/DialogContent';
-import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import Dialog from '@mui/material/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
-import { DialogActions } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import { DialogActions } from '@mui/material';
+import Button from '@mui/material/Button';
 import { RootState } from '../store';
 import { DialogTitleWithClose } from './DialogTitleWithClose';
 import { closeModals } from '../store/modals/actions';

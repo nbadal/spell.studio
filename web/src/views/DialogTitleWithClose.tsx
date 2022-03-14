@@ -1,10 +1,11 @@
 import React from 'react';
-import { createStyles, Theme, withStyles } from '@material-ui/core/styles';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { DialogTitleProps } from '@material-ui/core/DialogTitle/DialogTitle';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import { Theme } from '@mui/material/styles';
+import { createStyles, withStyles } from '@mui/styles';
+import DialogTitle from '@mui/material/DialogTitle';
+import { DialogTitleProps } from '@mui/material/DialogTitle/DialogTitle';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -31,7 +32,7 @@ export const DialogTitleWithClose = withStyles(styles)((props: Props) => {
     } = props;
     return (
         // eslint-disable-next-line react/jsx-props-no-spreading
-        <DialogTitle disableTypography className={classes?.root} {...other}>
+        <DialogTitle className={classes?.root} {...other}>
             <Typography variant="h6">{children}</Typography>
             <IconButton aria-label="close" className={classes?.closeButton} onClick={onClose}>
                 <CloseIcon />

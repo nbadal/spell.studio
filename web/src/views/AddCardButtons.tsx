@@ -1,11 +1,11 @@
 import React from 'react';
 import '../css/AddCardButtons.css';
 
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-import CodeIcon from '@material-ui/icons/Code';
-import AddIcon from '@material-ui/icons/Add';
-import Box from '@material-ui/core/Box';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import CodeIcon from '@mui/icons-material/Code';
+import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFilePicker } from 'use-file-picker';
 import { allSRDSpells, importJsonChanged } from '../store/import';

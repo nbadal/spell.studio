@@ -1,10 +1,10 @@
 import React from 'react';
 
 import '../css/AddCard.css';
-import AddIcon from '@material-ui/icons/Add';
-import { grey } from '@material-ui/core/colors';
+import AddIcon from '@mui/icons-material/Add';
+import { grey } from '@mui/material/colors';
 import { useDispatch } from 'react-redux';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import { showModal } from '../store/modals';
 
 export function AddCard() {

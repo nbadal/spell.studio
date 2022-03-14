@@ -1,7 +1,7 @@
 import React from 'react';
 
-import DialogContent from '@material-ui/core/DialogContent';
-import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import Dialog from '@mui/material/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { DialogTitleWithClose } from './DialogTitleWithClose';

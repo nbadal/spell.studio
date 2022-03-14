@@ -1,8 +1,8 @@
 import '../css/CardList.css';
-import { makeStyles } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
-import Box from '@material-ui/core/Box';
-import Checkbox from '@material-ui/core/Checkbox';
+import { makeStyles } from '@mui/styles';
+import { grey } from '@mui/material/colors';
+import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
 import React, { CSSProperties } from 'react';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import { CardIconView } from './CardIconView';

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
-import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { resetCards } from '../store/cards';
 import { resetTemplate } from '../store/template';
 

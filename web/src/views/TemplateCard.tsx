@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import { sanitize } from 'dompurify';
 import { Card } from '../store/cards/types';
 import { RootState } from '../store';

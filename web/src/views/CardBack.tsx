@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/CardBack.css';
 import { useDispatch, useSelector } from 'react-redux';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import _ from 'lodash';
 import { selectCard, unselectCard } from '../store/cards';
 import { CardIconView } from './CardIconView';
