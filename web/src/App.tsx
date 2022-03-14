@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {
     HashRouter, Route, Routes, useHref,
 } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { TopBar } from './views/TopBar';
 import { Overlays } from './views/Overlays';
 import { PrintSpellbook } from './views/PrintSpellbook';
@@ -34,6 +35,8 @@ export function App() {
     );
 }
 
+const theme = createTheme();
+
 function Home() {
     const printHref = useHref('/print');
     const onPrintHotkey = () => {
@@ -42,14 +45,16 @@ function Home() {
 
     return (
         <CaptureHotkeys onPrintHotkey={onPrintHotkey}>
-            <div className="App">
-                <Box className="TopBar">
-                    <TopBar />
-                </Box>
-                <CardToolbar />
-                <Spellbook />
-                <Overlays />
-            </div>
+            <ThemeProvider theme={theme}>
+                <div className="App">
+                    <Box className="TopBar">
+                        <TopBar />
+                    </Box>
+                    <CardToolbar />
+                    <Spellbook />
+                    <Overlays />
+                </div>
+            </ThemeProvider>
         </CaptureHotkeys>
     );
 }
