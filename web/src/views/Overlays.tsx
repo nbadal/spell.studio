@@ -34,7 +34,7 @@ export function Overlays() {
     }));
 
     return (
-        <Box className="Overlays" displayPrint="none">
+        <Box displayPrint="none">
             <Snackbar
                 open={multiSelect && selectedCount > 0}
                 anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
