@@ -47,6 +47,7 @@ export function TemplateCard(props: Props) {
     return (
         <Box
             onMouseEnter={() => setHovering(true)}
+            onMouseMove={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
         >
             {isHovering && (
