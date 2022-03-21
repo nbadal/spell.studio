@@ -12,6 +12,16 @@ const cardsSlice = createSlice({
     name: 'cards',
     initialState: initialCardsState,
     reducers: {
+        duplicateCard: (state, action: PayloadAction<Card>) => {
+            const newCard = { ...action.payload };
+            newCard.uid = Math.random().toString(36);
+
+            const idx = state.all.findIndex((card) => card.uid === action.payload.uid);
+            state.all = [...state.all.slice(0, idx), newCard, ...state.all.slice(idx)];
+        },
+        deleteCard: (state, action: PayloadAction<Card>) => {
+            state.all = state.all.filter((card) => card.uid !== action.payload.uid);
+        },
         selectCard: (state, action: PayloadAction<Card>) => {
             if (state.multiSelect) {
                 state.selectedUids = [action.payload.uid, ...state.selectedUids];
@@ -38,7 +48,7 @@ const cardsSlice = createSlice({
 });
 
 export const {
-    selectCard, unselectCard, clearSelection, resetCards,
+    duplicateCard, deleteCard, selectCard, unselectCard, clearSelection, resetCards,
 } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

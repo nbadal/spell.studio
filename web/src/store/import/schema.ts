@@ -122,6 +122,7 @@ export const convertRpgCard = (rpgCard: RpgCard): Card => {
 
     const rpgIcon = getGameIcon(rpgCard.icon_back || '');
     return {
+        uid: Math.random().toString(36),
         title: rpgCard.title,
         color: rpgCard.color,
         stats,
@@ -133,7 +134,6 @@ export const convertRpgCard = (rpgCard: RpgCard): Card => {
         // TODO: how to support these?
         backCharacter: subtitle.substring(0, 1),
         category: 'TODO',
-        uid: Math.random().toString(36),
     };
 };
 

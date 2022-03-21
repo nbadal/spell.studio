@@ -9,7 +9,7 @@ const IconFont = require('../../gen/font/icons.json') as {[iconName: string]: st
 
 export function getSpellCard(spell: Spell, spellClass: SpellClass, color: CardColor): Card {
     return {
-        uid: `${spellClass}/${spell.name}`,
+        uid: Math.random().toString(36),
         title: spell.name,
         subtitle: spellSubtitle(spell),
         stats: {

@@ -30,7 +30,7 @@ body {
     overflow-y: auto;
 }
 
-.CardContainer {
+.CardContent {
     display: inline-block;
     width: 2.5in;
     height: 3.5in;
