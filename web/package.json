@@ -13,7 +13,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "ace-builds": "^1.4.14",
-    "ajv": "^8.10.0",
+    "ajv": "^8.11.0",
     "csstype": "^3.0.11",
     "dompurify": "^2.3.6",
     "handlebars": "^4.7.7",
