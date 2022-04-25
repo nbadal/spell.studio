@@ -55,7 +55,6 @@ export function TemplateCard(props: Props) {
             )}
             <Box
                 sx={{
-                    display: 'inline-block',
                     width: '2.5in',
                     height: '3.5in',
                     margin: '8px',
