@@ -54,7 +54,12 @@ export function TemplateCard(props: Props) {
                 <CardHoverButtons onDeleteClicked={onDeleteClicked} onCopyClicked={onCopyClicked} />
             )}
             <Box
-                className="CardContent"
+                sx={{
+                    display: 'inline-block',
+                    width: '2.5in',
+                    height: '3.5in',
+                    margin: '8px',
+                }}
                 onClick={onClick}
                 dangerouslySetInnerHTML={{ __html: sanitize(result, { FORCE_BODY: true }) }}
             />

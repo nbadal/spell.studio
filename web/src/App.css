@@ -30,13 +30,6 @@ body {
     overflow-y: auto;
 }
 
-.CardContent {
-    display: inline-block;
-    width: 2.5in;
-    height: 3.5in;
-    margin: 8px;
-}
-
 @media print {
     .Controls {
         display: none;
