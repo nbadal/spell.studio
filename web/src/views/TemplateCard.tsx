@@ -19,8 +19,8 @@ export function TemplateCard(props: Props) {
     return (
         <Box
             sx={{
-                width: '2.5in',
-                height: '3.5in',
+                width: '2.5in', // TODO: from layout settings
+                height: '3.5in', // TODO: from layout settings
             }}
             dangerouslySetInnerHTML={{ __html: sanitize(result, { FORCE_BODY: true }) }}
         />

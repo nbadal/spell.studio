@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Box } from '@mui/material';
 import { selectFilteredCards } from '../store/cards/selectors';
 import { TemplateCard } from './TemplateCard';
 import { selectStyleCss } from '../store/template/selectors';
@@ -19,9 +20,15 @@ export function PrintSpellbook() {
         <div className="Spellbook">
             <style>{style}</style>
             {cards.map((card, index) => (
-                <React.Fragment key={card.uid}>
+                <Box
+                    key={card.uid}
+                    sx={{
+                        display: 'inline-block',
+                        margin: '0px', // TODO: from layout settings
+                    }}
+                >
                     <TemplateCard cardIndex={index} />
-                </React.Fragment>
+                </Box>
             ))}
         </div>
     );
