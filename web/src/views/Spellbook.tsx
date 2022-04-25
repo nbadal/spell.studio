@@ -1,14 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
 import { RootState } from '../store';
-import { selectCardCount, selectFilteredCards } from '../store/cards/selectors';
+import { selectCardAtIdx, selectCardCount, selectFilteredCards } from '../store/cards/selectors';
 import { AddCard } from './AddCard';
 import { AddCardButtons } from './AddCardButtons';
 import { TemplateCard } from './TemplateCard';
 import { selectStyleCss } from '../store/template/selectors';
+import { CardHoverButtons } from './CardHoverButtons';
+import {
+    deleteCard, duplicateCard, selectCard, unselectCard,
+} from '../store/cards';
+import { Card } from '../store/cards/types';
 
 export function Spellbook() {
     const { cardCount } = useSelector((state: RootState) => ({
@@ -40,7 +45,7 @@ export function Spellbook() {
                     if (cardIdx >= cardCount) return <Box style={gridProps.style} />;
                     return (
                         <Box style={gridProps.style}>
-                            <TemplateCard cardIndex={cardIdx} />
+                            <GridItem cardIdx={cardIdx} />
                         </Box>
                     );
                 }}
@@ -59,6 +64,52 @@ export function Spellbook() {
             {cardCount === 0 && (
                 <AddCardButtons />
             )}
+        </Box>
+    );
+}
+
+function GridItem(props: { cardIdx: number }) {
+    const dispatch = useDispatch();
+
+    const card = useSelector<RootState, Card>(selectCardAtIdx(props.cardIdx));
+
+    const [isHovering, setHovering] = useState(false);
+
+    const onDeleteClicked = () => {
+        dispatch(deleteCard(card));
+    };
+
+    const onCopyClicked = () => {
+        dispatch(duplicateCard(card));
+    };
+
+    const selected = useSelector<RootState, boolean>(
+        (state) => state.cards.selectedUids.includes(card.uid),
+    );
+
+    const onCardClicked = () => {
+        if (selected) {
+            dispatch(unselectCard(card));
+        } else {
+            dispatch(selectCard(card));
+        }
+    };
+
+    return (
+        <Box
+            onMouseEnter={() => setHovering(true)}
+            onMouseMove={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
+        >
+            {isHovering && (
+                <CardHoverButtons onDeleteClicked={onDeleteClicked} onCopyClicked={onCopyClicked} />
+            )}
+            <Box
+                onClick={onCardClicked}
+                sx={{ margin: '8px' }}
+            >
+                <TemplateCard cardIndex={props.cardIdx} />
+            </Box>
         </Box>
     );
 }
