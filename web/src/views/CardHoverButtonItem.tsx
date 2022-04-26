@@ -18,6 +18,9 @@ export function CardHoverButtonItem(props: Props) {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: '50%',
+                '&:hover': {
+                    opacity: '90%',
+                },
                 opacity: '75%',
                 backgroundColor: 'lightgrey',
                 marginLeft: '4px',
