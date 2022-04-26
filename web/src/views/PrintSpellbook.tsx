@@ -16,6 +16,8 @@ export function PrintSpellbook() {
         }, 100);
     });
 
+    const gutter = '0.1in'; // TODO: Use layout state
+
     return (
         <div>
             <style>{style}</style>
@@ -24,10 +26,10 @@ export function PrintSpellbook() {
                     key={card.uid}
                     sx={{
                         display: 'inline-block',
-                        margin: '0px', // TODO: from layout settings
+                        margin: `calc(${gutter} / 2)`,
                     }}
                 >
-                    <TemplateCard cardIndex={index} />
+                    <TemplateCard isPrint cardIndex={index} />
                 </Box>
             ))}
         </div>

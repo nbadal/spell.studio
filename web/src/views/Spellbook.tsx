@@ -114,7 +114,7 @@ function GridItem(props: { cardIdx: number }) {
                     margin: '8px',
                 }}
             >
-                <TemplateCard cardIndex={props.cardIdx} />
+                <TemplateCard isPrint={false} cardIndex={props.cardIdx} />
             </Box>
         </Box>
     );

@@ -1,14 +1,15 @@
-.CardFront,
-.DisabledCardFront {
+.CardFront {
+    width: 100%;
+    height: 100%;
+}
+
+.CardContent {
     width: 100%;
     height: 100%;
     display: flex;
     vertical-align: top;
     flex-direction: column;
-    break-inside: avoid;
-
     padding: 10px 10px 6px 10px;
-    border-radius: 12px;
 
     font-family: "modesto-text", serif;
     font-style: normal;

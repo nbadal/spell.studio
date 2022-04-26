@@ -9,19 +9,34 @@ import { selectFrontTemplate } from '../store/template/selectors';
 
 interface Props {
     cardIndex: number;
+    isPrint: boolean;
 }
 
-export function TemplateCard(props: Props) {
-    const card = useSelector<RootState, Card>(selectCardAtIdx(props.cardIndex));
-    const template = useSelector(selectFrontTemplate);
-    const result = template(card);
+export function TemplateCard({ cardIndex, isPrint }: Props) {
+    // Bleed should only show when printing AND enabled
+    // Corner should show if set AND not showing bleed (overridden by bleed)
+    const bleedSetting = useSelector((state: RootState) =>
+        state.layout.bleed);
+    const cornerSetting = useSelector((state: RootState) =>
+        state.layout.cornerRadius);
+    const showBleed = isPrint && bleedSetting;
+    const showCorner = !showBleed && cornerSetting;
+    const layout = {
+        bleed: showBleed ? `${bleedSetting}in` : '0in',
+        cornerRadius: showCorner ? `${cornerSetting}in` : '0in',
+    };
 
+    const card = useSelector<RootState, Card>(selectCardAtIdx(cardIndex));
+    const template = useSelector(selectFrontTemplate);
+    const result = template({ ...card, layout });
     return (
         <Box
             sx={{
-                width: '2.5in', // TODO: from layout settings
-                height: '3.5in', // TODO: from layout settings
+                width: `calc(2.5in + ${layout.bleed} * 2)`,
+                height: `calc(3.5in + ${layout.bleed} * 2)`,
+                breakInside: 'avoid',
                 userSelect: 'none',
+                clipPath: `inset(0 round ${layout.cornerRadius})`,
             }}
             dangerouslySetInnerHTML={{ __html: sanitize(result, { FORCE_BODY: true }) }}
         />

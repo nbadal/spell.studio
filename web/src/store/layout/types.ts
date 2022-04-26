@@ -1,4 +1,4 @@
 export type LayoutState = {
-    showFront: boolean;
-    showBack: boolean;
+    bleed: number | undefined,
+    cornerRadius: number | undefined,
 };
