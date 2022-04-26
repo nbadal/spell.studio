@@ -106,7 +106,13 @@ function GridItem(props: { cardIdx: number }) {
             )}
             <Box
                 onClick={onCardClicked}
-                sx={{ margin: '8px' }}
+                sx={{
+                    '&:hover': {
+                        opacity: 0.9,
+                    },
+                    cursor: 'pointer',
+                    margin: '8px',
+                }}
             >
                 <TemplateCard cardIndex={props.cardIdx} />
             </Box>

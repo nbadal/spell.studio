@@ -13,32 +13,12 @@
     font-family: "modesto-text", serif;
     font-style: normal;
     font-weight: 300;
-
-    cursor: pointer;
-    user-select: none;
-}
-
-.CardFront:hover {
-    opacity: 0.9;
-}
-
-.DisabledCardFront {
-    opacity: 0.5;
-}
-
-.DisabledCardFront:hover {
-    opacity: 0.65;
 }
 
 @media print {
-    .CardFront,
-    .DisabledCardFront {
+    .CardFront {
         -webkit-print-color-adjust: exact;
         margin: 2px !important;
-    }
-
-    .DisabledCardFront {
-        display: none;
     }
 }
 

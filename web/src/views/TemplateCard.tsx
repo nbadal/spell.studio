@@ -21,6 +21,7 @@ export function TemplateCard(props: Props) {
             sx={{
                 width: '2.5in', // TODO: from layout settings
                 height: '3.5in', // TODO: from layout settings
+                userSelect: 'none',
             }}
             dangerouslySetInnerHTML={{ __html: sanitize(result, { FORCE_BODY: true }) }}
         />

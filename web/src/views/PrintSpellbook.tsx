@@ -17,7 +17,7 @@ export function PrintSpellbook() {
     });
 
     return (
-        <div className="Spellbook">
+        <div>
             <style>{style}</style>
             {cards.map((card, index) => (
                 <Box
