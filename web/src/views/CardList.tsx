@@ -1,5 +1,4 @@
 import '../css/CardList.css';
-import { makeStyles } from '@mui/styles';
 import { grey } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
@@ -51,26 +50,22 @@ interface ImportCardItemProps {
 }
 
 function ImportCardItem(props: ImportCardItemProps) {
-    const useStyles = makeStyles({
-        checkbox: {
-            color: grey[50],
-            '& checked': {
-                color: grey[200],
-            },
-        },
-        cardItem: {
-            backgroundColor: props.card.color,
-        },
-    });
-
-    const classes = useStyles();
-
     return (
         <Box style={props.style}>
-            <Box className={`CardItem ${classes.cardItem}`}>
+            <Box
+                className="CardItem"
+                sx={{
+                    backgroundColor: props.card.color,
+                }}
+            >
                 <Checkbox
                     color="default"
-                    className={classes.checkbox}
+                    sx={{
+                        color: grey[50],
+                        '& checked': {
+                            color: grey[200],
+                        },
+                    }}
                     checked={props.isSelected}
                     onChange={(e) => props.onChange(e.target.checked)}
                 />
