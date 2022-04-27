@@ -11,7 +11,7 @@
     "build-font": "ts-node-script scripts/generate-iconfont.ts"
   },
   "dependencies": {
-    "axios": "^0.26.1",
+    "axios": "^0.27.1",
     "firebase-tools": "^10.7.1",
     "unzipper": "^0.10.11"
   }
