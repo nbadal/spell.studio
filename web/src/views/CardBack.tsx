@@ -2,7 +2,6 @@ import React from 'react';
 import '../css/CardBack.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
-import _ from 'lodash';
 import { selectCard, unselectCard } from '../store/cards';
 import { CardIconView } from './CardIconView';
 import { RootState } from '../store';
@@ -55,11 +54,11 @@ export function CardBack(props: Props) {
         const transform = `rotate(${angle} 50 50)`;
         // let transform = undefined;
 
-        const smallText = _.times(25)
-            .map(() => card.backIconsSmall)
+        const smallText = Array(25)
+            .fill(card.backIconsSmall)
             .join('');
-        const largeText = _.times(15)
-            .map(() => card.backIconsLarge)
+        const largeText = Array(15)
+            .fill(card.backIconsLarge)
             .join('');
 
         const cardColor = card.color;
