@@ -30,7 +30,7 @@
     "react-scripts": "5.0.0",
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.7",
-    "redux": "^4.1.2",
+    "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "use-file-picker": "^1.4.2"
   },
