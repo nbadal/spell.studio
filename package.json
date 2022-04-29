@@ -7,7 +7,7 @@
     "@types/unzipper": "^0.10.5",
     "husky": "^7.0.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.4"
   },
   "scripts": {
     "build": "yarn run build-font",
