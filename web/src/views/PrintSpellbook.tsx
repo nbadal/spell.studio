@@ -5,15 +5,25 @@ import { selectFilteredCards } from '../store/cards/selectors';
 import { TemplateCard } from './TemplateCard';
 import { selectStyleCss } from '../store/template/selectors';
 
+const printAfterDelayThenClose = () => {
+    setTimeout(() => {
+        window.print();
+        closeAfterDelay();
+    }, 300);
+};
+
+const closeAfterDelay = () => {
+    setTimeout(() => {
+        window.close();
+    }, 1000);
+};
+
 export function PrintSpellbook() {
     const cards = useSelector(selectFilteredCards);
     const style = useSelector(selectStyleCss);
 
     useEffect(() => {
-        setTimeout(() => {
-            window.print();
-            window.close();
-        }, 100);
+        printAfterDelayThenClose();
     });
 
     const gutter = '0.1in'; // TODO: Use layout state
