@@ -100,7 +100,24 @@
 .StatsBadge {
     grid-row: 1/3;
     grid-column: 3;
-    display: flex;
+    position: relative;
+    z-index: 0;
+    height: 17px;
+    width: 14px;
+    font-family: "modesto-expanded", serif;
+    font-size: 10px;
+    line-height: 17px;
+    text-align: center;
+    color: white;
+}
+
+.StatsBadge svg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .DetailsContainer {
