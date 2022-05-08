@@ -1,6 +1,4 @@
-import {
-    combineReducers, configureStore, getDefaultMiddleware, PreloadedState,
-} from '@reduxjs/toolkit';
+import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
 import {
     FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE,
 } from 'redux-persist';
@@ -40,21 +38,11 @@ export function configureAppStore(preloadedState?: PreloadedState<RootState>) {
     const store = configureStore({
         preloadedState,
         reducer: persistedReducer,
-        middleware: [
-            ...getDefaultMiddleware({
-                serializableCheck: {
-                    ignoredActions: [
-                        // Ignore redux-persist actions:
-                        FLUSH,
-                        REHYDRATE,
-                        PAUSE,
-                        PERSIST,
-                        PURGE,
-                        REGISTER,
-                    ],
-                },
-            }),
-        ],
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
     });
 
     const persistor = persistStore(store);
