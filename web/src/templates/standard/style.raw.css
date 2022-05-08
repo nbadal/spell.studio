@@ -61,10 +61,6 @@
     padding: 2px;
 }
 
-.StatCellStretch {
-    grid-column: span 2;
-}
-
 .CellContent {
     display: grid;
     grid-template-columns: 16px auto 16px;
