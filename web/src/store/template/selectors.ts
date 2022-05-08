@@ -14,7 +14,19 @@ const prepareFromHbs = (hbs: string) => {
     return Handlebars.compile(hbs);
 };
 
-const processText = (text: string) => text;
+const processText = (text: string) => text.split('***').map((value, index) => {
+    if (index % 2) {
+        // Odd indexes are within ***'s
+        return `<span class="BoldDetail">${value}</span>`;
+    }
+    return value.split('*').map((value2, index2) => {
+        if (index2 % 2) {
+            // Odd indexes are within *'s
+            return `<span class="ItalicDetail">${value2}</span>`;
+        }
+        return value2;
+    }).join('');
+}).join('');
 
 export const selectFrontTemplate = createSelector([selectFrontHbs], prepareFromHbs);
 export const selectBackTemplate = createSelector([selectBackHbs], prepareFromHbs);

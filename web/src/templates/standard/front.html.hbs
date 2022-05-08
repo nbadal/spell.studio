@@ -31,12 +31,12 @@
                 {{/header}}
                 <div class="DetailsBlock" {{#expand}}style="flex-grow: 1"{{/expand}}>
                     {{#if (isTextDetail this)}}
-                        {{processText text}}
+                        {{{processText text}}}
                     {{/if}}
                     {{#if (isListDetail this)}}
                         <ul>
                             {{#each items}}
-                                <li>{{processText this}}</li>
+                                <li>{{{processText this}}}</li>
                             {{/each}}
                         </ul>
                     {{/if}}
