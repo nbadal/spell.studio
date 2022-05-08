@@ -41,7 +41,7 @@ export function processBTM(): Spell[] {
             .filter((klass) => spellSets[klass].includes(name))
             .map((klass) => klass as SpellClass);
 
-        const castingTime = popSection('**Casting Time:** ', spellContent);
+        const castingTime = popSection('**Casting Time:** ', spellContent)?.split(',')[0];
         const range = popSection('**Range:** ', spellContent);
         const durationRaw = popSection('**Duration:** ', spellContent);
         const concentration = durationRaw?.startsWith('Concentration, ') || false;
