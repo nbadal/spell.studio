@@ -30,7 +30,7 @@ export function processBTM(): Spell[] {
 
         const componentsStr = popSection('**Components:** ', spellContent) || '';
         const componentInfo = componentsStr.match(
-            /(V)?(?:, )?(S)?(?:, )?(M)?(?: )?(?:\(([^)]+)\))?/,
+            /(V)?(?:, )?(S)?(?:, )?(M)? ?(?:\(([^)]+)\))?/,
         );
         if (!componentInfo || !typeInfo) {
             console.error(`No match for ${name}`);
