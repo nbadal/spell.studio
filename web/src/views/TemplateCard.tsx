@@ -36,7 +36,8 @@ export function TemplateCard({ cardIndex, isPrint }: Props) {
                 height: `calc(3.5in + ${layout.bleed} * 2)`,
                 breakInside: 'avoid',
                 userSelect: 'none',
-                clipPath: `inset(0 round ${layout.cornerRadius})`,
+                borderRadius: layout.cornerRadius,
+                overflow: 'hidden',
             }}
             dangerouslySetInnerHTML={{ __html: sanitize(result, { FORCE_BODY: true }) }}
         />
