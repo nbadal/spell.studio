@@ -3,7 +3,7 @@ import { LayoutState } from './types';
 
 const initialLayoutState: LayoutState = {
     cornerRadius: 0.125,
-    bleed: undefined,
+    bleed: null,
 };
 
 const layoutSlice = createSlice({
@@ -14,13 +14,13 @@ const layoutSlice = createSlice({
             state.cornerRadius = action.payload;
         },
         disableCornerRadius: (state) => {
-            state.cornerRadius = undefined;
+            state.cornerRadius = null;
         },
         setBleed: (state, action: PayloadAction<number>) => {
             state.bleed = action.payload;
         },
         disableBleed: (state) => {
-            state.bleed = undefined;
+            state.bleed = null;
         },
         resetLayout: () => initialLayoutState,
     },

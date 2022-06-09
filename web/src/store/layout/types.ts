@@ -1,4 +1,4 @@
 export type LayoutState = {
-    bleed: number | undefined,
-    cornerRadius: number | undefined,
+    bleed: number | null,
+    cornerRadius: number | null,
 };
