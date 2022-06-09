@@ -4,6 +4,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 
 interface Props {
     icon: ReactNode,
+    tooltip: string,
     onClick: () => any,
 }
 
@@ -11,6 +12,7 @@ export function CardHoverButtonItem(props: Props) {
     return (
         <Box
             className="CardHoverButtonItem"
+            title={props.tooltip}
             sx={{
                 display: 'inline-flex',
                 width: '24px',

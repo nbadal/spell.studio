@@ -23,10 +23,12 @@ export function CardHoverButtons(props: Props) {
         >
             <CardHoverButtonItem
                 icon={<ContentCopyIcon sx={iconStyle} />}
+                tooltip="Copy"
                 onClick={() => props.onCopyClicked()}
             />
             <CardHoverButtonItem
                 icon={<CloseIcon sx={iconStyle} />}
+                tooltip="Remove"
                 onClick={() => props.onDeleteClicked()}
             />
         </Box>
