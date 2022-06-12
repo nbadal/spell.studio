@@ -5,14 +5,15 @@ import { sanitize } from 'dompurify';
 import { Card } from '../store/cards/types';
 import { RootState } from '../store';
 import { selectCardAtIdx } from '../store/cards/selectors';
-import { selectFrontTemplate } from '../store/template/selectors';
+import { selectBackTemplate, selectFrontTemplate } from '../store/template/selectors';
 
 interface Props {
     cardIndex: number;
     isPrint: boolean;
+    showFront: boolean;
 }
 
-export function TemplateCard({ cardIndex, isPrint }: Props) {
+export function TemplateCard({ cardIndex, isPrint, showFront }: Props) {
     // Bleed should only show when printing AND enabled
     // Corner should show if set AND not showing bleed (overridden by bleed)
     const bleedSetting = useSelector((state: RootState) =>
@@ -27,7 +28,10 @@ export function TemplateCard({ cardIndex, isPrint }: Props) {
     };
 
     const card = useSelector<RootState, Card>(selectCardAtIdx(cardIndex));
-    const template = useSelector(selectFrontTemplate);
+
+    const frontTemplate = useSelector(selectFrontTemplate);
+    const backTemplate = useSelector(selectBackTemplate);
+    const template = showFront ? frontTemplate : backTemplate;
     const result = template({ ...card, layout });
     return (
         <Box

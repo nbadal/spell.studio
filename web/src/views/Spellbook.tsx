@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
@@ -10,9 +10,7 @@ import { AddCardButtons } from './AddCardButtons';
 import { TemplateCard } from './TemplateCard';
 import { selectStyleCss } from '../store/template/selectors';
 import { CardHoverButtons } from './CardHoverButtons';
-import {
-    deleteCard, duplicateCard, selectCard, unselectCard,
-} from '../store/cards';
+import { deleteCard, duplicateCard } from '../store/cards';
 import { Card } from '../store/cards/types';
 
 export function Spellbook() {
@@ -83,17 +81,10 @@ function GridItem(props: { cardIdx: number }) {
         dispatch(duplicateCard(card));
     };
 
-    const selected = useSelector<RootState, boolean>(
-        (state) => state.cards.selectedUids.includes(card.uid),
-    );
-
-    const onCardClicked = () => {
-        if (selected) {
-            dispatch(unselectCard(card));
-        } else {
-            dispatch(selectCard(card));
-        }
-    };
+    const [showFront, setShowFront] = useState(true);
+    const toggleFront = useCallback(() => {
+        setShowFront(!showFront);
+    }, [showFront]);
 
     return (
         <Box
@@ -105,7 +96,7 @@ function GridItem(props: { cardIdx: number }) {
                 <CardHoverButtons onDeleteClicked={onDeleteClicked} onCopyClicked={onCopyClicked} />
             )}
             <Box
-                onClick={onCardClicked}
+                onClick={toggleFront}
                 sx={{
                     '&:hover': {
                         opacity: 0.9,
@@ -114,7 +105,7 @@ function GridItem(props: { cardIdx: number }) {
                     margin: '8px',
                 }}
             >
-                <TemplateCard isPrint={false} cardIndex={props.cardIdx} />
+                <TemplateCard showFront={showFront} isPrint={false} cardIndex={props.cardIdx} />
             </Box>
         </Box>
     );

@@ -39,7 +39,7 @@ export function PrintSpellbook() {
                         margin: `calc(${gutter} / 2)`,
                     }}
                 >
-                    <TemplateCard isPrint cardIndex={index} />
+                    <TemplateCard showFront isPrint cardIndex={index} />
                 </Box>
             ))}
         </div>
