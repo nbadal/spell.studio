@@ -1,4 +1,3 @@
-import '../css/CardList.css';
 import { grey } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
@@ -20,7 +19,6 @@ export function CardList(props: CardListProps) {
         <FixedSizeList
             width={props.width}
             height={props.height}
-            className="ImportCardList"
             itemCount={props.cards.length}
             itemSize={46}
         >
@@ -56,6 +54,14 @@ function ImportCardItem(props: ImportCardItemProps) {
                 className="CardItem"
                 sx={{
                     backgroundColor: props.card.color,
+                    height: '42px',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '10px',
+                    margin: '2px 16px 2px 0',
+                    padding: '0 2px',
                 }}
             >
                 <Checkbox
@@ -69,14 +75,15 @@ function ImportCardItem(props: ImportCardItemProps) {
                     checked={props.isSelected}
                     onChange={(e) => props.onChange(e.target.checked)}
                 />
-                <Box className="CardItemTitle">{props.card.title}</Box>
-                <CardIconView
-                    className="CardItemIcon"
-                    height=".25in"
-                    icon={props.card.icon}
-                    iconCharacter={props.card.iconCharacter}
-                    fill="white"
-                />
+                <Box sx={{ flexGrow: 1 }}>{props.card.title}</Box>
+                <Box sx={{ margin: '0 10px' }}>
+                    <CardIconView
+                        height=".25in"
+                        icon={props.card.icon}
+                        iconCharacter={props.card.iconCharacter}
+                        fill="white"
+                    />
+                </Box>
             </Box>
         </Box>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import Box from '@mui/material/Box';
 import { CardIcon } from '../store/cards/types';
 import { ReactComponent as BardIcon } from '../svg/classes/bard.svg';
 import { ReactComponent as ClericIcon } from '../svg/classes/cleric.svg';
@@ -12,39 +13,38 @@ import { ReactComponent as WizardIcon } from '../svg/classes/wizard.svg';
 interface Props {
     icon: CardIcon | undefined;
     iconCharacter: string | undefined;
-    className: string;
     height: string;
     fill: string;
 }
 
 export function CardIconView(props: Props) {
     const {
-        className, height, fill, icon, iconCharacter,
+        height, fill, icon, iconCharacter,
     } = props;
 
     if (icon) {
         switch (icon) {
             case 'bard':
-                return <BardIcon className={className} height={height} fill={fill} />;
+                return <BardIcon height={height} fill={fill} />;
             case 'cleric':
-                return <ClericIcon className={className} height={height} fill={fill} />;
+                return <ClericIcon height={height} fill={fill} />;
             case 'druid':
-                return <DruidIcon className={className} height={height} fill={fill} />;
+                return <DruidIcon height={height} fill={fill} />;
             case 'paladin':
-                return <PaladinIcon className={className} height={height} fill={fill} />;
+                return <PaladinIcon height={height} fill={fill} />;
             case 'ranger':
-                return <RangerIcon className={className} height={height} fill={fill} />;
+                return <RangerIcon height={height} fill={fill} />;
             case 'sorcerer':
-                return <SorcererIcon className={className} height={height} fill={fill} />;
+                return <SorcererIcon height={height} fill={fill} />;
             case 'warlock':
-                return <WarlockIcon className={className} height={height} fill={fill} />;
+                return <WarlockIcon height={height} fill={fill} />;
             case 'wizard':
-                return <WizardIcon className={className} height={height} fill={fill} />;
+                return <WizardIcon height={height} fill={fill} />;
             default:
                 throw Error('Unknown icon for card');
         }
     } else if (iconCharacter) {
-        return <div className={className} style={{ fontSize: height }}>{iconCharacter}</div>;
+        return <Box sx={{ fontSize: height }}>{iconCharacter}</Box>;
     } else {
         throw Error('Missing icon for card');
     }
