@@ -2,9 +2,11 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CloseIcon from '@mui/icons-material/Close';
+import FlipIcon from '@mui/icons-material/Flip';
 import { CardHoverButtonItem } from './CardHoverButtonItem';
 
 interface Props {
+    onFlipClicked: () => any,
     onCopyClicked: () => any,
     onDeleteClicked: () => any,
 }
@@ -21,6 +23,11 @@ export function CardHoverButtons(props: Props) {
                 zIndex: '1',
             }}
         >
+            <CardHoverButtonItem
+                icon={<FlipIcon sx={iconStyle} />}
+                tooltip="Flip"
+                onClick={() => props.onFlipClicked()}
+            />
             <CardHoverButtonItem
                 icon={<ContentCopyIcon sx={iconStyle} />}
                 tooltip="Copy"

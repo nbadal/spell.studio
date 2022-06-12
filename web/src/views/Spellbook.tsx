@@ -72,6 +72,7 @@ function GridItem(props: { cardIdx: number }) {
     const card = useSelector<RootState, Card>(selectCardAtIdx(props.cardIdx));
 
     const [isHovering, setHovering] = useState(false);
+    const [showFront, setShowFront] = useState(true);
 
     const onDeleteClicked = () => {
         dispatch(deleteCard(card));
@@ -81,8 +82,7 @@ function GridItem(props: { cardIdx: number }) {
         dispatch(duplicateCard(card));
     };
 
-    const [showFront, setShowFront] = useState(true);
-    const toggleFront = useCallback(() => {
+    const onFlipClicked = useCallback(() => {
         setShowFront(!showFront);
     }, [showFront]);
 
@@ -93,10 +93,13 @@ function GridItem(props: { cardIdx: number }) {
             onMouseLeave={() => setHovering(false)}
         >
             {isHovering && (
-                <CardHoverButtons onDeleteClicked={onDeleteClicked} onCopyClicked={onCopyClicked} />
+                <CardHoverButtons
+                    onFlipClicked={onFlipClicked}
+                    onCopyClicked={onCopyClicked}
+                    onDeleteClicked={onDeleteClicked}
+                />
             )}
             <Box
-                onClick={toggleFront}
                 sx={{
                     '&:hover': {
                         opacity: 0.9,
