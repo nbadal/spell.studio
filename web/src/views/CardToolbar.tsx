@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../css/CardToolbar.css';
 
 import Box from '@mui/material/Box';
 import { Activity, ActivityBar } from './ActivityBar';

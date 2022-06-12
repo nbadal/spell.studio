@@ -11,7 +11,14 @@ interface SideBarProps {
 
 export function SideBar(props: SideBarProps) {
     return (
-        <Box className="SideBar">
+        <Box
+            sx={{
+                width: '256px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        >
             {props.selectedActivity && activityComponent(props.selectedActivity)}
         </Box>
     );

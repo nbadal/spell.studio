@@ -38,7 +38,14 @@ export function ActivityBar(props: ActivityBarProps) {
     }
 
     return (
-        <Box className="ActivityBar">
+        <Box
+            sx={{
+                backgroundColor: '#f0f0f0',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'stretch',
+            }}
+        >
             {items.map((item) => (
                 <ActivityItem
                     key={item.activity}
@@ -70,7 +77,25 @@ function ActivityItem(itemProps: ActivityItemProps) {
                     onItemClicked();
                 }}
             >
-                <Box className={selected ? 'ActivityItem SelectedItem' : 'ActivityItem'}>
+                <Box
+                    sx={{
+                        width: '64px',
+                        height: '64px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        borderLeft: `4px solid ${selected ? 'orangered' : 'transparent'}`,
+                        borderRight: '4px solid transparent',
+                        '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.10)',
+                        },
+                        '& svg': {
+                            fontSize: '32px',
+                        },
+                    }}
+                    className={selected ? 'ActivityItem SelectedItem' : 'ActivityItem'}
+                >
                     {icon}
                 </Box>
             </ButtonBase>
