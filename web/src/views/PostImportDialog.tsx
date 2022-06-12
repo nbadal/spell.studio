@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import '../css/PostImportDialog.css';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import { RootState } from '../store';
 import { DialogTitleWithClose } from './DialogTitleWithClose';
@@ -30,25 +28,23 @@ export function PostImportDialog() {
         <Dialog maxWidth="lg" fullWidth open={openModal === 'post-import'} onClose={onClose}>
             <DialogTitleWithClose onClose={onClose}>Post Import</DialogTitleWithClose>
             <DialogContent>
-                <Box className="DialogContent">
-                    <Button onClick={() => setSelectedCards(new Set())}>Clear</Button>
-                    <Button onClick={() => setSelectedCards(new Set(allUids))}>All</Button>
-                    <CardList
-                        width={350}
-                        height={500}
-                        cards={importCards}
-                        selectedCards={selectedCards}
-                        onCardSelected={(cardUid, selected) => {
-                            const selection = selectedCards;
-                            if (selected) {
-                                selection.add(cardUid);
-                            } else {
-                                selection.delete(cardUid);
-                            }
-                            setSelectedCards(new Set(selection));
-                        }}
-                    />
-                </Box>
+                <Button onClick={() => setSelectedCards(new Set())}>Clear</Button>
+                <Button onClick={() => setSelectedCards(new Set(allUids))}>All</Button>
+                <CardList
+                    width={350}
+                    height={500}
+                    cards={importCards}
+                    selectedCards={selectedCards}
+                    onCardSelected={(cardUid, selected) => {
+                        const selection = selectedCards;
+                        if (selected) {
+                            selection.add(cardUid);
+                        } else {
+                            selection.delete(cardUid);
+                        }
+                        setSelectedCards(new Set(selection));
+                    }}
+                />
             </DialogContent>
             <DialogActions>
                 <Button onClick={onOkClick}>OK</Button>
