@@ -21,6 +21,12 @@ const prepareFromHbs = (hbs: string) => {
     Handlebars.registerHelper('isTextDetail', isText);
     Handlebars.registerHelper('isListDetail', isList);
     Handlebars.registerHelper('processText', processText);
+    Handlebars.registerHelper('isEqual', (a, b) => a === b);
+    Handlebars.registerHelper('times', (n, block) => {
+        let accum = '';
+        for (let i = 0; i < n; i += 1) accum += block.fn(i);
+        return accum;
+    });
     return Handlebars.compile(hbs);
 };
 
