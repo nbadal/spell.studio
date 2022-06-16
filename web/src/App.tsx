@@ -1,5 +1,4 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React, { useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,16 +17,14 @@ import { CaptureHotkeys } from './views/CaptureHotkeys';
 import './App.css';
 
 export function App() {
+    useEffect(() => {
+        document.title = process.env.NODE_ENV === 'development'
+            ? '[DEV] SpellStudio' : 'SpellStudio';
+    });
+
     return (
         <HashRouter>
             <CssBaseline />
-            <Helmet>
-                <title>
-                    {process.env.NODE_ENV === 'development'
-                        ? '[DEV] SpellStudio'
-                        : 'SpellStudio'}
-                </title>
-            </Helmet>
             <Routes>
                 <Route path="/print" element={<PrintSpellbook />} />
                 <Route path="/" element={<Home />} />
