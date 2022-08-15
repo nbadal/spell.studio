@@ -9282,10 +9282,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-use-file-picker@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/use-file-picker/-/use-file-picker-1.4.2.tgz#5d27baaf332038eedd84291d01a65862212d8947"
-  integrity sha512-RkJlsHko25I2zZOAMhph1ZDfmnDtWwkFZqJzmD71vM5chIECogWt0qmyGIsn+gnCYbwsWdiGHfI6LjpGgWu1TQ==
+use-file-picker@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/use-file-picker/-/use-file-picker-1.5.1.tgz#969fb536886f3cc6b9db85e5341d0b472b2a3ac6"
+  integrity sha512-mKkoEX1Iw8SufkLYEvwGI+faT9LyT58vWY1GxdxNpxe2Z5bzaQ6GXNYADrPIbUsg1TJy67VsVSIafrqx4yqbBg==
   dependencies:
     file-selector "0.2.4"
 
