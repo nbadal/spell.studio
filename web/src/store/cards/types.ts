@@ -3,7 +3,6 @@ import { SpellClass } from '../spells/types';
 
 export type CardsState = {
     all: Card[],
-    multiSelect: boolean,
     selectedUids: string[];
 };
 
