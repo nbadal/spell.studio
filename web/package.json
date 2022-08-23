@@ -17,7 +17,7 @@
     "@testing-library/user-event": "^14.2.3",
     "ace-builds": "^1.6.1",
     "ajv": "^8.11.0",
-    "dompurify": "^2.3.9",
+    "dompurify": "^2.3.11",
     "handlebars": "^4.7.7",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
