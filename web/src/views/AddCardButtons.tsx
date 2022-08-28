@@ -9,9 +9,9 @@ import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFilePicker } from 'use-file-picker';
 import { allSRDSpells, importJsonChanged } from '../store/import';
-import { setImportedCards } from '../store/import/actions';
 import { showModal } from '../store/modals';
 import { RootState } from '../store';
+import {addCards} from "../store/cards/actions";
 
 export function AddCardButtons() {
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ export function AddCardButtons() {
                 <ButtonItem
                     icon={<ImportContactsIcon fontSize="large" />}
                     labelText="Import example cards (D&D 5e SRD)"
-                    onClick={() => dispatch(setImportedCards(allSRDSpells))}
+                    onClick={() => dispatch(addCards(allSRDSpells))}
                 />
             )}
             <ButtonItem

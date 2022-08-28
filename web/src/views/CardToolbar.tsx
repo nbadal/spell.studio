@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Box from '@mui/material/Box';
-import { Activity, ActivityBar } from './ActivityBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { ActivityBar } from './ActivityBar';
 import { SideBar } from './SideBar';
+import { showActivity } from '../store/modals';
+import { Activity } from '../store/modals/types';
+import { RootState } from '../store';
 
 export function CardToolbar() {
-    const [selectedActivity, setActivity] = useState<Activity | null>(null);
+    const dispatch = useDispatch();
+    const selectedActivity = useSelector((state: RootState) => state.modals.openActivity);
 
     const activityClicked = (clickedActivity: Activity) => {
         if (selectedActivity === clickedActivity) {
             // Deselect if clicked twice
-            setActivity(null);
+            dispatch(showActivity(null));
         } else {
-            setActivity(clickedActivity);
+            dispatch(showActivity(clickedActivity));
         }
     };
 
@@ -22,7 +27,7 @@ export function CardToolbar() {
                 onActivityClicked={activityClicked}
                 selectedActivity={selectedActivity}
             />
-            {selectedActivity && (<SideBar selectedActivity={selectedActivity} />)}
+            {selectedActivity && (<SideBar />)}
         </Box>
     );
 }

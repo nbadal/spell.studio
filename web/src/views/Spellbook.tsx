@@ -4,25 +4,31 @@ import Box from '@mui/material/Box';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window';
 import { RootState } from '../store';
-import { selectCardAtIdx, selectCardCount, selectFilteredCards } from '../store/cards/selectors';
+import {
+    selectAllCards, selectedCardAtIdx, selectedCardCount,
+} from '../store/cards/selectors';
 import { AddCard } from './AddCard';
 import { AddCardButtons } from './AddCardButtons';
 import { TemplateCard } from './TemplateCard';
 import { selectStyleCss } from '../store/template/selectors';
 import { CardHoverButtons } from './CardHoverButtons';
-import { deleteCard, duplicateCard } from '../store/cards';
 import { Card } from '../store/cards/types';
+import { unselectCard } from '../store/cards';
+import { Activity } from '../store/modals/types';
 
 export function Spellbook() {
-    const { cardCount } = useSelector((state: RootState) => ({
-        cards: selectFilteredCards(state),
-        cardCount: selectCardCount(state),
+    const { cardCount, allCount } = useSelector((state: RootState) => ({
+        allCount: selectAllCards(state).length,
+        cardCount: selectedCardCount(state),
     }));
+
+    const searchActivityShown = useSelector((state: RootState) =>
+        state.modals.openActivity !== Activity.SEARCH);
 
     const renderGrid = (gridSize: Size) => {
         const cellWidth = 256;
         const cellHeight = 352;
-        const cellCount = cardCount + 1;
+        const cellCount = searchActivityShown ? cardCount + 1 : cardCount;
         const columnCount = Math.max(1, Math.floor(gridSize.width / cellWidth));
         const rowCount = Math.max(1, Math.ceil(cellCount / columnCount));
         return (
@@ -36,10 +42,10 @@ export function Spellbook() {
             >
                 {(gridProps: GridChildComponentProps) => {
                     const idx = gridProps.rowIndex * columnCount + gridProps.columnIndex;
-                    if (idx === 0) {
+                    if (idx === 0 && searchActivityShown) {
                         return <Box style={gridProps.style}><AddCard /></Box>;
                     }
-                    const cardIdx = idx - 1;
+                    const cardIdx = searchActivityShown ? idx - 1 : idx;
                     if (cardIdx >= cardCount) return <Box style={gridProps.style} />;
                     return (
                         <Box style={gridProps.style}>
@@ -56,10 +62,10 @@ export function Spellbook() {
     return (
         <Box className="Spellbook">
             {typeof style === 'string' && (<style>{style}</style>)}
-            {cardCount > 0 && (
+            {allCount > 0 && (
                 <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
             )}
-            {cardCount === 0 && (
+            {allCount === 0 && (
                 <AddCardButtons />
             )}
         </Box>
@@ -69,17 +75,13 @@ export function Spellbook() {
 function GridItem(props: { cardIdx: number }) {
     const dispatch = useDispatch();
 
-    const card = useSelector<RootState, Card>(selectCardAtIdx(props.cardIdx));
+    const card = useSelector<RootState, Card>(selectedCardAtIdx(props.cardIdx));
 
     const [isHovering, setHovering] = useState(false);
     const [showFront, setShowFront] = useState(true);
 
     const onDeleteClicked = () => {
-        dispatch(deleteCard(card));
-    };
-
-    const onCopyClicked = () => {
-        dispatch(duplicateCard(card));
+        dispatch(unselectCard(card));
     };
 
     const onFlipClicked = useCallback(() => {
@@ -95,7 +97,6 @@ function GridItem(props: { cardIdx: number }) {
             {isHovering && (
                 <CardHoverButtons
                     onFlipClicked={onFlipClicked}
-                    onCopyClicked={onCopyClicked}
                     onDeleteClicked={onDeleteClicked}
                 />
             )}

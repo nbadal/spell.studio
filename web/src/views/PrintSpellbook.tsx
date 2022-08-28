@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Box } from '@mui/material';
-import { selectFilteredCards } from '../store/cards/selectors';
+import { selectedCards } from '../store/cards/selectors';
 import { TemplateCard } from './TemplateCard';
 import { selectStyleCss } from '../store/template/selectors';
 
@@ -19,7 +19,7 @@ const closeAfterDelay = () => {
 };
 
 export function PrintSpellbook() {
-    const cards = useSelector(selectFilteredCards);
+    const cards = useSelector(selectedCards);
     const style = useSelector(selectStyleCss);
 
     useEffect(() => {

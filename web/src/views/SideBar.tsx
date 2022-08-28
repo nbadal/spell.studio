@@ -1,15 +1,15 @@
 import React from 'react';
 
 import Box from '@mui/material/Box';
-import { Activity } from './ActivityBar';
+import { useSelector } from 'react-redux';
 import { ActivityDebug } from './ActivityDebug';
 import { ActivityLayout } from './ActivityLayout';
+import { ActivitySearch } from './ActivitySearch';
+import { Activity } from '../store/modals/types';
+import { RootState } from '../store';
 
-interface SideBarProps {
-    selectedActivity: Activity | null,
-}
-
-export function SideBar(props: SideBarProps) {
+export function SideBar() {
+    const selectedActivity = useSelector((state: RootState) => state.modals.openActivity);
     return (
         <Box
             sx={{
@@ -19,13 +19,15 @@ export function SideBar(props: SideBarProps) {
                 justifyContent: 'center',
             }}
         >
-            {props.selectedActivity && activityComponent(props.selectedActivity)}
+            {selectedActivity && activityComponent(selectedActivity)}
         </Box>
     );
 }
 
 const activityComponent = (activity: Activity) => {
     switch (activity) {
+        case Activity.SEARCH:
+            return <ActivitySearch />;
         case Activity.DEBUG:
             return (<ActivityDebug />);
         case Activity.LAYOUT:

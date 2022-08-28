@@ -15,7 +15,7 @@ import { DialogTitleWithClose } from './DialogTitleWithClose';
 import { closeModals } from '../store/modals/actions';
 import { importJsonChanged } from '../store/import';
 import { selectParsedJsonCards } from '../store/import/selectors';
-import { setImportedCards } from '../store/import/actions';
+import {addCards} from "../store/cards/actions";
 
 export function ImportJsonDialog() {
     const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export function ImportJsonDialog() {
     };
 
     const doImport = () => {
-        dispatch(setImportedCards(jsonCards));
+        dispatch(addCards(jsonCards));
         dispatch(importJsonChanged(''));
     };
 

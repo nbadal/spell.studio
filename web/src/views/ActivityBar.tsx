@@ -5,18 +5,12 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CodeIcon from '@mui/icons-material/Code';
 import BugReportIcon from '@mui/icons-material/BugReport';
+import SearchIcon from '@mui/icons-material/Search';
 
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import ButtonBase from '@mui/material/ButtonBase';
-
-export enum Activity {
-    STYLE = 'Style',
-    LAYOUT = 'Layout',
-    FILTERING = 'Filtering',
-    EXPORT = 'Export',
-    DEBUG = 'Debugging',
-}
+import { Activity } from '../store/modals/types';
 
 interface ActivityBarProps {
     onActivityClicked: (activity: Activity) => any,
@@ -27,6 +21,7 @@ export function ActivityBar(props: ActivityBarProps) {
     const { onActivityClicked, selectedActivity } = props;
 
     const items = [
+        { activity: Activity.SEARCH, icon: <SearchIcon /> },
         { activity: Activity.STYLE, icon: <BrushIcon /> },
         { activity: Activity.LAYOUT, icon: <FileCopyIcon /> },
         { activity: Activity.FILTERING, icon: <FilterListIcon /> },

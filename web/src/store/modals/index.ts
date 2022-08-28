@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { OpenAppModal, ModalsState } from './types';
-import { setImportedCards } from '../import/actions';
+import { OpenAppModal, ModalsState, Activity } from './types';
 import { closeModals } from './actions';
 import { addCards } from '../cards/actions';
 
 const initialModalsState: ModalsState = {
     openModal: null,
+    openActivity: null,
 };
 
 const modalsSlice = createSlice({
@@ -15,6 +15,9 @@ const modalsSlice = createSlice({
         showModal: (state, action: PayloadAction<OpenAppModal>) => {
             state.openModal = action.payload;
         },
+        showActivity: (state, action: PayloadAction<Activity|null>) => {
+            state.openActivity = action.payload;
+        },
     },
     extraReducers: (builder) => {
         const closeModalsReducer = (state: ModalsState) => {
@@ -22,14 +25,11 @@ const modalsSlice = createSlice({
         };
 
         builder
-            .addCase(setImportedCards, (state) => {
-                state.openModal = 'post-import';
-            })
             .addCase(closeModals, closeModalsReducer)
             .addCase(addCards, closeModalsReducer);
     },
 });
 
-export const { showModal } = modalsSlice.actions;
+export const { showModal, showActivity } = modalsSlice.actions;
 
 export default modalsSlice.reducer;

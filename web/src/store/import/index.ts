@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ImportState } from './types';
 import { getSpellCard } from '../spells/convert';
 import { allSpells } from '../../data/SpellRepo';
-import { setImportedCards } from './actions';
 import { closeModals } from '../modals/actions';
 import { SpellClass } from '../spells/types';
 
 const initialImportState: ImportState = {
-    importedCards: [],
     json: '',
 };
 
@@ -22,9 +20,6 @@ const importSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(setImportedCards, (state, action) => {
-                state.importedCards = action.payload;
-            })
             .addCase(closeModals, () => initialImportState);
     },
 });

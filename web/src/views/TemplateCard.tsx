@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { sanitize } from 'dompurify';
 import { Card } from '../store/cards/types';
 import { RootState } from '../store';
-import { selectCardAtIdx } from '../store/cards/selectors';
+import { selectedCardAtIdx } from '../store/cards/selectors';
 import { selectBackTemplate, selectFrontTemplate } from '../store/template/selectors';
 
 interface Props {
@@ -27,7 +27,7 @@ export function TemplateCard({ cardIndex, isPrint, showFront }: Props) {
         cornerRadius: showCorner ? `${cornerSetting}in` : '0in',
     };
 
-    const card = useSelector<RootState, Card>(selectCardAtIdx(cardIndex));
+    const card = useSelector<RootState, Card>(selectedCardAtIdx(cardIndex));
 
     const frontTemplate = useSelector(selectFrontTemplate);
     const backTemplate = useSelector(selectBackTemplate);

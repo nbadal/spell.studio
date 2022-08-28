@@ -4,7 +4,6 @@ import PrintIcon from '@mui/icons-material/Print';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AddCardDialog } from './AddCardDialog';
-import { PostImportDialog } from './PostImportDialog';
 import { ImportJsonDialog } from './ImportJsonDialog';
 
 export function Overlays() {
@@ -23,7 +22,6 @@ export function Overlays() {
                 <PrintIcon color="primary" />
             </Fab>
             <AddCardDialog />
-            <PostImportDialog />
             <ImportJsonDialog />
         </Box>
     );
