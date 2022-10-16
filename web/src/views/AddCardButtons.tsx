@@ -11,7 +11,7 @@ import { useFilePicker } from 'use-file-picker';
 import { allSRDSpells, importJsonChanged } from '../store/import';
 import { showModal } from '../store/modals';
 import { RootState } from '../store';
-import {addCards} from "../store/cards/actions";
+import { addCards } from '../store/cards/actions';
 
 export function AddCardButtons() {
     const dispatch = useDispatch();
