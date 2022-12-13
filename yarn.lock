@@ -2193,10 +2193,10 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-firebase-tools@^11.16.0:
-  version "11.16.0"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-11.16.0.tgz#6c0477798c5d7497ddfb12356d9eb2e045f5a5c8"
-  integrity sha512-fT8yeco/ksIjA3fdpqWoI+v58tUCzH7YXY+WZdBq6DsbJ27EOSgVcO9uUzn7GYfWEP3A0OdsBwoi/i78RMGlkQ==
+firebase-tools@^11.18.0:
+  version "11.18.0"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-11.18.0.tgz#11ad7b089979fc1fb9fde74f7916852c060d9d4b"
+  integrity sha512-hCwlDfVtnaeYd19JaVUtWuN+EIzq6DnEJLg8HwEV8YPaFe+andaPMVQD4Q62Iol+JZxSyyrnjG+DWiRYiX91Ig==
   dependencies:
     "@google-cloud/pubsub" "^3.0.1"
     abort-controller "^3.0.0"
