@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@commitlint/cli": "^17.2.0",
+    "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.2.0",
     "@momentum-ui/webfonts-generator": "^2.3.2",
     "@types/node": "^18.11.9",
