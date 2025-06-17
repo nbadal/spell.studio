@@ -63,7 +63,7 @@ export function Spellbook() {
         <Box className="Spellbook">
             {typeof style === 'string' && (<style>{style}</style>)}
             {allCount > 0 && (
-                <AutoSizer>{(size) => renderGrid(size)}</AutoSizer>
+                <AutoSizer>{(size: Size) => renderGrid(size)}</AutoSizer>
             )}
             {allCount === 0 && (
                 <AddCardButtons />

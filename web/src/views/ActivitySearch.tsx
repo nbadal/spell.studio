@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import AutoSizer from 'react-virtualized-auto-sizer';
+import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { InputAdornment } from '@mui/material';
@@ -41,10 +41,10 @@ export function ActivitySearch() {
             />
             {!noResults && (
                 <AutoSizer>
-                    {(size) => (
+                    {({ height, width }: Size) => (
                         <CardList
-                            width={size.width}
-                            height={size.height}
+                            width={width}
+                            height={height}
                             cards={cards}
                             onCardClicked={(uid) => dispatch(selectCardUid(uid))}
                         />
