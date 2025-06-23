@@ -213,10 +213,15 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@electric-sql/pglite@^0.2.17":
-  version "0.2.17"
-  resolved "https://registry.yarnpkg.com/@electric-sql/pglite/-/pglite-0.2.17.tgz#23d53a9b7ddd1590d59d7c701aba23b037f08108"
-  integrity sha512-qEpKRT2oUaWDH6tjRxLHjdzMqRUGYDnGZlKrnL4dJ77JVMcP2Hpo3NYnOSPKdZdeec57B6QPprCUFg0picx5Pw==
+"@electric-sql/pglite-tools@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@electric-sql/pglite-tools/-/pglite-tools-0.2.8.tgz#9f8ec8462eca5a47f0a1be7153da27d39ad1c613"
+  integrity sha512-MBWelYjUZThOBrktPU4beuuX4hrUdIPRgfLbTgltLMT6Chh2R7ATxHsT9Nr7L9fXUSYlZCyoIf+n8pis3uoiiw==
+
+"@electric-sql/pglite@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@electric-sql/pglite/-/pglite-0.3.3.tgz#ce98737d57e2e640b582559f5e8d0c55463981a6"
+  integrity sha512-JrvHOx9q0yvKEby0bK8qzGTVw6K+yEg8enxDWb2IwNKr5XZxRrBb+GNIqoAIP7yXyhRg5jcENWmdHmtnAT87vA==
 
 "@google-cloud/cloud-sql-connector@^1.3.3":
   version "1.8.1"
@@ -2337,12 +2342,13 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-firebase-tools@^14.7.0:
-  version "14.7.0"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-14.7.0.tgz#0188b512f46caca49da4164f5e22ec5306d2d619"
-  integrity sha512-Vdo7EwaK8CRU3NuFWkNWxDF2k/g/NSSSvglMiuwfvFCb1Hkb+vmoDFnvyWD4z41TH3wDx2GzSpvNCGJGTmRVfQ==
+firebase-tools@^14.8.0:
+  version "14.8.0"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-14.8.0.tgz#c99435ee8510b6588980bdbe8222a28344e33282"
+  integrity sha512-fz1m5LXs5e4WjS9bqe8yFUxz+grUtfnCEXCtRYRdgoofeY4av0DxW1PSxwLq5soPEBXj5ZR9CeSE6SrBui0WzQ==
   dependencies:
-    "@electric-sql/pglite" "^0.2.17"
+    "@electric-sql/pglite" "^0.3.3"
+    "@electric-sql/pglite-tools" "^0.2.8"
     "@google-cloud/cloud-sql-connector" "^1.3.3"
     "@google-cloud/pubsub" "^4.5.0"
     "@inquirer/prompts" "^7.4.0"
@@ -2392,6 +2398,7 @@ firebase-tools@^14.7.0:
     p-limit "^3.0.1"
     pg "^8.11.3"
     pg-gateway "^0.3.0-beta.4"
+    pglite-2 "npm:@electric-sql/pglite@0.2.17"
     portfinder "^1.0.32"
     progress "^2.0.3"
     proxy-agent "^6.3.0"
@@ -4492,6 +4499,11 @@ pg@^8.11.3:
     pgpass "1.0.5"
   optionalDependencies:
     pg-cloudflare "^1.2.5"
+
+"pglite-2@npm:@electric-sql/pglite@0.2.17":
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/@electric-sql/pglite/-/pglite-0.2.17.tgz#23d53a9b7ddd1590d59d7c701aba23b037f08108"
+  integrity sha512-qEpKRT2oUaWDH6tjRxLHjdzMqRUGYDnGZlKrnL4dJ77JVMcP2Hpo3NYnOSPKdZdeec57B6QPprCUFg0picx5Pw==
 
 pgpass@1.0.5:
   version "1.0.5"
