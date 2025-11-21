@@ -13,7 +13,7 @@ jobs:
         working-directory: web
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     # ROOT
     - name: Root - Install Dependencies
       uses: bahmutov/npm-install@v1
